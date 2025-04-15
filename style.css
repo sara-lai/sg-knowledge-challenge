@@ -79,3 +79,19 @@ body {
 .selected .answer-text {
     background: #f5f5f5;
 }
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heart-container {
+    display: flex;
+    gap: 16px;
+}
+.heart {
+    background-image: url('heart-icon.png');
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+}

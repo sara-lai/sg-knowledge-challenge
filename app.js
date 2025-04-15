@@ -40,6 +40,8 @@ let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false
 
+
+
 // cached el references
 const questionTextEl = document.querySelector('#question-text')
 
@@ -52,10 +54,12 @@ const answerDEl = document.querySelector('#d .answer-text')
 
 const answerSubmitEl = document.querySelector('#submit-q')
 
+const heartContainerEl = document.querySelector('.heart-container')
+
 // answer selection 
 // todo - let select with A B C D keys tyoo
 function handleSelected(event){
-    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))    
+    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
 }
 answerBoxEls.forEach( el => {
@@ -91,17 +95,19 @@ answerSubmitEl.addEventListener('click', (event) => {
     }
 })
 
-// redeem items events
+// redeem items events todo
 // click to redeem chillicrab
 // click to redeem durian
 
 function initQuiz(){
-    unaskedQs = [...sampleQs] // tmp
+    unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
 
     // steps / todo
     // randomize order of questions
     // randomly assign surprises
     // initiate hearts 
+
+
     // launch the first question
 
     initQuestion()
