@@ -1,0 +1,81 @@
+/* CSS misc: makes heavy use of flex, rem, and divs with class names/ids (should use more semantic tags?) */
+
+body {
+    height: 100vh;
+    font-family: "Roboto";
+}
+
+/* for flex purposes */
+.question-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+}
+.question-box {
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.question-text {
+    font-size: 1.9rem;
+    line-height: 2.4rem;
+    letter-spacing: .5px;
+}
+
+.answer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.answer-box {
+    display: flex;
+    align-items: center;
+}
+
+.answer-box:hover, .btn:hover {
+    cursor: pointer;
+}
+
+.answer-text {
+    border: 1px solid #d9d9d9;
+    font-size: 1rem;
+    padding: 1rem;
+    width: 220px;
+}
+
+.answer-letter {
+    margin-right: 14px;
+    font-size: 1.1rem;
+}
+
+.btn {
+    background: #65558F;
+    color: white;
+    border-radius: 50px;
+    padding: 12px 24px;
+    border: none;
+    font-size: 1.1rem;
+}
+
+.btn-wrapper {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-answer {
+    text-align: center;
+    margin-left: -2rem;
+}
+
+
+.selected {
+    font-weight: bold;
+}
+
+.selected .answer-text {
+    background: #f5f5f5;
+}
