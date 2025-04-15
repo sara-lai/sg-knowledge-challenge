@@ -1,4 +1,4 @@
-const sampleQs = [
+[
     {
         id: 1,
         text: "What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",

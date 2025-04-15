@@ -1,8 +1,11 @@
-// big question: use classes for quiz and question, and construct Quiz/Question with JSON data?
+// test https://v8.dev/features/import-assertions
+// import json from 'test.json' assert { type: 'json' };
+// console.log(json)
 
-// init - todo
-// initQuiz to setup the quiz (randomly order questions, assign surprises, shuffle a-b-c-d options, other misc config)
-// initQuestion... assign currQ, set the question UI
+
+// big question: use classes for quiz and question, and construct Quiz/Question with JSON data?
+// question: scrap ABCD options in the data, use options: ["first","second","third"] and correct: "correct answer"
+// ^ not all questions need to be ABCD type
 
 // next steps
 // setup the UI upper left: hearts / items / quiz name
@@ -51,15 +54,12 @@ const answerSubmitEl = document.querySelector('#submit-q')
 
 // answer selection 
 // todo - let select with A B C D keys tyoo
-// needs to be named function, setSelected
+function handleSelected(event){
+    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))    
+    event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
+}
 answerBoxEls.forEach( el => {
-    el.addEventListener('click', (event) => {
-
-        answerBoxEls.forEach(el2 => el2.classList.remove('selected'));
-
-        // add class on parent of the clicked target
-        event.target.closest('.answer-box').classList.add('selected')
-    })
+    el.addEventListener('click', handleSelected)
 })
 
 // todo - anti cheating events
@@ -95,19 +95,31 @@ answerSubmitEl.addEventListener('click', (event) => {
 // click to redeem chillicrab
 // click to redeem durian
 
-// goes in init .... 
-unaskedQs = [...qSamples]
+function initQuiz(){
+    unaskedQs = [...sampleQs] // tmp
 
-// more like an id lookup here
-// function getNextQuestion()
-currQ = unaskedQs.shift()
+    // steps / todo
+    // randomize order of questions
+    // randomly assign surprises
+    // initiate hearts 
+    // launch the first question
 
-// load UI with question info
-// some setupQuestion() function... or initQuestion()
-questionTextEl.textContent = currQ.text
-answerAEl.textContent = currQ.a
-answerBEl.textContent = currQ.b
-answerCEl.textContent = currQ.c
-answerDEl.textContent = currQ.d
+    initQuestion()
+}
+function initQuestion(){
+
+    currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
+
+    // steps / todo
+    // randomize the ABCD
+    // set the question UI 
+    questionTextEl.textContent = currQ.text
+    answerAEl.textContent = currQ.a
+    answerBEl.textContent = currQ.b
+    answerCEl.textContent = currQ.c
+    answerDEl.textContent = currQ.d
+}
+initQuiz()
+
 
 
