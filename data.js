@@ -46,7 +46,7 @@ const qSamples = [
     }, 
     {
         id: 4,
-        text: "Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?"
+        text: "Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?",
         a: "Jurong Island",
         b: "Coney Island",
         c: "Sentosa Island",
