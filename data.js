@@ -9,9 +9,6 @@ const sampleQs = [
         answer: 'd',
         labels: [
             'tourist', 'culinary'
-        ],
-        surprises: [
-            'durian'
         ]
     },
     {
@@ -24,10 +21,7 @@ const sampleQs = [
         answer: 'd',
         labels: [
             'tourist', 'folklore', 'culinary'
-        ],
-        surprises: [
-            'chillicrab'
-        ]        
+        ]     
     },
     {
         id: 3,
@@ -39,10 +33,7 @@ const sampleQs = [
         answer: 'a',
         labels: [
             'tourist', 'folklore', 'culinary'
-        ],
-        surprises: [
-            'scam'
-        ]           
+        ]         
     }, 
     {
         id: 4,
@@ -54,6 +45,30 @@ const sampleQs = [
         answer: 'c',
         labels: [
             'tourist', 'folklore', 'culinary'
-        ],         
-    }
+        ]        
+    },
+    {
+        id: 5,
+        text: "What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",
+        a: "The Singapore Sting",
+        b: "The Temasek Tequila Tsunami ",
+        c: "The Nanyang Negroni",
+        d: "The Singapore Sling",
+        answer: 'd',
+        labels: [
+            'tourist', 'culinary'
+        ]
+    },
+    {
+        id: 6,
+        text: "What is the name of Singapore's famous statue that is part-lion part-fish?",
+        a: "Lionfish",
+        b: "Gorgonu",
+        c: "Wuruk",
+        d: "Merlion",
+        answer: 'd',
+        labels: [
+            'tourist', 'folklore', 'culinary'
+        ]     
+    }              
 ]

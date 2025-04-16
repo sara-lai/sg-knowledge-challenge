@@ -1,4 +1,5 @@
-// test https://v8.dev/features/import-assertions
+// maybe use json
+// https://v8.dev/features/import-assertions
 // import json from 'test.json' assert { type: 'json' };
 // console.log(json)
 
@@ -8,18 +9,17 @@
 // ^ not all questions need to be ABCD type
 
 // next steps
-// setup the UI upper left: hearts / items / quiz name
-// setup the UI upper right: timer UI
-// init & properly get/prepare full quiz & question
 // setup a render for all the render cases.... 
 
-// state overview:
+
+// state
 
 let currQ = {} // use obj not id so can do currQ.answer
 let unaskedQs = []
 let prevQs = []
 let wrongAnswers = [] // in case want to review at end
 let score = 0 // num correct, display when lose (track high score until then?)
+let surprisesIdMap = {} // for assignging surprises to questions
 
 let userWon = false
 let userLost = false
@@ -35,6 +35,7 @@ let durians = 0
 let chilliCrabs = 0
 
 // should have state for adding items? each features a different UI message/logic
+let isSurprise = false
 let gotHeart = false
 let gotDurian = false
 let gotChilliCrab = false
@@ -43,30 +44,36 @@ let gotScammed = false
 
 
 // cached el references
+
+// question - answer related
 const questionTextEl = document.querySelector('#question-text')
-
 const answerBoxEls = document.querySelectorAll('.answer-box')
-
 const answerAEl = document.querySelector('#a .answer-text')
 const answerBEl = document.querySelector('#b .answer-text')
 const answerCEl = document.querySelector('#c .answer-text')
 const answerDEl = document.querySelector('#d .answer-text')
-
 const answerSubmitEl = document.querySelector('#submit-q')
 
+// status bar related
 const heartContainerEl = document.querySelector('.heart-container')
+const durianContainerEl = document.querySelector('.durian-container')
+const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
+// todo - timer
 
-// answer selection 
-// todo - let select with A B C D keys tyoo
-function handleSelected(event){
+
+
+
+function handleAnswerSelection(event){
     answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
 }
 answerBoxEls.forEach( el => {
-    el.addEventListener('click', handleSelected)
+    // todo - let select with A B C D keys tyoo
+    el.addEventListener('click', handleAnswerSelection)
 })
 
-// todo - anti cheating events
+
+
 
 // answer submission, much logic here
 // todo use enter as well ; put this in named function.... handleSubmission
@@ -100,6 +107,15 @@ answerSubmitEl.addEventListener('click', (event) => {
 // click to redeem durian
 
 function initQuiz(){
+    // reset quiz state (for multiple quizzes)
+    currQ = {}
+    unaskedQs = []
+    prevQs = []
+    wrongAnswers = []
+    score = 0
+    surprisesIdMap = {}
+    
+    
     unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
 
     // steps / todo
@@ -111,7 +127,11 @@ function initQuiz(){
     // launch the first question
 
     initQuestion()
+
 }
+
+initQuiz()
+
 function initQuestion(){
 
     currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
@@ -124,8 +144,20 @@ function initQuestion(){
     answerBEl.textContent = currQ.b
     answerCEl.textContent = currQ.c
     answerDEl.textContent = currQ.d
+
+
+    // reset state each new question
+    answeredWrong = false
+    answeredRight = false
+    timeAllowed = 20
+    panicMode = false    
+    isSurprise = false
+    gotHeart = false
+    gotDurian = false
+    gotChilliCrab = false
+    gotScammed = false    
 }
-initQuiz()
 
 
+// todo - anti cheating events
 
