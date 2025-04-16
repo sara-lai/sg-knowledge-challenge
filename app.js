@@ -63,12 +63,14 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 
 // answer selection
 answerBoxEls.forEach( el => {
-    // todo - let select with A B C D keys tyoo
-    el.addEventListener('click', handleAnswerSelection)
+    el.addEventListener('click', handleAnswerSelection) // todo - let select with A B C D keys tyoo
 })
 function handleAnswerSelection(event){
-    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
+    clearSelected()
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
+}
+function clearSelected(){
+    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
 }
 
 
@@ -76,7 +78,6 @@ function handleAnswerSelection(event){
 // the 50-50 chillicrab UI
 // the durian adding time UI
 // challenge: incorportating "suspenseful pauses".... async-await-promise, or?
-// todo - move question/optoin text setting to here
 function render(){
     // brainstorming
     renderRightWrong() // red/green related screen
@@ -117,7 +118,6 @@ function renderSurprises(){
             
         }
     }
-    
 }
 function renderStatusBar(){
     // render hearts, durians, chillicrabs, and timer
@@ -129,6 +129,8 @@ function renderNextQuestion(){
     answerBEl.textContent = currQ.b
     answerCEl.textContent = currQ.c
     answerDEl.textContent = currQ.d
+
+    clearSelected() // clear prev answer selection
 }
 
 
@@ -166,9 +168,9 @@ function handleAnswerSubmission(event){
 
     prevQs.push(currQ)
 
-    render()
-
     initQuestion()
+
+    render()    
 
 }
 
@@ -190,6 +192,8 @@ function initChallenge(){
     unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
 
     initQuestion()
+
+    render()
 }
 
 initChallenge()
