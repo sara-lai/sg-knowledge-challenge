@@ -3,13 +3,21 @@
 // import json from 'test.json' assert { type: 'json' };
 // console.log(json)
 
-
 // big question: use classes for quiz and question, and construct Quiz/Question with JSON data?
 // question: scrap ABCD options in the data, use options: ["first","second","third"] and correct: "correct answer"
 // ^ not all questions need to be ABCD type
 
-// next steps
-// setup a render for all the render cases.... 
+// next steps:
+// do the status bar type of render where it creates all the elements from state each time
+// randomly assign surprises to questions
+// randomly order questions
+// "suspensful pauses", for right/wrong screen & for got items screen
+
+// next next steps:
+// timer, with panic mode
+// redeeming chillicrabs & durians
+// UI/screens for right/wrong, getting an item, and winning/lsoing
+
 
 
 // state
@@ -60,7 +68,6 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 // todo - timer
 
 
-
 // answer selection
 answerBoxEls.forEach( el => {
     el.addEventListener('click', handleAnswerSelection) // todo - let select with A B C D keys tyoo
@@ -73,10 +80,47 @@ function clearSelected(){
     answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
 }
 
+// answer submission
+answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
 
-// some UI things that may not belong in render():
-// the 50-50 chillicrab UI
-// the durian adding time UI
+function handleAnswerSubmission(event){
+
+    userAnswer = document.querySelector('.answer-container .selected').id
+
+    if (currQ.answer === userAnswer){
+        answeredRight = true
+        score += 1
+
+        // check for winner
+        if (unaskedQs.length === 0){ // possible issue: answered wrong but no more questions
+            userWon = true
+        }
+
+        // todo check for surprises & update state
+        // handleSurprises() ?           
+        
+    } else {
+        answeredWrong = true
+        hearts -= 1
+
+        // check for loser
+        if (hearts === 0){
+            userLost = true
+        }
+
+        wrongAnswers.push(currQ)      
+    }
+
+    prevQs.push(currQ)
+
+    initQuestion()
+
+    render()    
+}
+
+
+
+// UI actions that may not belong in render(): the 50-50 chillicrab ; the durian adding time
 // challenge: incorportating "suspenseful pauses".... async-await-promise, or?
 function render(){
     // brainstorming
@@ -133,46 +177,6 @@ function renderNextQuestion(){
     clearSelected() // clear prev answer selection
 }
 
-
-answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
-
-function handleAnswerSubmission(event){
-
-    userAnswer = document.querySelector('.answer-container .selected').id
-
-    if (currQ.answer === userAnswer){
-        answeredRight = true
-        score += 1
-
-        // check for winner
-        if (unaskedQs.length === 0){ // possible issue: answered wrong but no more questions
-            userWon = true
-        }
-
-        // todo check for surprises & update state
-        // handleSurprises() ?
-           
-        
-    } else {
-        answeredWrong = true
-        hearts -= 1
-
-        // check for loser
-        if (hearts === 0){
-            userLost = true
-        }
-
-        wrongAnswers.push(currQ)      
-
-    }
-
-    prevQs.push(currQ)
-
-    initQuestion()
-
-    render()    
-
-}
 
 
 function initChallenge(){
