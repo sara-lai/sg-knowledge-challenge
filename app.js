@@ -83,7 +83,7 @@ function render(){
     renderWonLost()
     renderSurprises() // screen telling you about your new surprise items ; goes after won/lost but before status bar update   
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
-    //renderNextQuestion() todo
+    renderNextQuestion() // question text & options text
 }
 
 function renderRightWrong(){
@@ -124,7 +124,11 @@ function renderStatusBar(){
     // maybe: re-create from state each time? not just adding/minusing 1
 }
 function renderNextQuestion(){
-    // move from init?
+    questionTextEl.textContent = currQ.text
+    answerAEl.textContent = currQ.a
+    answerBEl.textContent = currQ.b
+    answerCEl.textContent = currQ.c
+    answerDEl.textContent = currQ.d
 }
 
 
@@ -206,14 +210,7 @@ function initQuestion(){
 
     currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
 
-    // randomize the ABCD
-    // set the question UI - move to render()
-    questionTextEl.textContent = currQ.text
-    answerAEl.textContent = currQ.a
-    answerBEl.textContent = currQ.b
-    answerCEl.textContent = currQ.c
-    answerDEl.textContent = currQ.d
-
+    // randomize the ABCD options
 }
 
 // todo - anti cheating events
