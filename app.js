@@ -42,7 +42,6 @@ let gotChilliCrab = false
 let gotScammed = false
 
 
-
 // cached el references
 
 // question - answer related
@@ -62,52 +61,116 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 
 
 
-
-function handleAnswerSelection(event){
-    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
-    event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
-}
+// answer selection
 answerBoxEls.forEach( el => {
     // todo - let select with A B C D keys tyoo
     el.addEventListener('click', handleAnswerSelection)
 })
+function handleAnswerSelection(event){
+    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
+    event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
+}
 
 
+// some UI things that may not belong in render():
+// the 50-50 chillicrab UI
+// the durian adding time UI
+// challenge: incorportating "suspenseful pauses".... async-await-promise, or?
+// todo - move question/optoin text setting to here
+function render(){
+    // brainstorming
+    renderRightWrong() // red/green related screen
+    renderWonLost()
+    renderSurprises() // screen telling you about your new surprise items ; goes after won/lost but before status bar update   
+    renderStatusBar() // e.g. lost heart, gained durian, timer reset
+    //renderNextQuestion() todo
+}
+
+function renderRightWrong(){
+    if (answeredRight) {
+
+    }
+    if (answeredWrong) {
+        
+    }    
+}
+function renderWonLost(){
+    if (userWon){
+        alert('You won!!!')
+    }
+    if (userLost){
+        alert("I'm disappointed to see that you have lost. Oh well.")
+    }    
+}
+function renderSurprises(){
+    if (isSurprise){
+        if (gotDurian){
+
+        }
+        if (gotChilliCrab){ 
+            
+        }
+        if (gotHeart){ 
+            
+        }   
+        if (gotScammed){ 
+            
+        }
+    }
+    
+}
+function renderStatusBar(){
+    // render hearts, durians, chillicrabs, and timer
+    // maybe: re-create from state each time? not just adding/minusing 1
+}
+function renderNextQuestion(){
+    // move from init?
+}
 
 
-// answer submission, much logic here
-// todo use enter as well ; put this in named function.... handleSubmission
-answerSubmitEl.addEventListener('click', (event) => {
+answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
+
+function handleAnswerSubmission(event){
+
     userAnswer = document.querySelector('.answer-container .selected').id
 
-    // todo - some suspsense/thinking UI like 1 second
-
     if (currQ.answer === userAnswer){
-        alert('correct')
-        // set UI checkmark/success mode 
-        // move q to answered
-        // shift next q 
+        answeredRight = true
+        score += 1
+
         // check for winner
-        // check for surprises
-        // serve surprises UI if need to + update items
-        // some delay so briefly lingers on page before next
-        // setup next q....  includes reset timer
+        if (unaskedQs.length === 0){ // possible issue: answered wrong but no more questions
+            userWon = true
+        }
+
+        // todo check for surprises & update state
+        // handleSurprises() ?
+           
+        
     } else {
-        // set UI for wrong
-        // move q to missed
+        answeredWrong = true
+        hearts -= 1
+
         // check for loser
-        // remove heart
-        // some delay so briefly lingers on page before next        
-        // setup next q.... 
+        if (hearts === 0){
+            userLost = true
+        }
+
+        wrongAnswers.push(currQ)      
+
     }
-})
 
-// redeem items events todo
-// click to redeem chillicrab
-// click to redeem durian
+    prevQs.push(currQ)
 
-function initQuiz(){
-    // reset quiz state (for multiple quizzes)
+    render()
+
+    initQuestion()
+
+}
+
+
+function initChallenge(){
+    // reset quiz-related state (for multiple quizzes)
     currQ = {}
     unaskedQs = []
     prevQs = []
@@ -115,38 +178,21 @@ function initQuiz(){
     score = 0
     surprisesIdMap = {}
     
-    
-    unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
 
-    // steps / todo
+    // todo
     // randomize order of questions
     // randomly assign surprises
-    // initiate hearts 
-
-
-    // launch the first question
+    // maybe - warm up questions - easy questions to start
+    unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
 
     initQuestion()
-
 }
 
-initQuiz()
+initChallenge()
 
 function initQuestion(){
 
-    currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
-
-    // steps / todo
-    // randomize the ABCD
-    // set the question UI 
-    questionTextEl.textContent = currQ.text
-    answerAEl.textContent = currQ.a
-    answerBEl.textContent = currQ.b
-    answerCEl.textContent = currQ.c
-    answerDEl.textContent = currQ.d
-
-
-    // reset state each new question
+    // reset question-related state each new question
     answeredWrong = false
     answeredRight = false
     timeAllowed = 20
@@ -155,9 +201,23 @@ function initQuestion(){
     gotHeart = false
     gotDurian = false
     gotChilliCrab = false
-    gotScammed = false    
-}
+    gotScammed = false       
 
+
+    currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
+
+    // randomize the ABCD
+    // set the question UI - move to render()
+    questionTextEl.textContent = currQ.text
+    answerAEl.textContent = currQ.a
+    answerBEl.textContent = currQ.b
+    answerCEl.textContent = currQ.c
+    answerDEl.textContent = currQ.d
+
+}
 
 // todo - anti cheating events
 
+// redeem items events todo
+// click to redeem chillicrab
+// click to redeem durian
