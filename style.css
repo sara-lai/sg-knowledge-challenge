@@ -83,6 +83,7 @@ body {
 .status-bar {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 
 .heart-container {

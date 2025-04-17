@@ -9,23 +9,21 @@
 
 // next steps:
 // "suspensful pauses", for right/wrong screen & for got items screen
-// do the status bar type of render where it creates all the elements from state each time
-// randomly order questions
 // randomly assign surprises to questions
-// change data to use options: ["first","second","third"] and correct: "correct answer" ; add more sample questions
-// randomly order answer options
+// complete status bar render for durians, chillicrabs
 
 // next next steps:
 // timer, with panic mode 
 // redeeming chillicrabs & durians
 // UI/screens for right/wrong, getting an item, and winning/lsoing
 // use 'enter' events or keypress 1,2,3,4,a,b,c,d 
+// randomly order answer options
+// change data to use options: ["first","second","third"] and correct: "correct answer" ; add more sample questions
 
 // next next next steps:
 // quiz selection / quiz type (tourist vs local)
 // beautify UI / a landing page
 // make generic quiz builder... for any type of quiz
-
 
 
 // *** state ***
@@ -99,7 +97,7 @@ function handleAnswerSubmission(event){
         score += 1
 
         // check for winner
-        if (unaskedQs.length === 0){
+        if (unaskedQs.length === 0 && hearts > 0){
             userWon = true
         }
 
@@ -125,7 +123,9 @@ function handleAnswerSubmission(event){
     initQuestion()  // order requirement -> this clears state & sets next question, must do render() before
 }
 
+
 // *** render *** //
+
 // UI actions that may not belong in render(): the 50-50 chillicrab ; the durian adding time
 // challenge: incorportating "suspenseful pauses".... async-await-promise, or?
 function render(){
@@ -137,12 +137,13 @@ function render(){
 
 function renderRightWrong(){
     if (answeredRight) {
-        console.log('right')
+        alert('right')
     }
     if (answeredWrong) {
-        console.log('wrong')
+        alert('wrong')
     }    
 }
+
 function renderWonLost(){
     if (userWon){
         alert('You won!!!')
@@ -151,6 +152,7 @@ function renderWonLost(){
         alert("I'm disappointed to see that you have lost. Oh well.")
     }    
 }
+
 function renderSurprises(){
     if (isSurprise){
         if (gotDurian){
@@ -167,33 +169,24 @@ function renderSurprises(){
         }
     }
 }
+
 function renderStatusBar(){
     // render hearts, durians, chillicrabs
 
-    // render style inspired by tic-tac-toe lab -> only re-render based on state
+    // render style per tic-tac-toe lab -> only re-render based on state
     heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
     for (let i = 0; i < hearts; i++){
         let heartEl = document.createElement('div')
         heartEl.classList.add('heart')
         heartContainerEl.append(heartEl)
     }
-
-    // maybe: re-create from state each time? not just adding/minusing 1
-}
-function renderNewQuestion(){
-    questionTextEl.textContent = currQ.text
-    answerAEl.textContent = currQ.a
-    answerBEl.textContent = currQ.b
-    answerCEl.textContent = currQ.c
-    answerDEl.textContent = currQ.d
-
-    clearSelected() // clear prev answer selection
 }
 
 
 // *** init ***
 
 function initChallenge(){
+
     // reset quiz-related state (for multiple quizzes)
     currQ = {}
     unaskedQs = []
@@ -203,11 +196,9 @@ function initChallenge(){
     streak = 0
     surprisesIdMap = {}
     
-    // todo
-    // randomize order of questions
-    // randomly assign surprises
-    // maybe - warm up questions - easy questions to start
-    unaskedQs = [...sampleQs] // tmp, sampleQs coming from data.js
+    produceQuestionSet()
+
+    // todo - randomly assign surprises to questions    
 
     initQuestion()
 
@@ -229,23 +220,49 @@ function initQuestion(){
     gotChilliCrab = false
     gotScammed = false       
 
-    // or replace with random choice, get idx, and splice from array
-
+    chooseRandomQuestion()
     
-    currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
+    // todo - randomise the ABCD options
 
-
-    // randomize the ABCD options
-
-    // cannot put this in render() because render() requires old state and renderNewQuestion() requires new state
-    renderNewQuestion() 
+    // cannot put this in render() because render() requires old state and renderQuestion() requires new state
+    renderQuestion() 
 }
 
+function chooseRandomQuestion(){
+    // per SQ, instead of shuffling unaskedQs, will randomly pick from ordered unaskedQs
+    // currQ = unaskedQs.shift() -> old method, shrinks array each time until quiz ends
+
+    // randomly pick question from unaskedQs, then remove from unaskedQs (or quiz will never end)
+    // set current question currQ as obj
+    let randomIdx = Math.floor(Math.random() * unaskedQs.length)
+    let currQId = unaskedQs[randomIdx]
+    currQ = sampleQs.find(question => question.id === currQId)
+    unaskedQs.splice(randomIdx, 1)
+}
+
+function produceQuestionSet(){
+    // set unaskedQs array, with ids not objs
+    // todo maybe - warm up questions - easy questions to start
+
+    unaskedQs = sampleQs.map(question => question.id)
+    console.log(unaskedQs)
+}
 
 function randomlyOrderQuestions(){
 
 
 }
+
+function renderQuestion(){
+    questionTextEl.textContent = currQ.text
+    answerAEl.textContent = currQ.a
+    answerBEl.textContent = currQ.b
+    answerCEl.textContent = currQ.c
+    answerDEl.textContent = currQ.d
+
+    clearSelected() // clear prev answer selection
+}
+
 
 // todo - anti cheating events
 
