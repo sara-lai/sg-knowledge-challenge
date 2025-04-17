@@ -12,12 +12,19 @@
 // do the status bar type of render where it creates all the elements from state each time
 // randomly order questions
 // randomly assign surprises to questions
+// change data to use options: ["first","second","third"] and correct: "correct answer" ; add more sample questions
+// randomly order answer options
 
 // next next steps:
 // timer, with panic mode
 // redeeming chillicrabs & durians
 // UI/screens for right/wrong, getting an item, and winning/lsoing
 // use 'enter' events or keypress 1,2,3,4,a,b,c,d 
+
+// next next next steps:
+// quiz selection / quiz type (tourist vs local)
+// beautify UI / a landing page
+// make generic quiz builder... for any type of quiz
 
 
 
@@ -117,7 +124,6 @@ function handleAnswerSubmission(event){
     
     initQuestion()  // order requirement -> this clears state & sets next question, must do render() before
 }
-
 
 
 // UI actions that may not belong in render(): the 50-50 chillicrab ; the durian adding time
