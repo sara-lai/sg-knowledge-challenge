@@ -8,41 +8,41 @@
 // ^ not all questions need to be ABCD type
 
 // next steps:
-// do the status bar type of render where it creates all the elements from state each time
-// randomly assign surprises to questions
-// randomly order questions
 // "suspensful pauses", for right/wrong screen & for got items screen
+// do the status bar type of render where it creates all the elements from state each time
+// randomly order questions
+// randomly assign surprises to questions
 
 // next next steps:
 // timer, with panic mode
 // redeeming chillicrabs & durians
 // UI/screens for right/wrong, getting an item, and winning/lsoing
+// use 'enter' events or keypress 1,2,3,4,a,b,c,d 
 
 
 
-// state
+// *** state ***
 
+// quiz level state
 let currQ = {} // use obj not id so can do currQ.answer
 let unaskedQs = []
 let prevQs = []
 let wrongAnswers = [] // in case want to review at end
 let score = 0 // num correct, display when lose (track high score until then?)
+let streak = 0
 let surprisesIdMap = {} // for assignging surprises to questions
-
 let userWon = false
 let userLost = false
+
+// question level state
 let answeredWrong = false
 let answeredRight = false
-
 let userAnswer = '' // maybe not here
-
 let timeAllowed = 20 // can be changed with chillicrabs
 let panicMode = false
 let hearts = 3 // or constant for start out heart value?
 let durians = 0
 let chilliCrabs = 0
-
-// should have state for adding items? each features a different UI message/logic
 let isSurprise = false
 let gotHeart = false
 let gotDurian = false
@@ -50,7 +50,7 @@ let gotChilliCrab = false
 let gotScammed = false
 
 
-// cached el references
+// *** cached el references ***
 
 // question - answer related
 const questionTextEl = document.querySelector('#question-text')
@@ -113,9 +113,9 @@ function handleAnswerSubmission(event){
 
     prevQs.push(currQ)
 
-    initQuestion()
-
     render()    
+    
+    initQuestion()  // order requirement -> this clears state & sets next question, must do render() before
 }
 
 
@@ -128,15 +128,15 @@ function render(){
     renderWonLost()
     renderSurprises() // screen telling you about your new surprise items ; goes after won/lost but before status bar update   
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
-    renderNextQuestion() // question text & options text
+    // renderNewQuestion() // handleAnswerSubmission order issue, may need to go in initQuestion()
 }
 
 function renderRightWrong(){
     if (answeredRight) {
-
+        console.log('right')
     }
     if (answeredWrong) {
-        
+        console.log('wrong')
     }    
 }
 function renderWonLost(){
@@ -167,7 +167,7 @@ function renderStatusBar(){
     // render hearts, durians, chillicrabs, and timer
     // maybe: re-create from state each time? not just adding/minusing 1
 }
-function renderNextQuestion(){
+function renderNewQuestion(){
     questionTextEl.textContent = currQ.text
     answerAEl.textContent = currQ.a
     answerBEl.textContent = currQ.b
@@ -178,6 +178,7 @@ function renderNextQuestion(){
 }
 
 
+// *** init ***
 
 function initChallenge(){
     // reset quiz-related state (for multiple quizzes)
@@ -186,9 +187,9 @@ function initChallenge(){
     prevQs = []
     wrongAnswers = []
     score = 0
+    streak = 0
     surprisesIdMap = {}
     
-
     // todo
     // randomize order of questions
     // randomly assign surprises
@@ -215,11 +216,15 @@ function initQuestion(){
     gotChilliCrab = false
     gotScammed = false       
 
-
     currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
 
     // randomize the ABCD options
+
+    // cannot put renderNewQuestion() in render() because render requires old state
+    renderNewQuestion() 
 }
+
+
 
 // todo - anti cheating events
 
