@@ -220,7 +220,7 @@ function initQuestion(){
 
     // randomize the ABCD options
 
-    // cannot put renderNewQuestion() in render() because render requires old state
+    // cannot put renderNewQuestion() in render() because render() requires old state and renderNewQuestion() requires new state
     renderNewQuestion() 
 }
 
