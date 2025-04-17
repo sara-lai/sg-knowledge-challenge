@@ -16,7 +16,7 @@
 // randomly order answer options
 
 // next next steps:
-// timer, with panic mode
+// timer, with panic mode 
 // redeeming chillicrabs & durians
 // UI/screens for right/wrong, getting an item, and winning/lsoing
 // use 'enter' events or keypress 1,2,3,4,a,b,c,d 
@@ -99,7 +99,7 @@ function handleAnswerSubmission(event){
         score += 1
 
         // check for winner
-        if (unaskedQs.length === 0){ // possible issue: answered wrong but no more questions
+        if (unaskedQs.length === 0){
             userWon = true
         }
 
@@ -125,16 +125,14 @@ function handleAnswerSubmission(event){
     initQuestion()  // order requirement -> this clears state & sets next question, must do render() before
 }
 
-
+// *** render *** //
 // UI actions that may not belong in render(): the 50-50 chillicrab ; the durian adding time
 // challenge: incorportating "suspenseful pauses".... async-await-promise, or?
 function render(){
-    // brainstorming
     renderRightWrong() // red/green related screen
     renderWonLost()
     renderSurprises() // screen telling you about your new surprise items ; goes after won/lost but before status bar update   
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
-    // renderNewQuestion() // handleAnswerSubmission order issue, may need to go in initQuestion()
 }
 
 function renderRightWrong(){
@@ -170,7 +168,16 @@ function renderSurprises(){
     }
 }
 function renderStatusBar(){
-    // render hearts, durians, chillicrabs, and timer
+    // render hearts, durians, chillicrabs
+
+    // render style inspired by tic-tac-toe lab -> only re-render based on state
+    heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
+    for (let i = 0; i < hearts; i++){
+        let heartEl = document.createElement('div')
+        heartEl.classList.add('heart')
+        heartContainerEl.append(heartEl)
+    }
+
     // maybe: re-create from state each time? not just adding/minusing 1
 }
 function renderNewQuestion(){
@@ -222,15 +229,23 @@ function initQuestion(){
     gotChilliCrab = false
     gotScammed = false       
 
+    // or replace with random choice, get idx, and splice from array
+
+    
     currQ = unaskedQs.shift() // todo - use id lookup, maybe function getNextQuestion()
+
 
     // randomize the ABCD options
 
-    // cannot put renderNewQuestion() in render() because render() requires old state and renderNewQuestion() requires new state
+    // cannot put this in render() because render() requires old state and renderNewQuestion() requires new state
     renderNewQuestion() 
 }
 
 
+function randomlyOrderQuestions(){
+
+
+}
 
 // todo - anti cheating events
 
