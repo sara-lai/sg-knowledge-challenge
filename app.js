@@ -3,14 +3,14 @@
 // import json from 'test.json' assert { type: 'json' };
 // console.log(json)
 
-// async - await - promise
-// really seems the preferred way for pauses and dismissable notices in a state - render() setup; a non state-render setup seems a lot more jumbled/complicated
-// similar examples to my usage at https://javascript.info/async-await
+// async-await-promise vs. refactored.... 
+// version here without async-await-promise, seems good for now
+// examples of my previous usage at https://javascript.info/async-await
 
 // next steps:
 // assign surprises to questions, randomly
 // status bar render for durians, chillicrabs
-// dismissable notices for gained items/surprises
+// dismissable notices for gained items/surprises (find way to do without promises)
 // redeeming chillicrabs & durians
 
 // next next steps:
@@ -36,7 +36,7 @@ let prevQs = []
 let wrongAnswers = [] // in case want to review at end
 let score = 0 // num correct, display when lose (track high score until then?)
 let streak = 0
-let surprisesIdMap = {} // for assignging surprises to questions
+let surprisesIdMap = {} // for assignging surprises to questions, and checking if surprise on currQ
 let userWon = false
 let userLost = false
 
@@ -93,7 +93,7 @@ function clearSelected(){
 
 answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
 
-async function handleAnswerSubmission(event){
+function handleAnswerSubmission(event){
 
     userAnswer = document.querySelector('.answer-container .selected').id
 
@@ -122,16 +122,21 @@ async function handleAnswerSubmission(event){
 
     prevQs.push(currQ)
 
-    await render()    
-    
-    initQuestion()  // order requirement -> this clears state & sets next question, must do render() before since render() needs the state
+    // alternative to async-await-promise in render()
+    giveNoticeRightWrong()
+    setTimeout(() => {
+        hideNoticeRightWrong()
+        render() 
+        initQuestion() // order requirement -> clears state & sets next question, must do render() before initQuestion() since render() needs the state        
+     }, 800)    
+     
 }
 
 
 // *** main render *** //
 
-async function render(){
-    await renderRightWrong() // red/green related screen
+function render(){
+    //await renderRightWrong() // red/green related screen
 
     renderWonLost()
 
@@ -140,27 +145,43 @@ async function render(){
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
 }
 
-async function renderRightWrong(){
-
-    if (answeredRight || answeredWrong){ // only fire if a question has been answered
-    
-        if (answeredRight) {
-            rightWrongMarkerEl.classList.add('checkmark')
-        }
-        if (answeredWrong) {
-            rightWrongMarkerEl.classList.add('xmark')
-        }    
-        
-        rightWrongMarkerEl.style.display = 'block'
-
-        // similar example at https://javascript.info/async-await
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-
-        rightWrongMarkerEl.classList = [] // clear out classes for cycling
-
-        rightWrongMarkerEl.style.display = 'none'
+function giveNoticeRightWrong(){
+    if (answeredRight) {
+        rightWrongMarkerEl.classList.add('checkmark')
     }
+    if (answeredWrong) {
+        rightWrongMarkerEl.classList.add('xmark')
+    }
+    rightWrongMarkerEl.style.display = 'block'        
+
 }
+function hideNoticeRightWrong(){
+    rightWrongMarkerEl.classList = [] 
+    rightWrongMarkerEl.style.display = 'none'
+}
+
+// previous async-await-promise method for placing it in main render() ; refactoring to avoid
+// async function renderRightWrong(){
+
+//     if (answeredRight || answeredWrong){ // only fire if a question has been answered
+    
+//         if (answeredRight) {
+//             rightWrongMarkerEl.classList.add('checkmark')
+//         }
+//         if (answeredWrong) {
+//             rightWrongMarkerEl.classList.add('xmark')
+//         }    
+        
+//         rightWrongMarkerEl.style.display = 'block'
+
+//         // similar example at https://javascript.info/async-await
+//         await new Promise((resolve) => setTimeout(resolve, 1000))
+
+//         rightWrongMarkerEl.classList = [] // clear out classes for cycling
+
+//         rightWrongMarkerEl.style.display = 'none'
+//     }
+// }
 
 // todo
 function renderWonLost(){
@@ -200,6 +221,7 @@ function renderStatusBar(){
         heartEl.classList.add('heart')
         heartContainerEl.append(heartEl)
     }
+    
 }
 
 
@@ -267,10 +289,6 @@ function produceQuestionSet(){
     console.log(unaskedQs)
 }
 
-function randomlyOrderQuestions(){
-
-
-}
 
 function renderQuestion(){
     questionTextEl.textContent = currQ.text
