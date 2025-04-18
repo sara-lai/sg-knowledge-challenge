@@ -1,0 +1,26 @@
+next steps:
+assign surprises to questions, randomly
+status bar render for durians, chillicrabs
+dismissable notices for gained items/surprises
+timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer )
+redeem chillicrabs & durians (50-50 logic, add 20 to timer)
+
+next next steps:
+ui screens for winning/lsoing
+use 'enter' events or keypress 1,2,3,4,a,b,c,d 
+randomly order answer options
+change data to use options: ["first","second","third"] and correct: "correct answer", more flexibility question types
+add 20+ more sample questions
+anti cheating event listeners
+
+next next next steps:
+quiz selection / quiz type (tourist vs local)
+beautify UI / a landing page
+other question types (drag and drop, etc.)
+start out with "warm up" questions (ease into the harder challenge)
+use classes for quiz and question, and construct Quiz/Question with JSON data
+hantu mode
+"hot" streak mode (high UV?)
+some answers which if selected are so very wrong that quiz ends immediately
+recycle missed questions mode (maybe)
+turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with generic constants

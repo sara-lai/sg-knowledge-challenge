@@ -1,52 +1,25 @@
-// maybe use json
-// https://v8.dev/features/import-assertions
-// import json from 'test.json' assert { type: 'json' };
-// console.log(json)
-
-// async-await-promise vs. refactored.... 
-// version here without async-await-promise, seems good for now
-// examples of my previous usage at https://javascript.info/async-await
-
-// next steps:
-// assign surprises to questions, randomly
-// status bar render for durians, chillicrabs
-// dismissable notices for gained items/surprises (find way to do without promises)
-// redeeming chillicrabs & durians
-
-// next next steps:
-// timer, with panic mode  (use animation frames for smooth countdown circle??; end of timer = got wrong; ability to stop and reset timer )
-// ui screens for winning/lsoing
-// use 'enter' events or keypress 1,2,3,4,a,b,c,d 
-// randomly order answer options
-// change data to use options: ["first","second","third"] and correct: "correct answer" ; add many more sample questions
-
-// next next next steps:
-// quiz selection / quiz type (tourist vs local)
-// beautify UI / a landing page
-// turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with general "add time" "fifty fifty"
-// use classes for quiz and question, and construct Quiz/Question with JSON data?
-
+// sections:
+// state - answer selection - answer submission - render - init
 
 // *** state ***
 
 // quiz level state
-let currQ = {} // use obj not id so can do currQ.answer
+let currQ = {}
 let unaskedQs = []
 let prevQs = []
-let wrongAnswers = [] // in case want to review at end
-let score = 0 // num correct, display when lose (track high score until then?)
+let wrongAnswers = [] // maybe review at end
+let score = 0 
 let streak = 0
-let surprisesIdMap = {} // for assignging surprises to questions, and checking if surprise on currQ
 let userWon = false
 let userLost = false
 
 // question level state
 let answeredWrong = false
 let answeredRight = false
-let userAnswer = '' // for cases e.g. no user answer & time runs out
-let timeAllowed = 20 // can be changed with chillicrabs
+let userAnswer = null // e.g. logic if no user answer & time runs out
+let timeAllowed = 20
 let panicMode = false
-let hearts = 3 // or constant for start out heart value?
+let hearts = 3 
 let durians = 0
 let chilliCrabs = 0
 let isSurprise = false
@@ -55,10 +28,14 @@ let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false
 
+// constants
+// todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY
+
 
 // *** cached el references ***
 
 // question - answer related
+const questionBoxEl = document.querySelector('.question-box')
 const questionTextEl = document.querySelector('#question-text')
 const answerBoxEls = document.querySelectorAll('.answer-box')
 const answerAEl = document.querySelector('#a .answer-text')
@@ -79,7 +56,7 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 // *** answer selection *** //
 
 answerBoxEls.forEach( el => {
-    el.addEventListener('click', handleAnswerSelection) // todo - let select with A B C D keys tyoo
+    el.addEventListener('click', handleAnswerSelection) // todo - A B C D or 1 2 3 4 keys
 })
 function handleAnswerSelection(event){
     clearSelected()
@@ -88,6 +65,8 @@ function handleAnswerSelection(event){
 function clearSelected(){
     answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
 }
+
+
 
 // *** answer submission *** //
 
@@ -101,56 +80,78 @@ function handleAnswerSubmission(event){
         answeredRight = true
         score += 1
         streak += 1
-
-        if (unaskedQs.length === 0 && hearts > 0){
+        if (unaskedQs.length === 0 && hearts > 0){ 
             userWon = true
         }
-
-        // todo handleSurprises()       
-        
+        handleSurprises()   
     } else {
         answeredWrong = true
         hearts -= 1
         streak = 0
-
         if (hearts === 0){
             userLost = true
         }
-
-        wrongAnswers.push(currQ)      
+        wrongAnswers.push(currQ.id)      
     }
 
-    prevQs.push(currQ)
+    prevQs.push(currQ.id)
 
-    // alternative to async-await-promise in render()
-    giveNoticeRightWrong()
+    // alternative to an async-await-promise:
+    // idea: serve right-wrong notices *before* render()
+    renderNoticeRightWrong()
     setTimeout(() => {
         hideNoticeRightWrong()
         render() 
-        initQuestion() // order requirement -> clears state & sets next question, must do render() before initQuestion() since render() needs the state        
-     }, 800)    
-     
+        initQuestion() // launch new cycle
+     }, 1000)    
 }
+
+// work in progress
+function handleSurprises(){
+    // randomly set a surprise with some frequency 
+    // skip scam if you dont have items already   
+
+    if (Math.floor(Math.random() * 2) === 1){  // 50% chance getting item each question for demo (15% for live?)
+        console.log('you get a surprise!')
+        
+        // // pick randomly from array of surprises - control by number of items
+        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
+        let randomIdx = Math.floor(Math.random() * surprises.length)        
+        let theSurprise = surprises[randomIdx]
+
+        console.log('you got a ' + theSurprise)
+
+        // if (theSurprise === 'durian'){
+        //     gotDurian = true 
+        //     durians += 1
+        // }
+    }
+}
+
 
 
 // *** main render *** //
 
 function render(){
-    //await renderRightWrong() // red/green related screen
 
+    // renderNoticeRightWrong() moved
+    
     renderWonLost()
 
     renderSurprises() // todo - dismissable notices about new items
      
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
+
+    // renderQuestion() moved
 }
 
-function giveNoticeRightWrong(){
+function renderNoticeRightWrong(){
     if (answeredRight) {
         rightWrongMarkerEl.classList.add('checkmark')
     }
     if (answeredWrong) {
         rightWrongMarkerEl.classList.add('xmark')
+        questionBoxEl.style.color = 'red'
     }
     rightWrongMarkerEl.style.display = 'block'        
 
@@ -158,11 +159,118 @@ function giveNoticeRightWrong(){
 function hideNoticeRightWrong(){
     rightWrongMarkerEl.classList = [] 
     rightWrongMarkerEl.style.display = 'none'
+    questionBoxEl.style.color = 'black'
 }
 
-// previous async-await-promise method for placing it in main render() ; refactoring to avoid
-// async function renderRightWrong(){
+// todo
+function renderWonLost(){
+    if (userWon){
+        alert('You did it!! You won!!')
+    }
+    if (userLost){
+        alert("Very disappointing that you were not able to complete this challenge.")
+    }    
+}
 
+// todo
+function renderSurprises(){
+    if (gotDurian){
+        alert('got durian!')
+    }
+    if (gotChilliCrab){ 
+        alert('got chillicrab!')
+    }
+    if (gotHeart){ 
+        alert('got heart!')
+    }   
+    if (gotScammed){ 
+        alert('uhoh. you fell for a scam!')
+    }
+}
+
+// work in progress
+function renderStatusBar(){
+    // render style per tic-tac-toe lab -> only re-render based on state
+    heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
+    for (let i = 0; i < hearts; i++){
+        let heartEl = document.createElement('div')
+        heartEl.classList.add('heart')
+        heartContainerEl.append(heartEl)
+    }
+}
+
+function renderQuestion(){
+    questionTextEl.textContent = currQ.text
+    answerAEl.textContent = currQ.a
+    answerBEl.textContent = currQ.b
+    answerCEl.textContent = currQ.c
+    answerDEl.textContent = currQ.d
+
+    clearSelected() // clear prev answer selection
+}
+
+
+
+// *** init ***
+
+function initChallenge(){
+
+    // reset quiz state (for multiple quizzes)
+    currQ = {}
+    unaskedQs = []
+    prevQs = []
+    wrongAnswers = []
+    score = 0
+    streak = 0
+    userWon = false
+    userLost = false    
+    
+    produceQuestionSet()
+
+    initQuestion()
+
+    render()
+}
+
+initChallenge()
+
+function initQuestion(){
+
+    // reset question state each new question
+    answeredWrong = false
+    answeredRight = false
+    userAnswer = null
+    timeAllowed = 20
+    panicMode = false    
+    isSurprise = false
+    gotHeart = false
+    gotDurian = false
+    gotChilliCrab = false
+    gotScammed = false       
+ 
+    chooseRandomQuestion()
+
+    // randommlyAssignSurprise() moved
+
+    renderQuestion() // moved from render(), render() is about old question, this is new question
+}
+
+function chooseRandomQuestion(){
+    // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
+    let randomIdx = Math.floor(Math.random() * unaskedQs.length)
+    let currQId = unaskedQs[randomIdx]
+    currQ = sampleQs.find(question => question.id === currQId)  // use currQ as obj
+    unaskedQs.splice(randomIdx, 1)
+}
+
+function produceQuestionSet(){
+    // use ids not objs for questions array
+    unaskedQs = sampleQs.map(question => question.id)
+    console.log(unaskedQs)
+}
+
+// previous async-await-promise method called in render() ; refactoring to avoid
+// async function renderRightWrong(){
 //     if (answeredRight || answeredWrong){ // only fire if a question has been answered
     
 //         if (answeredRight) {
@@ -182,127 +290,3 @@ function hideNoticeRightWrong(){
 //         rightWrongMarkerEl.style.display = 'none'
 //     }
 // }
-
-// todo
-function renderWonLost(){
-    if (userWon){
-        alert('You did it!! You won!!')
-    }
-    if (userLost){
-        alert("Very disappointing that you were not able to complete this challenge.")
-    }    
-}
-
-// todo
-function renderSurprises(){
-    if (isSurprise){
-        if (gotDurian){
-
-        }
-        if (gotChilliCrab){ 
-            
-        }
-        if (gotHeart){ 
-            
-        }   
-        if (gotScammed){ 
-            
-        }
-    }
-}
-
-function renderStatusBar(){
-    // render hearts, durians, chillicrabs
-
-    // render style per tic-tac-toe lab -> only re-render based on state
-    heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
-    for (let i = 0; i < hearts; i++){
-        let heartEl = document.createElement('div')
-        heartEl.classList.add('heart')
-        heartContainerEl.append(heartEl)
-    }
-    
-}
-
-
-// *** init ***
-
-function initChallenge(){
-
-    // reset quiz-related state (for multiple quizzes)
-    currQ = {}
-    unaskedQs = []
-    prevQs = []
-    wrongAnswers = []
-    score = 0
-    streak = 0
-    surprisesIdMap = {}
-    
-    produceQuestionSet()
-
-    // todo - assign surprises to questions    
-
-    initQuestion()
-
-    render()
-}
-
-initChallenge()
-
-function initQuestion(){
-
-    // reset question-related state each new question
-    answeredWrong = false
-    answeredRight = false
-    timeAllowed = 20
-    panicMode = false    
-    isSurprise = false
-    gotHeart = false
-    gotDurian = false
-    gotChilliCrab = false
-    gotScammed = false       
- 
-    chooseRandomQuestion()
-    
-    // todo - randomise the ABCD options
-
-    // cannot put this in render() because render() requires the old question state but renderQuestion() requires new question state
-    renderQuestion() 
-}
-
-function chooseRandomQuestion(){
-    // per SQ, instead of shuffling unaskedQs, will randomly pick from ordered unaskedQs
-    // currQ = unaskedQs.shift() -> old method, shrinks array each time until quiz ends
-
-    // randomly pick question from unaskedQs, set currQ, then remove from unaskedQs (or quiz will never end)
-    let randomIdx = Math.floor(Math.random() * unaskedQs.length)
-    let currQId = unaskedQs[randomIdx]
-    currQ = sampleQs.find(question => question.id === currQId)  // use currQ as obj
-    unaskedQs.splice(randomIdx, 1)
-}
-
-function produceQuestionSet(){
-    // set unaskedQs array, with ids not objs
-    // todo maybe - warm up questions - easy questions to start
-
-    unaskedQs = sampleQs.map(question => question.id)
-    console.log(unaskedQs)
-}
-
-
-function renderQuestion(){
-    questionTextEl.textContent = currQ.text
-    answerAEl.textContent = currQ.a
-    answerBEl.textContent = currQ.b
-    answerCEl.textContent = currQ.c
-    answerDEl.textContent = currQ.d
-
-    clearSelected() // clear prev answer selection
-}
-
-
-// todo - anti cheating events
-
-// redeem items events todo
-// click to redeem chillicrab
-// click to redeem durian
