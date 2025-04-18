@@ -92,14 +92,14 @@ body {
     gap: 16px;
 }
 .heart {
-    background-image: url('heart-icon.png');
+    background-image: url('images/heart-icon.png');
     background-size: contain;
     width: 2rem;
     height: 2rem;
 }
 
 .durian {
-    background-image: url('durian-icon.png');
+    background-image: url('images/durian-icon.png');
     background-size: contain;
     width: 2rem;
     height: 2rem;
@@ -116,14 +116,14 @@ body {
 }
 
 .checkmark {
-    background-image: url('correct-check.png');
+    background-image: url('images/correct-check.png');
     background-size: contain;
     width: 6rem;
     height: 6rem;    
 }
 
 .xmark {
-    background-image: url('incorrect-x.png');
+    background-image: url('images/incorrect-x.png');
     background-size: contain;
     width: 6rem;
     height: 6rem;

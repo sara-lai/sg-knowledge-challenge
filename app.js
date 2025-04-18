@@ -1,4 +1,5 @@
-// sections:
+
+// 5 sections:
 // state - answer selection - answer submission - render - init
 
 // *** state ***
