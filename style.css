@@ -96,3 +96,27 @@ body {
     width: 2rem;
     height: 2rem;
 }
+
+
+/* right-wrong markers - hide container by default */
+
+#right-wrong-marker {
+    display: none;
+    position: absolute; /* dont want it to move other element around */
+    top: 20%;
+    right: 50%;
+}
+
+.checkmark {
+    background-image: url('correct-check.png');
+    background-size: contain;
+    width: 6rem;
+    height: 6rem;    
+}
+
+.xmark {
+    background-image: url('incorrect-x.png');
+    background-size: contain;
+    width: 6rem;
+    height: 6rem;
+}

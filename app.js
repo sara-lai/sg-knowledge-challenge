@@ -3,27 +3,28 @@
 // import json from 'test.json' assert { type: 'json' };
 // console.log(json)
 
-// big question: use classes for quiz and question, and construct Quiz/Question with JSON data?
-// question: scrap ABCD options in the data, use options: ["first","second","third"] and correct: "correct answer"
-// ^ not all questions need to be ABCD type
+// async - await - promise
+// really seems the preferred way for pauses and dismissable notices in a state - render() setup; a non state-render setup seems a lot more jumbled/complicated
+// similar examples to my usage at https://javascript.info/async-await
 
 // next steps:
-// "suspensful pauses", for right/wrong screen & for got items screen
-// randomly assign surprises to questions
-// complete status bar render for durians, chillicrabs
+// assign surprises to questions, randomly
+// status bar render for durians, chillicrabs
+// dismissable notices for gained items/surprises
+// redeeming chillicrabs & durians
 
 // next next steps:
-// timer, with panic mode 
-// redeeming chillicrabs & durians
-// UI/screens for right/wrong, getting an item, and winning/lsoing
+// timer, with panic mode  (use animation frames for smooth countdown circle??; end of timer = got wrong; ability to stop and reset timer )
+// ui screens for winning/lsoing
 // use 'enter' events or keypress 1,2,3,4,a,b,c,d 
 // randomly order answer options
-// change data to use options: ["first","second","third"] and correct: "correct answer" ; add more sample questions
+// change data to use options: ["first","second","third"] and correct: "correct answer" ; add many more sample questions
 
 // next next next steps:
 // quiz selection / quiz type (tourist vs local)
 // beautify UI / a landing page
-// make generic quiz builder... for any type of quiz
+// turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with general "add time" "fifty fifty"
+// use classes for quiz and question, and construct Quiz/Question with JSON data?
 
 
 // *** state ***
@@ -42,7 +43,7 @@ let userLost = false
 // question level state
 let answeredWrong = false
 let answeredRight = false
-let userAnswer = '' // maybe not here
+let userAnswer = '' // for cases e.g. no user answer & time runs out
 let timeAllowed = 20 // can be changed with chillicrabs
 let panicMode = false
 let hearts = 3 // or constant for start out heart value?
@@ -65,6 +66,7 @@ const answerBEl = document.querySelector('#b .answer-text')
 const answerCEl = document.querySelector('#c .answer-text')
 const answerDEl = document.querySelector('#d .answer-text')
 const answerSubmitEl = document.querySelector('#submit-q')
+const rightWrongMarkerEl = document.querySelector('#right-wrong-marker')
 
 // status bar related
 const heartContainerEl = document.querySelector('.heart-container')
@@ -73,7 +75,9 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 // todo - timer
 
 
-// answer selection
+
+// *** answer selection *** //
+
 answerBoxEls.forEach( el => {
     el.addEventListener('click', handleAnswerSelection) // todo - let select with A B C D keys tyoo
 })
@@ -85,30 +89,30 @@ function clearSelected(){
     answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
 }
 
-// answer submission
+// *** answer submission *** //
+
 answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
 
-function handleAnswerSubmission(event){
+async function handleAnswerSubmission(event){
 
     userAnswer = document.querySelector('.answer-container .selected').id
 
     if (currQ.answer === userAnswer){
         answeredRight = true
         score += 1
+        streak += 1
 
-        // check for winner
         if (unaskedQs.length === 0 && hearts > 0){
             userWon = true
         }
 
-        // todo check for surprises & update state
-        // handleSurprises() ?           
+        // todo handleSurprises()       
         
     } else {
         answeredWrong = true
         hearts -= 1
+        streak = 0
 
-        // check for loser
         if (hearts === 0){
             userLost = true
         }
@@ -118,41 +122,57 @@ function handleAnswerSubmission(event){
 
     prevQs.push(currQ)
 
-    render()    
+    await render()    
     
-    initQuestion()  // order requirement -> this clears state & sets next question, must do render() before
+    initQuestion()  // order requirement -> this clears state & sets next question, must do render() before since render() needs the state
 }
 
 
-// *** render *** //
+// *** main render *** //
 
-// UI actions that may not belong in render(): the 50-50 chillicrab ; the durian adding time
-// challenge: incorportating "suspenseful pauses".... async-await-promise, or?
-function render(){
-    renderRightWrong() // red/green related screen
+async function render(){
+    await renderRightWrong() // red/green related screen
+
     renderWonLost()
-    renderSurprises() // screen telling you about your new surprise items ; goes after won/lost but before status bar update   
+
+    renderSurprises() // todo - dismissable notices about new items
+     
     renderStatusBar() // e.g. lost heart, gained durian, timer reset
 }
 
-function renderRightWrong(){
-    if (answeredRight) {
-        alert('right')
+async function renderRightWrong(){
+
+    if (answeredRight || answeredWrong){ // only fire if a question has been answered
+    
+        if (answeredRight) {
+            rightWrongMarkerEl.classList.add('checkmark')
+        }
+        if (answeredWrong) {
+            rightWrongMarkerEl.classList.add('xmark')
+        }    
+        
+        rightWrongMarkerEl.style.display = 'block'
+
+        // similar example at https://javascript.info/async-await
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+
+        rightWrongMarkerEl.classList = [] // clear out classes for cycling
+
+        rightWrongMarkerEl.style.display = 'none'
     }
-    if (answeredWrong) {
-        alert('wrong')
-    }    
 }
 
+// todo
 function renderWonLost(){
     if (userWon){
-        alert('You won!!!')
+        alert('You did it!! You won!!')
     }
     if (userLost){
-        alert("I'm disappointed to see that you have lost. Oh well.")
+        alert("Very disappointing that you were not able to complete this challenge.")
     }    
 }
 
+// todo
 function renderSurprises(){
     if (isSurprise){
         if (gotDurian){
@@ -198,7 +218,7 @@ function initChallenge(){
     
     produceQuestionSet()
 
-    // todo - randomly assign surprises to questions    
+    // todo - assign surprises to questions    
 
     initQuestion()
 
@@ -219,12 +239,12 @@ function initQuestion(){
     gotDurian = false
     gotChilliCrab = false
     gotScammed = false       
-
+ 
     chooseRandomQuestion()
     
     // todo - randomise the ABCD options
 
-    // cannot put this in render() because render() requires old state and renderQuestion() requires new state
+    // cannot put this in render() because render() requires the old question state but renderQuestion() requires new question state
     renderQuestion() 
 }
 
@@ -232,11 +252,10 @@ function chooseRandomQuestion(){
     // per SQ, instead of shuffling unaskedQs, will randomly pick from ordered unaskedQs
     // currQ = unaskedQs.shift() -> old method, shrinks array each time until quiz ends
 
-    // randomly pick question from unaskedQs, then remove from unaskedQs (or quiz will never end)
-    // set current question currQ as obj
+    // randomly pick question from unaskedQs, set currQ, then remove from unaskedQs (or quiz will never end)
     let randomIdx = Math.floor(Math.random() * unaskedQs.length)
     let currQId = unaskedQs[randomIdx]
-    currQ = sampleQs.find(question => question.id === currQId)
+    currQ = sampleQs.find(question => question.id === currQId)  // use currQ as obj
     unaskedQs.splice(randomIdx, 1)
 }
 
