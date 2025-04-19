@@ -79,14 +79,20 @@ function handleAnswerSubmission(event){
 
     if (handleRightAnswer()){
 
-        handleWinLoss()
+        if (handleWonLost()){
+            renderWonLost()
+            return
+        }
 
         handleSurprises()   
     } else {
 
         handleWrongAnswer()
 
-        handleWinLoss()
+        if (handleWonLost()){
+            renderWonLost()
+            return
+        }
 
         wrongAnswers.push(currQ.id)      
     }
@@ -94,12 +100,16 @@ function handleAnswerSubmission(event){
     prevQs.push(currQ.id)
 
     renderNoticeRightWrong()
+
+    // ok so maybe like:
+    // last thing in render() can be surprises dismissable notice, when dismiss does renderQuestion()
+    // ok if initQuestion() runs in meantime
     setTimeout(() => {
         hideNoticeRightWrong()
-        render() 
-        if (!userWon && !userLost){
-            initQuestion() // launch new cycle
-        }
+
+        render()
+
+        //initQuestion() // launch new cycle
      }, 1000)    
 }
 
@@ -119,7 +129,7 @@ function handleWrongAnswer(){
     streak = 0    
 }
 
-function handleWinLoss(){
+function handleWonLost(){
     if (unaskedQs.length === 0 && hearts > 0){ 
         userWon = true
     }
@@ -167,15 +177,18 @@ function handleSurprises(){
 
 function render(){
 
-    // renderNoticeRightWrong() moved
-    
-    renderWonLost()
+    // dismissable notice and/or long pause
+    if (isSurprise) {
 
-    renderSurprises() // todo - dismissable notices about new items
-     
-    renderStatusBar() // e.g. lost heart, gained durian, timer reset
+        // on dismiss -> renderStatusBar() & initQuestion()
+        renderSurprises()
 
-    // renderQuestion() moved
+    } else {
+
+        renderStatusBar()
+
+        initQuestion()
+    }
 }
 
 function renderNoticeRightWrong(){
@@ -189,6 +202,7 @@ function renderNoticeRightWrong(){
     rightWrongMarkerEl.style.display = 'block' // amy display option, just make qppear       
 
 }
+
 function hideNoticeRightWrong(){
     rightWrongMarkerEl.classList.remove('checkmark')
     rightWrongMarkerEl.classList.remove('xmark')
@@ -208,6 +222,7 @@ function renderWonLost(){
 
 // todo
 function renderSurprises(){
+    // on dismiss -> renderStatusBar() & initQuestion()
     if (gotDurian){
         //alert('got durian!')
     }
@@ -220,6 +235,11 @@ function renderSurprises(){
     if (gotScammed){ 
         alert('uhoh. you fell for a scam!')
     }
+
+    // click event on 'ok' 
+    // gives renderStatusBar()
+    // initQuestion()
+    // (or just calls render() again??) --> set isSurpise false first....
 }
 
 // work in progress
@@ -296,9 +316,7 @@ function initQuestion(){
  
     chooseRandomQuestion()
 
-    // randommlyAssignSurprise() moved
-
-    renderQuestion() // moved from render(), render() is about old question, this is new question
+    renderQuestion()
 }
 
 function chooseRandomQuestion(){
