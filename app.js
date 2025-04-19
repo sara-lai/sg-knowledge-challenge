@@ -1,6 +1,6 @@
 
 // 5 sections:
-// state - answer selection - answer submission - render - init
+// state - answer selection - answer submission - render L:136 - init
 
 // *** state ***
 
@@ -81,17 +81,17 @@ function handleAnswerSubmission(event){
         answeredRight = true
         score += 1
         streak += 1
-        if (unaskedQs.length === 0 && hearts > 0){ 
-            userWon = true
-        }
+
+        handleWinLoss()
+        
         handleSurprises()   
     } else {
         answeredWrong = true
         hearts -= 1
         streak = 0
-        if (hearts === 0){
-            userLost = true
-        }
+
+        handleWinLoss()
+
         wrongAnswers.push(currQ.id)      
     }
 
@@ -103,8 +103,18 @@ function handleAnswerSubmission(event){
     setTimeout(() => {
         hideNoticeRightWrong()
         render() 
-        initQuestion() // launch new cycle
+        initQuestion() // launch new cycle ; bug: dont call if userWon or userLost
      }, 1000)    
+}
+
+function handleWinLoss(){
+    if (unaskedQs.length === 0 && hearts > 0){ 
+        userWon = true
+    }
+
+    if (hearts === 0){
+        userLost = true
+    }
 }
 
 // work in progress
@@ -154,11 +164,12 @@ function renderNoticeRightWrong(){
         rightWrongMarkerEl.classList.add('xmark')
         questionBoxEl.style.color = 'red'
     }
-    rightWrongMarkerEl.style.display = 'block'        
+    rightWrongMarkerEl.style.display = 'block' // amy display option, just make qppear       
 
 }
 function hideNoticeRightWrong(){
-    rightWrongMarkerEl.classList = [] 
+    rightWrongMarkerEl.classList.remove('checkmark')
+    rightWrongMarkerEl.classList.remove('xmark')
     rightWrongMarkerEl.style.display = 'none'
     questionBoxEl.style.color = 'black'
 }
