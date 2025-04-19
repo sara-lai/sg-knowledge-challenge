@@ -36,6 +36,7 @@ let gotScammed = false
 // *** cached el references ***
 
 // question - answer related
+const questionWrapperEl = document.querySelector('.question-wrapper') // container for various screens/pages
 const questionBoxEl = document.querySelector('.question-box')
 const questionTextEl = document.querySelector('#question-text')
 const answerBoxEls = document.querySelectorAll('.answer-box')
@@ -52,6 +53,8 @@ const durianContainerEl = document.querySelector('.durian-container')
 const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 // todo - timer
 
+// screens/pages/notices
+const endScreen = document.querySelector('#end-screen')
 
 
 // *** answer selection *** //
@@ -101,15 +104,11 @@ function handleAnswerSubmission(event){
 
     renderNoticeRightWrong()
 
-    // ok so maybe like:
-    // last thing in render() can be surprises dismissable notice, when dismiss does renderQuestion()
-    // ok if initQuestion() runs in meantime
     setTimeout(() => {
         hideNoticeRightWrong()
 
         render()
 
-        //initQuestion() // launch new cycle
      }, 1000)    
 }
 
@@ -132,10 +131,12 @@ function handleWrongAnswer(){
 function handleWonLost(){
     if (unaskedQs.length === 0 && hearts > 0){ 
         userWon = true
+        return true // for branching/flow in handleAnswerSubmission() 
     }
 
     if (hearts === 0){
         userLost = true
+        return true
     }
 }
 
@@ -210,14 +211,22 @@ function hideNoticeRightWrong(){
     questionBoxEl.style.color = 'black'
 }
 
-// todo
 function renderWonLost(){
+    // using win/lose screen from html
     if (userWon){
-        alert('You did it!! You won!!')
+        document.querySelector('.end-screen h2').textContent = 'You did it! You won!'
+        document.querySelector('.end-screen p').innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
+            we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
+            to further test your knowledge and for the chance to win prizes!"
+        document.querySelector('.end-screen-flair').classList.add('win-screen-img')
     }
     if (userLost){
         alert("Very disappointing that you were not able to complete this challenge.")
-    }    
+    }  
+    
+    endScreen.style.display = 'flex'
+    questionWrapperEl.remove() //  todo - won't be able to restart challenge from button if remove main question area
+    document.querySelector('body').append(endScreen)    
 }
 
 // todo
@@ -235,6 +244,9 @@ function renderSurprises(){
     if (gotScammed){ 
         alert('uhoh. you fell for a scam!')
     }
+
+    renderStatusBar()
+    initQuestion()
 
     // click event on 'ok' 
     // gives renderStatusBar()
@@ -295,7 +307,7 @@ function initChallenge(){
 
     initQuestion()
 
-    render()
+    renderStatusBar()
 }
 
 initChallenge()
@@ -320,6 +332,7 @@ function initQuestion(){
 }
 
 function chooseRandomQuestion(){
+
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
     let randomIdx = Math.floor(Math.random() * unaskedQs.length)
     let currQId = unaskedQs[randomIdx]
@@ -331,6 +344,11 @@ function produceQuestionSet(){
     // use ids not objs for questions array
     unaskedQs = sampleQs.map(question => question.id)
     console.log(unaskedQs)
+}
+
+// todo
+function resetChallenge(){
+    // user clicks "again!" btn on end screen
 }
 
 // previous async-await-promise method called in render() ; refactoring to avoid

@@ -1,26 +1,26 @@
 next steps:
-fix question layout with bigger height status bar
-dismissable notices for gained items/surprises
-timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer )
-redeem chillicrabs & durians (50-50 logic, add 20 to timer)
+complete win/lose + UI (by april 20)
+dismissable notices for gained items/surprises (by april 21)
+timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer ) (by april 22-23)
+redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
 
 next next steps:
-ui screens for winning/lsoing
-use 'enter' events or keypress 1,2,3,4,a,b,c,d 
-randomly order answer options
 change data to use options: ["first","second","third"] and correct: "correct answer", more flexibility question types
 add 20+ more sample questions
+use 'enter' events or keypress 1,2,3,4,a,b,c,d 
 anti cheating event listeners
 
 next next next steps:
+beautify UI / pixel perfect tweaks / a landing page
 quiz selection / quiz type (tourist vs local)
-beautify UI / a landing page
 other question types (drag and drop, etc.)
+randomly order answer options
 start out with "warm up" questions (ease into the harder challenge)
 use classes for quiz and question, and construct Quiz/Question with JSON data
 hantu mode
 "hot" streak mode (high UV?)
-some answers which if selected are so very wrong that quiz ends immediately
-recycle missed questions mode (maybe)
+some answers which if selected are so very wrong that the quiz ends immediately
+^ or the opposite: user clicks a wildly wrong answer & some fun bonus mode occurs
+recycle missed questions mode (maybe, eg cant finish quiz until all questions correct)
 turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with generic constants
 
