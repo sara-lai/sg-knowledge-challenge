@@ -77,18 +77,14 @@ function handleAnswerSubmission(event){
 
     userAnswer = document.querySelector('.answer-container .selected').id
 
-    if (currQ.answer === userAnswer){
-        answeredRight = true
-        score += 1
-        streak += 1
+    if (handleRightAnswer()){
 
         handleWinLoss()
-        
+
         handleSurprises()   
     } else {
-        answeredWrong = true
-        hearts -= 1
-        streak = 0
+
+        handleWrongAnswer()
 
         handleWinLoss()
 
@@ -97,14 +93,30 @@ function handleAnswerSubmission(event){
 
     prevQs.push(currQ.id)
 
-    // alternative to an async-await-promise:
-    // idea: serve right-wrong notices *before* render()
     renderNoticeRightWrong()
     setTimeout(() => {
         hideNoticeRightWrong()
         render() 
-        initQuestion() // launch new cycle ; bug: dont call if userWon or userLost
+        if (!userWon && !userLost){
+            initQuestion() // launch new cycle
+        }
      }, 1000)    
+}
+
+function handleRightAnswer(){
+    if (currQ.answer === userAnswer){
+        answeredRight = true
+        score += 1
+        streak += 1
+        return true 
+    }
+    return false
+}
+
+function handleWrongAnswer(){
+    answeredWrong = true
+    hearts -= 1
+    streak = 0    
 }
 
 function handleWinLoss(){
@@ -119,10 +131,8 @@ function handleWinLoss(){
 
 // work in progress
 function handleSurprises(){
-    // randomly set a surprise with some frequency 
-    // skip scam if you dont have items already   
 
-    if (Math.floor(Math.random() * 2) === 1){  // 50% chance getting item each question for demo (15% for live?)
+    if (Math.floor(Math.random() * 1) === 0){  // 50% chance getting item each question for demo (15% for live?)
         console.log('you get a surprise!')
         
         // // pick randomly from array of surprises - control by number of items
@@ -132,10 +142,22 @@ function handleSurprises(){
 
         console.log('you got a ' + theSurprise)
 
-        // if (theSurprise === 'durian'){
-        //     gotDurian = true 
-        //     durians += 1
-        // }
+        if (theSurprise === 'durian'){
+            gotDurian = true 
+            durians += 1
+        }
+        if (theSurprise === 'chillicrab'){
+            gotChilliCrab = true 
+            chilliCrabs += 1
+        }   
+        if (theSurprise === 'heart'){
+            gotHeart = true 
+            hearts += 1
+        }   
+        if (theSurprise === 'scam'){
+            gotScammed = true 
+            // todo logic to remove a durian or chillicrab, if they have any
+        }                        
     }
 }
 
@@ -187,13 +209,13 @@ function renderWonLost(){
 // todo
 function renderSurprises(){
     if (gotDurian){
-        alert('got durian!')
+        //alert('got durian!')
     }
     if (gotChilliCrab){ 
-        alert('got chillicrab!')
+        //alert('got chillicrab!')
     }
     if (gotHeart){ 
-        alert('got heart!')
+        //alert('got heart!')
     }   
     if (gotScammed){ 
         alert('uhoh. you fell for a scam!')
@@ -209,6 +231,18 @@ function renderStatusBar(){
         heartEl.classList.add('heart')
         heartContainerEl.append(heartEl)
     }
+    durianContainerEl.innerHTML = ''
+    for (let i = 0; i < durians; i++){
+        let durianEl = document.createElement('div')
+        durianEl.classList.add('durian')
+        durianContainerEl.append(durianEl)
+    }
+    chilliCrabContainerEl.innerHTML = ''
+    for (let i = 0; i < chilliCrabs; i++){
+        let chilliCrabEl = document.createElement('div')
+        chilliCrabEl.classList.add('chillicrab')
+        chilliCrabContainerEl.append(chilliCrabEl)
+    }        
 }
 
 function renderQuestion(){

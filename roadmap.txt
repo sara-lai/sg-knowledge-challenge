@@ -1,6 +1,5 @@
 next steps:
-assign surprises to questions, randomly
-status bar render for durians, chillicrabs
+fix question layout with bigger height status bar
 dismissable notices for gained items/surprises
 timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer )
 redeem chillicrabs & durians (50-50 logic, add 20 to timer)

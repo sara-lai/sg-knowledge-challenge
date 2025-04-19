@@ -87,9 +87,23 @@ body {
     padding: 10px;
 }
 
+.left-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
 .heart-container {
     display: flex;
     gap: 16px;
+}
+.durian-container {
+    display: flex;
+    gap: 8px;
+}
+.chillicrab-container {
+    display: flex;
+    gap: 12px;
 }
 .heart {
     background-image: url('images/heart-icon.png');
@@ -101,8 +115,17 @@ body {
 .durian {
     background-image: url('images/durian-icon.png');
     background-size: contain;
-    width: 2rem;
-    height: 2rem;
+    background-repeat: no-repeat;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.chillicrab {
+    background-image: url('images/chillicrab-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
 }
 
 
