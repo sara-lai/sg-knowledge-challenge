@@ -160,9 +160,9 @@ body {
 }
 
 
-/* end screens/pages */
+/* end screens/ notice screens */
 
-.end-screen-wrapper { /* for centering reasons, like .question-wrapper */
+.end-screen-wrapper, .dismissable-notice-wrapper { /* for centering reasons, like .question-wrapper */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -171,7 +171,7 @@ body {
     display:none;
 }
 
-.end-screen {
+.end-screen, .dismissable-notice {
     letter-spacing: .8px;
     background: #fff;
     padding: 10px;

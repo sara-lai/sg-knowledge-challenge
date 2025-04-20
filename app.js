@@ -53,12 +53,19 @@ const durianContainerEl = document.querySelector('.durian-container')
 const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 // todo - timer
 
-// screens/pages/notices
+// end screens
 const endScreen = document.querySelector('#end-screen')
-const endScreenBlurb = document.querySelector('.end-screen p')
 const endScreenHeadline = document.querySelector('.end-screen h2')
+const endScreenBlurb = document.querySelector('.end-screen p')
 const endScreenFlair = document.querySelector('.end-screen-flair')
 const endScreenBtn = document.querySelector('.end-screen .btn')
+
+// notice screens
+const dismissableNotice = document.querySelector('#the-notice')
+const dismissableHeadline = document.querySelector('.dismissable-notice h2')
+const dismissableBlurb = document.querySelector('.dismissable-notice p')
+const dismissableImg= document.querySelector('#item-img')
+const dismissableBtn= document.querySelector('.dismissable-notice .btn')
 
 
 
@@ -150,7 +157,7 @@ function handleSurprises(){
 
     if (Math.floor(Math.random() * 1) === 0){  // 50% chance getting item each question for demo (15% for live?)
 
-        // isSurprise = true // test rendering
+        isSurprise = true // test rendering
         
         // // pick randomly from array of surprises - control by number of items
         let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
@@ -257,20 +264,27 @@ function renderWonLost(){
 function renderSurprises(){
     // on dismiss -> renderStatusBar() & initQuestion()
     if (gotDurian){
-        //alert('got durian!')
+        // endScreenHeadline.textContent = 'You did it! You won!'
+        // endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
+        //     we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
+        //     to further test your knowledge and for the chance to win prizes!"
+        // endScreenFlair.classList.add('win-screen-img')
+        // endScreenBtn.textContent = 'again!'       
     }
     if (gotChilliCrab){ 
-        //alert('got chillicrab!')
+       
     }
     if (gotHeart){ 
-        //alert('got heart!')
+       
     }   
     if (gotScammed){ 
-        alert('uhoh. you fell for a scam!')
+       
     }
 
-    renderStatusBar()
-    initQuestion()
+    dismissableBtn.addEventListener('click', () => {
+        renderStatusBar()
+        initQuestion()
+    })
 
     // click event on 'ok' 
     // gives renderStatusBar()
