@@ -149,10 +149,12 @@ function handleWonLost(){
 function handleSurprises(){
 
     if (Math.floor(Math.random() * 1) === 0){  // 50% chance getting item each question for demo (15% for live?)
-        console.log('you get a surprise!')
+
+        // isSurprise = true // test rendering
         
         // // pick randomly from array of surprises - control by number of items
-        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
+        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam', 'scam', 'scam', 'scam'] 
+        //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
         let theSurprise = surprises[randomIdx]
 
@@ -171,8 +173,15 @@ function handleSurprises(){
             hearts += 1
         }   
         if (theSurprise === 'scam'){
-            gotScammed = true 
-            // todo logic to remove a durian or chillicrab, if they have any
+            if (durians + chilliCrabs >= 2){ // only scam if durians + chilliCrabs >= 2
+                gotScammed = true 
+                randomInt = Math.floor(Math.random() * 3)  // take durians 3x more frequently than chillicrabs               
+                if (randomInt === 0 && chilliCrabs){
+                    chilliCrabs -= 1                    
+                } else {
+                    durians -= 1
+                }
+            }
         }                        
     }
 }
