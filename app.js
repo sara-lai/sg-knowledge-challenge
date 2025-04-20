@@ -220,7 +220,7 @@ function renderWonLost(){
     // using win/lose screen from html
 
     // if repeating the quiz, need to clear
-    endScreenFlair.classList = []
+    endScreenFlair.classList = ['end-screen-flair']
 
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'

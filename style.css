@@ -204,14 +204,14 @@ body {
 
   .end-screen-flair {
     height: 400px;
-    width: 400px;
+    width: 400px;     
     background-size: contain;
     background-repeat: no-repeat;     
     margin-top: 3rem;
   }
 
   .win-screen-img {
-    background-image: url('images/win-screen-img.png');
+    background-image: url('images/win-screen-img.png');  
   }
 
   .lose-screen-img {
