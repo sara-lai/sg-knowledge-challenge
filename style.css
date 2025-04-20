@@ -211,9 +211,11 @@ body {
   }
 
   .win-screen-img {
-    background-image: url('images/win-screen-img.png')
+    background-image: url('images/win-screen-img.png');
   }
 
   .lose-screen-img {
-    background-image: url('images/lose-screen-img.png')
+    background-image: url('images/lose-screen-img.png');
+    height: 150px;
+    width: 150px;
   }

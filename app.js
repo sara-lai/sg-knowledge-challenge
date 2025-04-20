@@ -55,6 +55,11 @@ const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
 
 // screens/pages/notices
 const endScreen = document.querySelector('#end-screen')
+const endScreenBlurb = document.querySelector('.end-screen p')
+const endScreenHeadline = document.querySelector('.end-screen h2')
+const endScreenFlair = document.querySelector('.end-screen-flair')
+const endScreenBtn = document.querySelector('.end-screen .btn')
+
 
 
 // *** answer selection *** //
@@ -214,18 +219,23 @@ function hideNoticeRightWrong(){
 function renderWonLost(){
     // using win/lose screen from html
     if (userWon){
-        document.querySelector('.end-screen h2').textContent = 'You did it! You won!'
-        document.querySelector('.end-screen p').innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
+        endScreenHeadline.textContent = 'You did it! You won!'
+        endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
             we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
             to further test your knowledge and for the chance to win prizes!"
-        document.querySelector('.end-screen-flair').classList.add('win-screen-img')
+        endScreenFlair.classList.add('win-screen-img')
     }
     if (userLost){
-        alert("Very disappointing that you were not able to complete this challenge.")
+        endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
+        endScreenBlurb.innerHTML = "We encourage you to pay more attention next time on your trip to Singapore, \
+            or perhaps study some basic  material about Singapore. Don’t be discouraged! Try again when you are \
+            better prepared!"
+        endScreenFlair.classList.add('lose-screen-img')  
+        endScreenBtn.textContent = 'redeem yourself'
     }  
     
     endScreen.style.display = 'flex'
-    questionWrapperEl.remove() //  todo - won't be able to restart challenge from button if remove main question area
+    questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
     document.querySelector('body').append(endScreen)    
 }
 
@@ -346,10 +356,14 @@ function produceQuestionSet(){
     console.log(unaskedQs)
 }
 
-// todo
-function resetChallenge(){
-    // user clicks "again!" btn on end screen
-}
+endScreenBtn.addEventListener('click', () => {
+    // init related....
+
+    endScreen.style.display = 'none'
+    questionWrapperEl.style.display = 'flex'
+
+    initChallenge()
+})
 
 // previous async-await-promise method called in render() ; refactoring to avoid
 // async function renderRightWrong(){

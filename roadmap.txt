@@ -1,5 +1,5 @@
 next steps:
-complete win/lose + UI (by april 20)
+scam - item behavior
 dismissable notices for gained items/surprises (by april 21)
 timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer ) (by april 22-23)
 redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
