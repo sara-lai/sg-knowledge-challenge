@@ -123,8 +123,8 @@ body {
     background-image: url('images/durian-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .chillicrab {
@@ -171,6 +171,10 @@ body {
     display:none;
 }
 
+.dismissable-notice-wrapper {
+    height: 90%;
+}
+
 .end-screen, .dismissable-notice {
     letter-spacing: .8px;
     background: #fff;
@@ -183,14 +187,18 @@ body {
     gap: 20px;
   }  
 
-  .end-screen p {
+  .end-screen p, .dismissable-notice p {
     font-size: 1.4rem;
     max-width: 640px;
     line-height: 2.1rem;
     text-align: left;
   }
 
-  .end-screen h2 {
+  .dismissable-notice p {
+    text-align: center;
+  }
+
+  .end-screen h2, .dismissable-notice h2 {
     font-size: 2.1rem;
     font-weight: 300;
   }
@@ -219,3 +227,33 @@ body {
     height: 150px;
     width: 150px;
   }
+
+  .heart-larger {
+    background-image: url('images/heart-icon.png');
+    background-size: contain;
+    width: 5rem;
+    height: 5rem;
+}
+
+.durian-larger {
+    background-image: url('images/durian-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 6rem;
+    height: 6rem;
+}
+
+.chillicrab-larger {
+    background-image: url('images/chillicrab-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 6rem;
+    height: 6rem;
+}
+.yandao {
+    background-image: url('images/yandao.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10rem;
+    height: 10rem;
+}

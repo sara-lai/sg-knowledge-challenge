@@ -64,8 +64,8 @@ const endScreenBtn = document.querySelector('.end-screen .btn')
 const dismissableNotice = document.querySelector('#the-notice')
 const dismissableHeadline = document.querySelector('.dismissable-notice h2')
 const dismissableBlurb = document.querySelector('.dismissable-notice p')
-const dismissableImg= document.querySelector('#item-img')
-const dismissableBtn= document.querySelector('.dismissable-notice .btn')
+const dismissableImg = document.querySelector('#item-img')
+const dismissableBtn = document.querySelector('.dismissable-notice .btn')
 
 
 
@@ -188,6 +188,8 @@ function handleSurprises(){
                 } else {
                     durians -= 1
                 }
+            } else {
+                isSurprise = false // breaks rendering otherwise! (just skip the surprise)
             }
         }                        
     }
@@ -257,39 +259,47 @@ function renderWonLost(){
     
     endScreen.style.display = 'flex'
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
-    document.querySelector('body').append(endScreen)    
 }
 
 // todo
 function renderSurprises(){
-    // on dismiss -> renderStatusBar() & initQuestion()
+
+    dismissableImg.classList = [] // or item classes will accumulate
+
     if (gotDurian){
-        // endScreenHeadline.textContent = 'You did it! You won!'
-        // endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
-        //     we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
-        //     to further test your knowledge and for the chance to win prizes!"
-        // endScreenFlair.classList.add('win-screen-img')
-        // endScreenBtn.textContent = 'again!'       
+        dismissableHeadline.textContent = "Congratulations! You unlocked a Durian!"
+        dismissableBlurb.innerHTML = "Click on your durian at any time to <b>add 20 seconds</b> to the timer! Remember this when time is low!"
+        dismissableImg.classList.add('durian-larger')
     }
     if (gotChilliCrab){ 
-       
+        dismissableHeadline.textContent = "Congratulations! You unlocked a cooked Chilli Crab dish!"
+        dismissableBlurb.innerHTML = " Click on your Chilli Crab for <b>50-50 elimination</b>, 2 incorrect answers will disappear!"
+        dismissableImg.classList.add('chillicrab-larger')       
     }
     if (gotHeart){ 
-       
+        dismissableHeadline.textContent = "Guess What? You earned another heart! Keep it up!"
+        dismissableBlurb.innerHTML = "It will surely come in handy in the dark depths of this challenge!"
+        dismissableImg.classList.add('heart-larger')       
     }   
     if (gotScammed){ 
-       
+        dismissableHeadline.textContent = "Uhoh. It looks like you fell for a scam!"
+        dismissableBlurb.innerHTML = "Unfortunately you gave the scammers <b>1 todo</b>. Let's hope to earn another one soon!"
+        dismissableImg.classList.add('yandao')       
     }
 
+    dismissableNotice.style.display = 'flex'
+    questionWrapperEl.style.display = 'none'
+
     dismissableBtn.addEventListener('click', () => {
+        console.log('clicking to dismiss notice')
+
+        dismissableNotice.style.display = 'none'
+        questionWrapperEl.style.display = 'flex'
+
         renderStatusBar()
         initQuestion()
+        // or just calls render() & set isSurpise to false?
     })
-
-    // click event on 'ok' 
-    // gives renderStatusBar()
-    // initQuestion()
-    // (or just calls render() again??) --> set isSurpise false first....
 }
 
 // work in progress
