@@ -153,7 +153,7 @@ function handleSurprises(){
         // isSurprise = true // test rendering
         
         // // pick randomly from array of surprises - control by number of items
-        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam', 'scam', 'scam', 'scam'] 
+        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
         //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
         let theSurprise = surprises[randomIdx]
