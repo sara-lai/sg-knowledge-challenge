@@ -218,12 +218,17 @@ function hideNoticeRightWrong(){
 
 function renderWonLost(){
     // using win/lose screen from html
+
+    // if repeating the quiz, need to clear
+    endScreenFlair.classList = []
+
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'
         endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
             we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
             to further test your knowledge and for the chance to win prizes!"
         endScreenFlair.classList.add('win-screen-img')
+        endScreenBtn.textContent = 'again!'
     }
     if (userLost){
         endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
@@ -312,6 +317,9 @@ function initChallenge(){
     streak = 0
     userWon = false
     userLost = false    
+    hearts = 3 
+    durians = 0
+    chilliCrabs = 0
     
     produceQuestionSet()
 
