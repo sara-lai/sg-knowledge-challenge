@@ -290,17 +290,19 @@ function renderSurprises(){
     dismissableNotice.style.display = 'flex'
     questionWrapperEl.style.display = 'none'
 
-    dismissableBtn.addEventListener('click', () => {
-        console.log('clicking to dismiss notice')
-
-        dismissableNotice.style.display = 'none'
-        questionWrapperEl.style.display = 'flex'
-
-        renderStatusBar()
-        initQuestion()
-        // or just calls render() & set isSurpise to false?
-    })
+    // move dismmissal outside render() or else will re-register/execute many times!
 }
+
+dismissableBtn.addEventListener('click', () => {
+    console.log('clicking to dismiss notice')
+
+    dismissableNotice.style.display = 'none'
+    questionWrapperEl.style.display = 'flex'
+
+    renderStatusBar()
+    initQuestion()
+    // or just calls render() & set isSurpise to false?
+})
 
 // work in progress
 function renderStatusBar(){
