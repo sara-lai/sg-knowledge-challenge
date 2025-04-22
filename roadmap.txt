@@ -1,14 +1,12 @@
 next steps:
-scam - item behavior
-dismissable notices for gained items/surprises (by april 21)
 timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer ) (by april 22-23)
 redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
+anti cheating event listeners
+some enter/keypress events to make my life easier
 
 next next steps:
-change data to use options: ["first","second","third"] and correct: "correct answer", more flexibility question types
 add 20+ more sample questions
-use 'enter' events or keypress 1,2,3,4,a,b,c,d 
-anti cheating event listeners
+change data to use options: ["first","second","third"] and correct: "correct answer", more flexibility question types
 
 next next next steps:
 beautify UI / pixel perfect tweaks / a landing page

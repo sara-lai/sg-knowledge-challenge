@@ -135,6 +135,16 @@ body {
     height: 3rem;
 }
 
+/* timer */
+.timer {
+    padding: 20px;
+}
+
+.panic {
+    background: red;
+}
+
+
 
 /* right-wrong markers */
 

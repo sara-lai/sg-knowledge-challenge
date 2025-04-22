@@ -18,8 +18,6 @@ let userLost = false
 let answeredWrong = false
 let answeredRight = false
 let userAnswer = null // e.g. logic if no user answer & time runs out
-let timeAllowed = 20
-let panicMode = false
 let hearts = 3 
 let durians = 0
 let chilliCrabs = 0
@@ -28,6 +26,10 @@ let gotHeart = false
 let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false
+// timer related
+let timerTime = 20
+let panicMode = false
+let intervalId = null
 
 // constants
 // todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY
@@ -51,7 +53,8 @@ const rightWrongMarkerEl = document.querySelector('#right-wrong-marker')
 const heartContainerEl = document.querySelector('.heart-container')
 const durianContainerEl = document.querySelector('.durian-container')
 const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
-// todo - timer
+const timerEl = document.querySelector('.timer')
+const bodyEl = document.querySelector('body') // for panic mode
 
 // end screens
 const endScreen = document.querySelector('#end-screen')
@@ -89,6 +92,7 @@ function clearSelected(){
 answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
 
 function handleAnswerSubmission(event){
+    stopTimer()
 
     userAnswer = document.querySelector('.answer-container .selected').id
 
@@ -339,6 +343,35 @@ function renderQuestion(){
 
 
 
+// *** timer related *** 
+
+function startTimer(){
+    // user timerTime
+    
+    timerEl.textContent = timerTime
+    intervalId = setInterval(() => {
+        timerTime -= 1
+        timerEl.textContent = timerTime
+
+        if (timerTime <=5){
+            bodyEl.classList.toggle('panic')
+        }
+
+        if (timerTime <= 0){
+            clearInterval(intervalId)
+        }
+
+    }, 1000)
+}
+
+function stopTimer(){
+    // todo - can get stuck in panic mode/red
+    clearInterval(intervalId)
+}
+
+
+
+
 // *** init ***
 
 function initChallenge(){
@@ -371,7 +404,7 @@ function initQuestion(){
     answeredWrong = false
     answeredRight = false
     userAnswer = null
-    timeAllowed = 20
+    timerTime = 20
     panicMode = false    
     isSurprise = false
     gotHeart = false
@@ -382,7 +415,10 @@ function initQuestion(){
     chooseRandomQuestion()
 
     renderQuestion()
+
+    startTimer()
 }
+
 
 function chooseRandomQuestion(){
 
