@@ -164,12 +164,15 @@ function handleWonLost(){
 
 function handleSurprises(){
 
-    if (Math.floor(Math.random() * 1) === 0){  // 50% chance getting item each question for demo (15% for live?)
+    if (Math.floor(Math.random() * 3) === 0){  // 33% chance getting item each question for demo (15% for live?)
 
         isSurprise = true // test rendering
         
         // // pick randomly from array of surprises - control by number of items
-        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
+        let surprises = [ 
+            'durian', 'durian', 'durian', 'durian', 'durian', 'durian', 'durian',
+            'chillicrab', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'scam'
+        ] 
         //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
         let theSurprise = surprises[randomIdx]
