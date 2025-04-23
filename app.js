@@ -24,7 +24,7 @@ let isSurprise = false
 let gotHeart = false
 let gotDurian = false
 let gotChilliCrab = false
-let gotScammed = false
+let gotScammed = false // can contain name of taken item
 // timer related
 let timerTime = 20
 let panicMode = false
@@ -169,7 +169,7 @@ function handleSurprises(){
         isSurprise = true // test rendering
         
         // // pick randomly from array of surprises - control by number of items
-        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
+        let surprises = ['durian', 'durian', 'durian', 'durian', 'durian', 'durian', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'scam'] 
         //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
         let theSurprise = surprises[randomIdx]
@@ -193,9 +193,11 @@ function handleSurprises(){
                 gotScammed = true 
                 randomInt = Math.floor(Math.random() * 3)  // take durians 3x more frequently than chillicrabs               
                 if (randomInt === 0 && chilliCrabs){
-                    chilliCrabs -= 1                    
+                    chilliCrabs -= 1  
+                    gotScammed = 'chilliCrab'                  
                 } else {
                     durians -= 1
+                    gotScammed = 'durian'
                 }
             } else {
                 isSurprise = false // breaks rendering otherwise! (just skip the surprise)
@@ -348,7 +350,7 @@ function renderSurprises(){
     }   
     if (gotScammed){ 
         dismissableHeadline.textContent = "Uhoh. It looks like you fell for a scam!"
-        dismissableBlurb.innerHTML = "Unfortunately you gave the scammers <b>1 todo</b>. Let's hope to earn another one soon!"
+        dismissableBlurb.innerHTML = `Unfortunately you gave the scammers <b id='scam-item'>1 ${gotScammed}</b>. Let's hope to earn another one soon!`
         dismissableImg.classList.add('yandao')       
     }
 
@@ -482,12 +484,14 @@ endScreenBtn.addEventListener('click', () => {
 
 function testAddDurian(){
     isSurprise = true
+    gotDurian = true
     durians += 1
     hearts += 1 // so dont run out of hearts
     handleAnswerSubmission()
 }
 function testAddChilliCrab(){
     isSurprise = true
+    gotChilliCrab = true
     chilliCrabs += 1
     hearts += 1 // so dont run out of hearts
     handleAnswerSubmission()
@@ -496,9 +500,9 @@ function testGotScammed(){
     // todo - dont want to re-write random item removal logic
     // pass a flag to handleSurprise for test mode?
     isSurprise = true
-    gotScammed = true
     hearts += 1 // so dont run out of hearts
     durians -= 1 // just take a durian for now
+    gotScammed = 'durian'
     handleAnswerSubmission()
 }
 function testWin(){
