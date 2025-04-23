@@ -91,10 +91,16 @@ function clearSelected(){
 
 answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
 
-function handleAnswerSubmission(event){
+function handleAnswerSubmission(){
+    // todo - disable submit button if havent selected (& time is left)
+
     stopTimer()
 
-    userAnswer = document.querySelector('.answer-container .selected').id
+    // these lines account for condition when timer runs out and no answer selected
+    let selected = document.querySelector('.answer-container .selected')
+    if (selected){
+        userAnswer = selected.id
+    }
 
     if (handleRightAnswer()){
 
@@ -227,7 +233,7 @@ function renderNoticeRightWrong(){
         rightWrongMarkerEl.classList.add('xmark')
         questionBoxEl.style.color = 'red'
     }
-    rightWrongMarkerEl.style.display = 'block' // amy display option, just make qppear       
+    rightWrongMarkerEl.style.display = 'block' // any display option, just make appear       
 
 }
 
@@ -342,31 +348,44 @@ function renderQuestion(){
 }
 
 
-
 // *** timer related *** 
 
 function startTimer(){
-    // user timerTime
-    
+    // todo - panic twice as fast?
+
+    timerTime = 20 // testing flag 
+
     timerEl.textContent = timerTime
     intervalId = setInterval(() => {
-        timerTime -= 1
-        timerEl.textContent = timerTime
+        timerTime -= 0.5
+        timerEl.textContent = Math.ceil(timerTime)
 
         if (timerTime <=5){
-            bodyEl.classList.toggle('panic')
+            bodyEl.classList.toggle('panic-red')
+            questionBoxEl.classList.remove('return-from-fade')
+            questionBoxEl.classList.add('panic-fade')
         }
 
         if (timerTime <= 0){
             clearInterval(intervalId)
+
+            questionBoxEl.classList.remove('panic-fade')
+            questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
+            bodyEl.classList.remove('panic-red')
+            
+            // submit answer when time is out
+            handleAnswerSubmission()
         }
 
-    }, 1000)
+    }, 500) // 2x for panic mode
 }
 
 function stopTimer(){
     // todo - can get stuck in panic mode/red
     clearInterval(intervalId)
+    bodyEl.classList.remove('panic-red')
+    questionBoxEl.classList.remove('panic-fade')
+    questionBoxEl.classList.add('return-from-fade')
 }
 
 
@@ -399,7 +418,6 @@ function initChallenge(){
 initChallenge()
 
 function initQuestion(){
-
     // reset question state each new question
     answeredWrong = false
     answeredRight = false

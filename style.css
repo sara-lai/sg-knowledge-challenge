@@ -21,6 +21,8 @@ body {
     flex-direction: column;
     gap: 30px;
     position: relative; /* for placement of right-wrong marker above it */
+    opacity: 1; 
+    transition: opacity 5s ease-out; /* for panic mode fade away */
 }
 
 .question-text {
@@ -113,35 +115,44 @@ body {
     gap: 12px;
 }
 .heart {
-    background-image: url('images/heart-icon.png');
+    background-image: url('images/heart2-icon.png');
     background-size: contain;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .durian {
-    background-image: url('images/durian-icon.png');
+    background-image: url('images/durian3-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 .chillicrab {
-    background-image: url('images/chillicrab-icon.png');
+    background-image: url('images/chillicrab2-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 /* timer */
 .timer {
     padding: 20px;
+    font-size: 3rem;
+    margin-right: 40px;
 }
 
-.panic {
+.panic-red {
     background: red;
+}
+.panic-fade {
+    opacity: .2;
+}
+.return-from-fade {  /* bring opacity:1 back immediately */
+    transition: none;
+    opacity: 1
 }
 
 
@@ -239,14 +250,14 @@ body {
   }
 
   .heart-larger {
-    background-image: url('images/heart-icon.png');
+    background-image: url('images/heart2-icon.png');
     background-size: contain;
     width: 5rem;
     height: 5rem;
 }
 
 .durian-larger {
-    background-image: url('images/durian-icon.png');
+    background-image: url('images/durian3-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 6rem;
@@ -254,7 +265,7 @@ body {
 }
 
 .chillicrab-larger {
-    background-image: url('images/chillicrab-icon.png');
+    background-image: url('images/chillicrab2-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 6rem;

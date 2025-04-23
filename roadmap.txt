@@ -3,6 +3,7 @@ timer, with panic mode  (animation frames for smooth progress arc?; end of timer
 redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
 anti cheating event listeners
 some enter/keypress events to make my life easier
+do something with scores/streaks
 
 next next steps:
 add 20+ more sample questions
