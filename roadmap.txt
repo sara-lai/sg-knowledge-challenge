@@ -1,13 +1,13 @@
 next steps:
-timer, with panic mode  (animation frames for smooth progress arc?; end of timer = got wrong; stop and reset timer ) (by april 22-23)
 redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
 anti cheating event listeners
 some enter/keypress events to make my life easier
-do something with scores/streaks
+do something with scores/streaks [track previous scores/high score?]
+reorganize question data to be more flexible, before add a ton more questions
 
 next next steps:
 add 20+ more sample questions
-change data to use options: ["first","second","third"] and correct: "correct answer", more flexibility question types
+add animation to timer.... like the progress arc that surrounds the number
 
 next next next steps:
 beautify UI / pixel perfect tweaks / a landing page

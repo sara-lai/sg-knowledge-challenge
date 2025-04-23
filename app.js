@@ -162,7 +162,6 @@ function handleWonLost(){
     }
 }
 
-// work in progress
 function handleSurprises(){
 
     if (Math.floor(Math.random() * 1) === 0){  // 50% chance getting item each question for demo (15% for live?)
@@ -205,6 +204,25 @@ function handleSurprises(){
     }
 }
 
+function redeemDurian(){
+    // will need to register events when durianEl created... or not??
+    timerTime += 20 
+    durians -= 1
+    renderStatusBar()
+    console.log('redeemed durian')
+}
+durianContainerEl.addEventListener('click', (event) => {
+    // event bubbling since durianEls get created/destroyed each cycle
+    if (event.target.className === 'durian'){
+        redeemDurian()
+    }
+})
+function testAddDurian(){
+    isSurprise = true
+    durians += 1
+    hearts += 1 // so dont run out of hearts
+    handleAnswerSubmission()
+}
 
 
 // *** main render *** //
@@ -314,7 +332,6 @@ dismissableBtn.addEventListener('click', () => {
     // or just calls render() & set isSurpise to false?
 })
 
-// work in progress
 function renderStatusBar(){
     // render style per tic-tac-toe lab -> only re-render based on state
     heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
