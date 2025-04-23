@@ -148,7 +148,7 @@ body {
     background: red;
 }
 .panic-fade {
-    opacity: .2;
+    opacity: 0;
 }
 .return-from-fade {  /* bring opacity:1 back immediately */
     transition: none;

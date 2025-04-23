@@ -227,6 +227,41 @@ durianContainerEl.addEventListener('click', (event) => {
     }
 })
 
+function redeemChilliCrab(){
+    chilliCrabs -= 1
+    renderStatusBar()
+    console.log('redeemed chillicrab')
+
+    // overview for remove two wrong options:
+    // splice correct answer from abcd array
+    // random choice from abcd array
+    // match choice to .answer-box #id
+    // clear el contents 
+    let abcd = ['a', 'b', 'c', 'd']
+    let answerIdx = abcd.indexOf(currQ.answer)
+    abcd.splice(answerIdx, 1)
+    let randomIdx = Math.floor(Math.random() * 3)
+    let remove1 = abcd[randomIdx] 
+    abcd.splice(randomIdx, 1) // must delete so wont choose again
+    let randomIdx2 = Math.floor(Math.random() * 2) // *2 because array is smaller
+    let remove2 = abcd[randomIdx2]
+
+    let remove1El = document.querySelector(`.answer-box#${remove1}`)
+    let remove2El = document.querySelector(`.answer-box#${remove2}`)
+
+    // trouble removing without affecting layout... using opacity
+    // set opacity to 1 again at renderQuestion()!
+    // remove1El.innerHTML = ''
+    // remove2El.innerHTML = ''
+    remove1El.style.opacity = 0
+    remove2El.style.opacity = 0
+
+}
+chilliCrabContainerEl.addEventListener('click', (event) => {
+    if (event.target.className === 'chillicrab'){
+        redeemChilliCrab()
+    }
+})
 
 
 // *** timer related *** 
@@ -268,7 +303,7 @@ function stopTimer(){
 
 
 
-// *** main render *** //
+// *** render section *** //
 
 function render(){
 
@@ -404,6 +439,8 @@ function renderQuestion(){
     answerDEl.textContent = currQ.d
 
     clearSelected() // clear prev answer selection
+
+    answerBoxEls.forEach(el => el.style.opacity = 1) // for 50-50 purposes (it uses opacity to hide)
 }
 
 
@@ -457,7 +494,6 @@ function initQuestion(){
 
 
 function chooseRandomQuestion(){
-
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
     let randomIdx = Math.floor(Math.random() * unaskedQs.length)
     let currQId = unaskedQs[randomIdx]

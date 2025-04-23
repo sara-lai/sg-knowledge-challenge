@@ -1,5 +1,4 @@
 next steps:
-redeem chillicrabs / 50-50
 handle submit button with no answer selection
 reorganize data.js, then add a bunch more questions
 do something with scores/streaks [track previous scores/high score?.... "hot streak" after ^ more questions]
