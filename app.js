@@ -1,6 +1,5 @@
-
-// 5 sections:
-// state - answer selection - answer submission - render L:136 - init
+// *** sections overview *** 
+// state - cached els - answer selection - answer submission - item redeeming - timer - render - init - tests - graveyard
 
 // *** state ***
 
@@ -33,6 +32,7 @@ let intervalId = null
 
 // constants
 // todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY
+
 
 
 // *** cached el references ***
@@ -204,6 +204,10 @@ function handleSurprises(){
     }
 }
 
+
+
+// *** item redeeming ***
+
 function redeemDurian(){
     // will need to register events when durianEl created... or not??
     timerTime += 20 
@@ -217,12 +221,46 @@ durianContainerEl.addEventListener('click', (event) => {
         redeemDurian()
     }
 })
-function testAddDurian(){
-    isSurprise = true
-    durians += 1
-    hearts += 1 // so dont run out of hearts
-    handleAnswerSubmission()
+
+
+
+// *** timer related *** 
+
+function startTimer(){
+
+    timerEl.textContent = timerTime
+    intervalId = setInterval(() => {
+        timerTime -= 0.5
+        timerEl.textContent = Math.ceil(timerTime)
+
+        if (timerTime <=5){
+            bodyEl.classList.toggle('panic-red')
+            questionBoxEl.classList.remove('return-from-fade')
+            questionBoxEl.classList.add('panic-fade')
+        }
+
+        if (timerTime <= 0){
+            clearInterval(intervalId)
+
+            questionBoxEl.classList.remove('panic-fade')
+            questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
+            bodyEl.classList.remove('panic-red')
+            
+            // submit answer when time is out
+            handleAnswerSubmission()
+        }
+
+    }, 500) // 2x for panic mode
 }
+
+function stopTimer(){
+    clearInterval(intervalId)
+    bodyEl.classList.remove('panic-red')
+    questionBoxEl.classList.remove('panic-fade')
+    questionBoxEl.classList.add('return-from-fade')
+}
+
+
 
 
 // *** main render *** //
@@ -289,7 +327,6 @@ function renderWonLost(){
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
 }
 
-// todo
 function renderSurprises(){
 
     dismissableImg.classList = [] // or item classes will accumulate
@@ -362,47 +399,6 @@ function renderQuestion(){
     answerDEl.textContent = currQ.d
 
     clearSelected() // clear prev answer selection
-}
-
-
-// *** timer related *** 
-
-function startTimer(){
-    // todo - panic twice as fast?
-
-    timerTime = 20 // testing flag 
-
-    timerEl.textContent = timerTime
-    intervalId = setInterval(() => {
-        timerTime -= 0.5
-        timerEl.textContent = Math.ceil(timerTime)
-
-        if (timerTime <=5){
-            bodyEl.classList.toggle('panic-red')
-            questionBoxEl.classList.remove('return-from-fade')
-            questionBoxEl.classList.add('panic-fade')
-        }
-
-        if (timerTime <= 0){
-            clearInterval(intervalId)
-
-            questionBoxEl.classList.remove('panic-fade')
-            questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
-            bodyEl.classList.remove('panic-red')
-            
-            // submit answer when time is out
-            handleAnswerSubmission()
-        }
-
-    }, 500) // 2x for panic mode
-}
-
-function stopTimer(){
-    // todo - can get stuck in panic mode/red
-    clearInterval(intervalId)
-    bodyEl.classList.remove('panic-red')
-    questionBoxEl.classList.remove('panic-fade')
-    questionBoxEl.classList.add('return-from-fade')
 }
 
 
@@ -479,24 +475,66 @@ endScreenBtn.addEventListener('click', () => {
     initChallenge()
 })
 
-// previous async-await-promise method called in render() ; refactoring to avoid
-// async function renderRightWrong(){
-//     if (answeredRight || answeredWrong){ // only fire if a question has been answered
+
+
+// *** test functions for console ***
+
+
+function testAddDurian(){
+    isSurprise = true
+    durians += 1
+    hearts += 1 // so dont run out of hearts
+    handleAnswerSubmission()
+}
+function testAddChilliCrab(){
+    isSurprise = true
+    chilliCrabs += 1
+    hearts += 1 // so dont run out of hearts
+    handleAnswerSubmission()
+}
+function testGotScammed(){
+    // todo - dont want to re-write random item removal logic
+    // pass a flag to handleSurprise for test mode?
+    isSurprise = true
+    gotScammed = true
+    hearts += 1 // so dont run out of hearts
+    durians -= 1 // just take a durian for now
+    handleAnswerSubmission()
+}
+function testWin(){
+    unaskedQs = []
+    hearts = 3
+    handleAnswerSubmission()
+}
+function testLose(){
+    hearts = 1 // will lose one in handleAnswerSubmission  
+    handleAnswerSubmission()
+    renderStatusBar()
+}
+
+
+// *** graveyard ***
+
+/*
+previous async-await-promise method called in render() ; refactoring to avoid
+async function renderRightWrong(){
+    if (answeredRight || answeredWrong){ // only fire if a question has been answered
     
-//         if (answeredRight) {
-//             rightWrongMarkerEl.classList.add('checkmark')
-//         }
-//         if (answeredWrong) {
-//             rightWrongMarkerEl.classList.add('xmark')
-//         }    
+        if (answeredRight) {
+            rightWrongMarkerEl.classList.add('checkmark')
+        }
+        if (answeredWrong) {
+            rightWrongMarkerEl.classList.add('xmark')
+        }    
         
-//         rightWrongMarkerEl.style.display = 'block'
+        rightWrongMarkerEl.style.display = 'block'
 
-//         // similar example at https://javascript.info/async-await
-//         await new Promise((resolve) => setTimeout(resolve, 1000))
+        // similar example at https://javascript.info/async-await
+        await new Promise((resolve) => setTimeout(resolve, 1000))
 
-//         rightWrongMarkerEl.classList = [] // clear out classes for cycling
+        rightWrongMarkerEl.classList = [] // clear out classes for cycling
 
-//         rightWrongMarkerEl.style.display = 'none'
-//     }
-// }
+        rightWrongMarkerEl.style.display = 'none'
+    }
+}
+    */

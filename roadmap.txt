@@ -1,25 +1,25 @@
 next steps:
-redeem chillicrabs & durians (50-50 logic, add 20 to timer) (by april 23-24)
+redeem chillicrabs / 50-50
+handle submit button with no answer selection
+reorganize data.js, then add a bunch more questions
+do something with scores/streaks [track previous scores/high score?.... "hot streak" after ^ more questions]
 anti cheating event listeners
 some enter/keypress events to make my life easier
-do something with scores/streaks [track previous scores/high score?]
-reorganize question data to be more flexible, before add a ton more questions
 
 next next steps:
-add 20+ more sample questions
+quiz selection / quiz type (tourist vs local) ; init the appropriate quiz
 add animation to timer.... like the progress arc that surrounds the number
+play panic mode heart beat sound
+a landing page
+fun hantu mode
+easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
 
 next next next steps:
-beautify UI / pixel perfect tweaks / a landing page
-quiz selection / quiz type (tourist vs local)
-other question types (drag and drop, etc.)
+demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
 randomly order answer options
 start out with "warm up" questions (ease into the harder challenge)
-use classes for quiz and question, and construct Quiz/Question with JSON data
-hantu mode
-"hot" streak mode (high UV?)
-some answers which if selected are so very wrong that the quiz ends immediately
-^ or the opposite: user clicks a wildly wrong answer & some fun bonus mode occurs
+try again with JSON.... 
+use classes for quiz and question, construct Quiz/Question with JSON data
 recycle missed questions mode (maybe, eg cant finish quiz until all questions correct)
 turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with generic constants
 
