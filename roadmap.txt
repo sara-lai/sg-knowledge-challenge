@@ -1,20 +1,19 @@
 next steps:
-handle submit button with no answer selection
 reorganize data.js, then add a bunch more questions
 do something with scores/streaks [track previous scores/high score?.... "hot streak" after ^ more questions]
+quiz selection / quiz type (tourist vs local) ; init the appropriate quiz ; basic landing page for this
 anti cheating event listeners
 some enter/keypress events to make my life easier
+handle submit button with no answer selection
+a progress arc animation for timer
 
 next next steps:
-quiz selection / quiz type (tourist vs local) ; init the appropriate quiz
-add animation to timer.... like the progress arc that surrounds the number
 play panic mode heart beat sound
-a landing page
 fun hantu mode
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
+demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
 
 next next next steps:
-demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
 randomly order answer options
 start out with "warm up" questions (ease into the harder challenge)
 try again with JSON.... 

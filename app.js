@@ -227,6 +227,7 @@ durianContainerEl.addEventListener('click', (event) => {
     }
 })
 
+
 function redeemChilliCrab(){
     chilliCrabs -= 1
     renderStatusBar()
