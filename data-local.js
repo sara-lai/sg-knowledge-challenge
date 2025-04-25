@@ -1,7 +1,7 @@
-const sampleQs = [
+const localQs = [
     {
         id: 1,
-        text: "What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",
+        text: "Locals! What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",
         a: "The Singapore Sting",
         b: "The Temasek Tequila Tsunami ",
         c: "The Nanyang Negroni",
@@ -13,7 +13,7 @@ const sampleQs = [
     },
     {
         id: 2,
-        text: "What is the name of Singapore's famous statue that is part-lion part-fish?",
+        text: "Locals! What is the name of Singapore's famous statue that is part-lion part-fish?",
         a: "Lionfish",
         b: "Gorgonu",
         c: "Wuruk",
@@ -25,7 +25,7 @@ const sampleQs = [
     },
     {
         id: 3,
-        text: "Which hawker centre was famously featured in the movie Crazy Rich Asians?",
+        text: "Locals! Which hawker centre was famously featured in the movie Crazy Rich Asians?",
         a: 'Newton',
         b: 'Maxwell',
         c: 'Golden Mile',
@@ -37,7 +37,7 @@ const sampleQs = [
     }, 
     {
         id: 4,
-        text: "Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?",
+        text: "Locals! Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?",
         a: "Jurong Island",
         b: "Coney Island",
         c: "Sentosa Island",
@@ -48,3 +48,4 @@ const sampleQs = [
         ]        
     },            
 ]
+

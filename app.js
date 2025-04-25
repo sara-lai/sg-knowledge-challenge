@@ -4,6 +4,8 @@
 // *** state ***
 
 // quiz level state
+let challengeName = null
+let mainQs = []
 let currQ = {}
 let unaskedQs = []
 let prevQs = []
@@ -32,7 +34,6 @@ let intervalId = null
 
 // constants
 // todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY
-
 
 
 // *** cached el references ***
@@ -70,19 +71,28 @@ const dismissableBlurb = document.querySelector('.dismissable-notice p')
 const dismissableImg = document.querySelector('#item-img')
 const dismissableBtn = document.querySelector('.dismissable-notice .btn')
 
+// landing page related
+const landingWrapperEl = document.querySelector('.landing-wrapper')
+const statusBarEl = document.querySelector('.status-bar')
+const quizOptionEls = document.querySelectorAll('.quiz-option')
 
-
-// *** answer selection *** //
+// *** answer selection - quiz selection *** //
 
 answerBoxEls.forEach( el => {
     el.addEventListener('click', handleAnswerSelection) // todo - A B C D or 1 2 3 4 keys
 })
+quizOptionEls.forEach( el => { // different parent class setup than answer selection
+    el.addEventListener('click', (event) => {
+        clearSelected(quizOptionEls)
+        el.classList.add('selected')
+    })
+})
 function handleAnswerSelection(event){
-    clearSelected()
+    clearSelected(answerBoxEls)
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
 }
-function clearSelected(){
-    answerBoxEls.forEach(el2 => el2.classList.remove('selected'))
+function clearSelected(els){ // takes an argument since used for answer & quiz options
+    els.forEach(el => el.classList.remove('selected'))
 }
 
 
@@ -227,7 +237,6 @@ durianContainerEl.addEventListener('click', (event) => {
     }
 })
 
-
 function redeemChilliCrab(){
     chilliCrabs -= 1
     renderStatusBar()
@@ -263,6 +272,7 @@ chilliCrabContainerEl.addEventListener('click', (event) => {
         redeemChilliCrab()
     }
 })
+
 
 
 // *** timer related *** 
@@ -434,12 +444,12 @@ function renderStatusBar(){
 
 function renderQuestion(){
     questionTextEl.textContent = currQ.text
-    answerAEl.textContent = currQ.a
-    answerBEl.textContent = currQ.b
-    answerCEl.textContent = currQ.c
-    answerDEl.textContent = currQ.d
+    answerAEl.innerHTML = currQ.a
+    answerBEl.innerHTML = currQ.b
+    answerCEl.innerHTML = currQ.c
+    answerDEl.innerHTML = currQ.d
 
-    clearSelected() // clear prev answer selection
+    clearSelected(answerBoxEls) // clear prev answer selection
 
     answerBoxEls.forEach(el => el.style.opacity = 1) // for 50-50 purposes (it uses opacity to hide)
 }
@@ -471,17 +481,14 @@ function initChallenge(){
     renderStatusBar()
 }
 
-
-// dont call right away if reusing index.html for landing page - move to event listener
-// initChallenge()
-
+// challenge selection to launch the inits()
 document.querySelector('#play').addEventListener('click', (event) => {
-    event.target.id // todo
+    challengeName = document.querySelector('.quiz-option.selected').id
 
     // todo - animation would be nice, launching the quiz
-    document.querySelector('.landing-wrapper').style.display = 'none'
-    document.querySelector('.status-bar').style.display = 'flex'
-    document.querySelector('.question-wrapper').style.display = 'flex'
+    landingWrapperEl.style.display = 'none'
+    statusBarEl.style.display = 'flex'
+    questionWrapperEl.style.display = 'flex'
 
     initChallenge()
 })
@@ -511,13 +518,20 @@ function chooseRandomQuestion(){
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
     let randomIdx = Math.floor(Math.random() * unaskedQs.length)
     let currQId = unaskedQs[randomIdx]
-    currQ = sampleQs.find(question => question.id === currQId)  // use currQ as obj
+    currQ = mainQs.find(question => question.id === currQId)  // use currQ as obj
     unaskedQs.splice(randomIdx, 1)
 }
 
 function produceQuestionSet(){
-    // use ids not objs for questions array
-    unaskedQs = sampleQs.map(question => question.id)
+    if (challengeName === 'tourist'){
+        mainQs = touristQs
+        console.log('set mainQs as tourist set')
+    } else if (challengeName === 'local'){
+        mainQs = localQs
+        console.log('set mainQs as locals set')        
+    }
+
+    unaskedQs = mainQs.map(question => question.id) // use ids not objs for questions array
     console.log(unaskedQs)
 }
 
@@ -573,7 +587,30 @@ function testLose(){
 // *** graveyard ***
 
 /*
-previous async-await-promise method called in render() ; refactoring to avoid
+// for an array shuffle based approach, may use for random ordering of answer options
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+function shuffle(array){
+    // don't edit original
+    array = [...array]
+
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array
+}
+
+previous async-await-promise method called in render() ; switched to broken up render paths
 async function renderRightWrong(){
     if (answeredRight || answeredWrong){ // only fire if a question has been answered
     
@@ -594,4 +631,5 @@ async function renderRightWrong(){
         rightWrongMarkerEl.style.display = 'none'
     }
 }
-    */
+
+ */

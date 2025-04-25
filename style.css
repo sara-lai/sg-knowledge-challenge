@@ -339,3 +339,11 @@ body {
     font-weight: 200;
     width: 100px;
 }
+
+.bottom-image {
+    background-image: url('images/fly-io-placeholder.png');
+    background-size: cover;
+    background-repeat: no-repeat;    
+    width: 100%;
+    min-height: 400px;
+}

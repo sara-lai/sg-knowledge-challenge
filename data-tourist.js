@@ -1,0 +1,160 @@
+const touristQs = [
+    {
+        id: 1,
+        text: "What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",
+        a: "The Singapore Sting",
+        b: "The Temasek Tequila Tsunami ",
+        c: "The Nanyang Negroni",
+        d: "The Singapore Sling",
+        answer: 'd',
+        labels: [
+            'tourist', 'culinary'
+        ]
+    },
+    {
+        id: 2,
+        text: "What is the name of the mythical creature with a lion’s head and a fish’s body, symbolizing Singapore’s origins?",
+        a: "Lionfish",
+        b: "Gorgonu",
+        c: "Wuruk",
+        d: "Merlion",
+        answer: 'd',
+        labels: [
+            'tourist', 'folklore', 'culinary'
+        ]     
+    },
+    {
+        id: 3,
+        text: "Which hawker centre was famously featured in the movie Crazy Rich Asians?",
+        a: 'Newton',
+        b: 'Maxwell',
+        c: 'Golden Mile',
+        d: 'Lau Pa Sat',
+        answer: 'a',
+        labels: [
+            'tourist', 'folklore', 'culinary'
+        ]         
+    }, 
+    {
+        id: 4,
+        text: "Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?",
+        a: "Jurong Island",
+        b: "Coney Island",
+        c: "Sentosa Island",
+        d: "Singapore Island",
+        answer: 'c',
+        labels: [
+            'tourist', 'folklore', 'culinary'
+        ]        
+    },  
+    {
+        id: 5,
+        text: "Approximately how many square kilometers/miles is Singapore?",
+        a: "10,135 km<sup>2</sup> / 3,912 miles<sup>2</sup>",        
+        b: "2,009 km<sup>2</sup> / 775 miles<sup>2</sup>",
+        c: "735 km<sup>2</sup> / 284 miles<sup>2</sup>",
+        d: "155 km<sup>2</sup> / 60 miles<sup>2</sup>",
+        answer: 'c',
+        labels: [
+            'tourist', 'folklore', 'culinary'
+        ]        
+    },    
+    {
+        id: 6,
+        text: "What iconic Singapore dish, often served with cucumber and peanut sauce, was named after a street that no longer exists?",
+        a: "Hainanese Chicken Rice",
+        b: "Satay",
+        c: "Laksa",
+        d: "Chilli Crab",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culinary",
+            "history"
+        ]
+    },  
+    {
+        id: 7,
+        text: "Which museum, shaped like a lotus flower, showcases Singapore’s history and cultural heritage?",
+        b: "National Museum of Singapore",
+        a: "ArtScience Museum",
+        c: "Peranakan Museum",
+        d: "Asian Civilisations Museum",
+        answer: "a",
+        labels: [
+            "tourist",
+            "culture",
+            "places"
+        ]
+    },     
+    {
+        id: 8,
+        text: "What spicy, coconut-based noodle soup is a staple of Peranakan cuisine and a must-try in Singapore?",
+        a: "Bak Kut Teh",
+        b: "Laksa",
+        c: "Rojak",
+        d: "Hokkien Mee",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culinary",
+            "culture"
+        ]
+    },
+    {
+        id: 9,
+        text: "Which historic fort, built in the 19th century, now hosts concerts and events on its scenic hilltop?",
+        a: "Fort Siloso",
+        d: "Fort Canning",
+        c: "Fort Pasir Panjang",
+        b: "Fort Faber",
+        answer: "d",
+        labels: [
+            "tourist",
+            "history",
+            "places"
+        ]
+    },    
+    {
+        id: 10,
+        text: "What is the name of the vibrant street in Kampong Glam, famous for its Middle Eastern cafes and textile shops?",
+        a: "Haji Lane",
+        b: "Bugis Street",
+        c: "Orchard Road",
+        d: "Clarke Quay",
+        answer: "a",
+        labels: [
+            "tourist",
+            "culture",
+            "places"
+        ]
+    },
+    {
+        id: 11,
+        text: "Which annual event transforms Singapore’s skyline with a dazzling display of fireworks and performances over Marina Bay?",
+        a: "Singapore Grand Prix",
+        b: "National Day Parade",
+        c: "4th of July",
+        d: "Deepavali Festival",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culture",
+            "events"
+        ]
+    },
+    {
+        id: 12,
+        text: "What key role did Sir Stamford Raffles play in Singapore’s history, leading to its establishment as a British trading port in 1819?",
+        a: "He was the first governor of Singapore",
+        b: "He signed a treaty with the local rulers to establish a trading post",
+        c: "He designed the city’s first urban plan",
+        d: "He discovered the island while sailing",
+        answer: "b",
+        labels: [
+            "tourist",
+            "history",
+            "people"
+        ]
+    }                            
+]
