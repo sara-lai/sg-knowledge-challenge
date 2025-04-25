@@ -471,7 +471,20 @@ function initChallenge(){
     renderStatusBar()
 }
 
-initChallenge()
+
+// dont call right away if reusing index.html for landing page - move to event listener
+// initChallenge()
+
+document.querySelector('#play').addEventListener('click', (event) => {
+    event.target.id // todo
+
+    // todo - animation would be nice, launching the quiz
+    document.querySelector('.landing-wrapper').style.display = 'none'
+    document.querySelector('.status-bar').style.display = 'flex'
+    document.querySelector('.question-wrapper').style.display = 'flex'
+
+    initChallenge()
+})
 
 function initQuestion(){
     // reset question state each new question

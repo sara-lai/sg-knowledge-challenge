@@ -9,13 +9,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">        
+    <link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
 
     <script defer src="data.js" ></script>     
     <script defer src="app.js" ></script>    
 </head>
 <body>
 
-    <div class="status-bar">
+    <div class="landing-wrapper">
+        <div class="landing-title">
+            The Great Singapore Game of Knowledge
+        </div>
+        <div class="landing-subtitle">
+            How well do you know Singapore?
+        </div>
+
+        <div class="action-box">
+            <div class="select-quiz-panel">
+                <div class="choose">
+                    Choose:
+                </div>
+                <div class="quiz-option" id="tourist">
+                    Tourist Challenge
+                </div>   
+                <div class="quiz-option" id="local">
+                    Locals Challenge
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn" id="play">play</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="status-bar" style="display:none;">
         <div class="left-content">
             <div class="heart-container">
             </div>
@@ -29,7 +57,7 @@
         </div>
     </div>
 
-    <div class="question-wrapper">
+    <div class="question-wrapper" style="display:none;">
         <div class="question-box">
             <div id="right-wrong-marker"></div>
             <div class="question-text" id="question-text"></div>
@@ -76,7 +104,7 @@
             <p></p>
             <div class='btn'>Ok!</div>
         </div>
-    </div>    
+    </div>
 
 
 </body>
