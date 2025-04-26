@@ -28,6 +28,7 @@ let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false // can contain name of taken item
 let disableEnter = false
+
 // timer related
 let timerTime = 20
 let panicMode = false
@@ -104,7 +105,7 @@ function clearSelected(els){ // takes an argument since used for answer & quiz o
 
 // *** answer submission *** //
 
-answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
+answerSubmitEl.addEventListener('click', handleAnswerSubmission)
 
 document.addEventListener('keydown', (event) => { // attach listener globally/to document, not to submit btn
     if (event.key === 'Enter' && !disableEnter) {
@@ -162,14 +163,14 @@ function handleRightAnswer(){
         score += 1
         streak += 1
         return true 
-    }
+    }        
     return false
 }
 
 function handleWrongAnswer(){
     answeredWrong = true
     hearts -= 1
-    streak = 0    
+    streak = 0  
 }
 
 function handleWonLost(){
@@ -322,7 +323,7 @@ function startTimer() {
         filledPercent = (timerTime / defaultTime) * 100
         timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
         timerTime--
-    }, 1000)
+    }, 1000)  // todo - double speed like old timer
 }
 
 function beginPanic(){
@@ -356,6 +357,8 @@ function render(){
     } else {
 
         renderStatusBar()
+
+        renderHotStreak()
 
         initQuestion()
     }
@@ -441,14 +444,12 @@ function renderSurprises(){
 }
 
 dismissableBtn.addEventListener('click', () => {
-    console.log('clicking to dismiss notice')
-
     dismissableNotice.style.display = 'none'
     questionWrapperEl.style.display = 'flex'
 
-    renderStatusBar()
-    initQuestion()
-    // or just calls render() & set isSurpise to false?
+    isSurprise = false
+    render() // repeating main render() to take other branch
+    
 })
 
 function renderStatusBar(){
@@ -471,6 +472,22 @@ function renderStatusBar(){
         chilliCrabEl.classList.add('chillicrab')
         chilliCrabContainerEl.append(chilliCrabEl)
     }        
+}
+
+function renderHotStreak(){
+    if (streak >= 5){
+        // plan, have junglefowl enter the screen
+        // perhaps multiply the junglefowl as streak continues
+        // scam steals junglefowl too?
+        // make them clickable and they move around like chickens?
+        // flash a notice when starts... "well done! you're on a hot streak"
+        let numFowl = streak - 4 // hot streak starts at 5
+        newEl = document.createElement('div')
+        newEl.classList.add('junglefowl1')
+        document.querySelector('.junglefowl-zone').append(newEl)
+    } else if (streak === 0) { // i.e. they missed the last questions
+        document.querySelector('.junglefowl-zone').innerHTML = ''
+    }
 }
 
 function renderQuestion(){
@@ -595,8 +612,6 @@ function testAddChilliCrab(){
     handleAnswerSubmission()
 }
 function testGotScammed(){
-    // todo - dont want to re-write random item removal logic
-    // pass a flag to handleSurprise for test mode?
     isSurprise = true
     userAnswer = currQ.answer
     durians -= 1 // just take a durian for now
@@ -606,6 +621,7 @@ function testGotScammed(){
 function testWin(){
     unaskedQs = []
     hearts = 3
+    userAnswer = currQ.answer
     handleAnswerSubmission()
 }
 function testLose(){
@@ -613,12 +629,17 @@ function testLose(){
     handleAnswerSubmission()
     renderStatusBar()
 }
+function testHotStreak(){
+    streak = 5
+    userAnswer = currQ.answer
+    handleAnswerSubmission()
+}
 
 
 // *** graveyard ***
 
 /*
-// for an array shuffle based approach, may use for random ordering of answer options
+// array shuffle based approach; may use for random ordering of answer options
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 function shuffle(array){
@@ -641,7 +662,7 @@ function shuffle(array){
     return array
 }
 
-previous async-await-promise method called in render() ; switched to broken up render paths
+previous async-await-promise approach, switched to broken up render paths
 async function renderRightWrong(){
     if (answeredRight || answeredWrong){ // only fire if a question has been answered
     
