@@ -1,15 +1,14 @@
 next steps:
 add instructions
 acknowledge item redemption
-some css animations for: when select quiz/start quiz.... for panic mode bobbing.... for landing page images
+some css animations for: when select quiz/start quiz.... for landing page images
 scores/streaks - streak of 5+ for demo.... show the jungle fowl, animate.... 
 add local challenge questions
 update win/lose pages to reflect chosen challenge; link to locals challenge from tourist win page, update go home button
 display the challenge name on quiz
-some enter/keypress events to make my life easier
+some keypress events to make my life easier
 bug: handle submit button with no answer selection
 panic mode heart beat sound 
-a progress arc animation for timer
 anti cheating event listeners
 figure out landing page ui
 

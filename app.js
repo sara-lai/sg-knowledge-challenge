@@ -289,62 +289,56 @@ chilliCrabContainerEl.addEventListener('click', (event) => {
 
 // *** timer related *** 
 
-// function startTimer(){
-
-//     timerEl.textContent = timerTime
-//     intervalId = setInterval(() => {
-//         timerTime -= 0.5
-//         timerEl.textContent = Math.ceil(timerTime)
-
-//         if (timerTime <=5){
-//             bodyEl.classList.toggle('panic-red')
-//             questionBoxEl.classList.remove('return-from-fade')
-//             questionBoxEl.classList.add('panic-fade')
-//         }
-
-//         if (timerTime <= 0){
-//             clearInterval(intervalId)
-
-//             questionBoxEl.classList.remove('panic-fade')
-//             questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
-//             bodyEl.classList.remove('panic-red')
-            
-//             // submit answer when time is out
-//             handleAnswerSubmission()
-//         }
-
-//     }, 500) // 2x for panic mode
-// }
-
 function stopTimer(){
     clearInterval(intervalId)
-    bodyEl.classList.remove('panic-red')
-    questionBoxEl.classList.remove('panic-fade')
-    questionBoxEl.classList.add('return-from-fade')
+    endPanic()
 }
 
 // variation https://codepen.io/simoae7/pen/GRBPJXN
 function startTimer() {
-    // overview: 
-    // use gap-dash patterns in svg to imitate a timer
-    // based on a changing percentage (depleting time / total time)
+    // use gap-dash pattern in svg to imitate a timer, use changing percentage of depleted time / total time
 
-    
     timerTextEl.textContent = timerTime // use timerTime state for Durian purposes
     let defaultTime = timerTime
-    let filledPercent = 100
+    let filledPercent = 100 
 
+    timerTime-- // decrement or will get 1 second delay
     timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
-    let interval = setInterval(function() {
+    intervalId = setInterval(function() {
         timerTextEl.textContent = timerTime
-        if (timerTime <= 0) {
-            clearInterval(interval)
-            return
+
+        if (timerTime <=5){
+            beginPanic()
         }
+
+        if (timerTime <= 0) {
+            clearInterval(intervalId)
+            
+            endPanic()
+
+            handleAnswerSubmission() // submit answer when time is out
+        }
+
         filledPercent = (timerTime / defaultTime) * 100
         timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
         timerTime--
     }, 1000)
+}
+
+function beginPanic(){
+    bodyEl.classList.toggle('panic-red')
+    questionBoxEl.classList.remove('return-from-fade')
+    questionBoxEl.classList.add('panic-fade')
+    timerCircleEl.classList.toggle('panic-red-svg')
+    questionWrapperEl.classList.add('frantic-bounce')
+}
+
+function endPanic(){
+    questionBoxEl.classList.remove('panic-fade')
+    questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
+    bodyEl.classList.remove('panic-red')
+    timerCircleEl.classList.remove('panic-red-svg')
+    questionWrapperEl.classList.remove('frantic-bounce')
 }
 
 
@@ -668,6 +662,35 @@ async function renderRightWrong(){
         rightWrongMarkerEl.style.display = 'none'
     }
 }
+
+simpler timer before SVG approcah
+function startTimer(){
+
+    timerEl.textContent = timerTime
+    intervalId = setInterval(() => {
+        timerTime -= 0.5
+        timerEl.textContent = Math.ceil(timerTime)
+
+        if (timerTime <=5){
+            bodyEl.classList.toggle('panic-red')
+            questionBoxEl.classList.remove('return-from-fade')
+            questionBoxEl.classList.add('panic-fade')
+        }
+
+        if (timerTime <= 0){
+            clearInterval(intervalId)
+
+            questionBoxEl.classList.remove('panic-fade')
+            questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
+            bodyEl.classList.remove('panic-red')
+            
+            // submit answer when time is out
+            handleAnswerSubmission()
+        }
+
+    }, 500) // 2x for panic mode
+}
+
 
  */
 

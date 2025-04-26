@@ -1,5 +1,7 @@
-/* CSS misc: makes heavy use of flex, rem, and divs with class names/ids (should use more semantic tags?) */
-/* appears in component order: question - status bar - timer - right/wrong markers - end screens - landing page */
+/* 
+appears in component order: 
+question - status bar - timer - panic mode - right/wrong markers - end screens - landing page 
+*/
 
 body {
     height: 100vh;
@@ -168,8 +170,13 @@ circle {
     fill: transparent;
 }
 
+/* panic mode */
+
 .panic-red {
     background: red;
+}
+.panic-red-svg {
+    stroke: red;
 }
 .panic-fade {
     opacity: .1;
@@ -177,6 +184,22 @@ circle {
 .return-from-fade {  /* bring opacity:1 back immediately */
     transition: none;
     opacity: 1
+}
+
+.frantic-bounce {
+    animation: frantic-bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes frantic-bounce {
+    0% { 
+        transform: translateY(0); 
+    }
+    50% { 
+        transform: translateY(-10px); 
+    }
+    100% {
+        transform: translateY(0); 
+    }
 }
 
 
@@ -399,4 +422,5 @@ circle {
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: .9;
+    object-fit: contain;
 }
