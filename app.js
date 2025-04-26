@@ -1,5 +1,5 @@
 // *** sections overview *** 
-// state - cached els - answer selection - answer submission - item redeeming - timer - render - init - tests - graveyard
+// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - tests - graveyard
 
 // *** state ***
 
@@ -27,6 +27,7 @@ let gotHeart = false
 let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false // can contain name of taken item
+let disableEnter = false
 // timer related
 let timerTime = 20
 let panicMode = false
@@ -76,20 +77,23 @@ const landingWrapperEl = document.querySelector('.landing-wrapper')
 const statusBarEl = document.querySelector('.status-bar')
 const quizOptionEls = document.querySelectorAll('.quiz-option')
 
+
+
 // *** answer selection - quiz selection *** //
 
 answerBoxEls.forEach( el => {
     el.addEventListener('click', handleAnswerSelection) // todo - A B C D or 1 2 3 4 keys
 })
-quizOptionEls.forEach( el => { // different parent class setup than answer selection
-    el.addEventListener('click', (event) => {
-        clearSelected(quizOptionEls)
-        el.classList.add('selected')
-    })
+quizOptionEls.forEach( el => { 
+    el.addEventListener('click', handleQuizSelection)
 })
 function handleAnswerSelection(event){
     clearSelected(answerBoxEls)
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
+}
+function handleQuizSelection(event){
+    clearSelected(quizOptionEls)
+    event.target.classList.add('selected') // different parent class setup than answer selection
 }
 function clearSelected(els){ // takes an argument since used for answer & quiz options
     els.forEach(el => el.classList.remove('selected'))
@@ -100,6 +104,13 @@ function clearSelected(els){ // takes an argument since used for answer & quiz o
 // *** answer submission *** //
 
 answerSubmitEl.addEventListener('click', handleAnswerSubmission) // todo 'enter' event as well 
+
+document.addEventListener('keydown', (event) => { // attach listener globally/to document, not to submit btn
+    if (event.key === 'Enter' && !disableEnter) {
+        handleAnswerSubmission()
+        disableEnter = true // only once per question cycle, resets in initQuestion
+    }
+})
 
 function handleAnswerSubmission(){
     // todo - disable submit button if havent selected (& time is left)
@@ -376,6 +387,8 @@ function renderWonLost(){
     
     endScreen.style.display = 'flex'
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
+
+    renderStatusBar() // mainly to remove final heart
 }
 
 function renderSurprises(){
@@ -504,7 +517,8 @@ function initQuestion(){
     gotHeart = false
     gotDurian = false
     gotChilliCrab = false
-    gotScammed = false       
+    gotScammed = false   
+    disableEnter = false    
  
     chooseRandomQuestion()
 
@@ -553,21 +567,21 @@ function testAddDurian(){
     isSurprise = true
     gotDurian = true
     durians += 1
-    hearts += 1 // so dont run out of hearts
+    userAnswer = currQ.answer
     handleAnswerSubmission()
 }
 function testAddChilliCrab(){
     isSurprise = true
     gotChilliCrab = true
     chilliCrabs += 1
-    hearts += 1 // so dont run out of hearts
+    userAnswer = currQ.answer
     handleAnswerSubmission()
 }
 function testGotScammed(){
     // todo - dont want to re-write random item removal logic
     // pass a flag to handleSurprise for test mode?
     isSurprise = true
-    hearts += 1 // so dont run out of hearts
+    userAnswer = currQ.answer
     durians -= 1 // just take a durian for now
     gotScammed = 'durian'
     handleAnswerSubmission()

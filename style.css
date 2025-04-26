@@ -346,4 +346,39 @@ body {
     background-repeat: no-repeat;    
     width: 100%;
     min-height: 400px;
+    display: none;
+}
+
+.image-set {
+    display: flex;
+}
+.image-set-left {
+
+    flex-wrap: wrap;
+    max-height: 600px;
+    flex-direction: column;
+    position: absolute;
+    left: 5%;
+    top: 2rem;
+    gap: 5px;
+}
+
+.image-set-right {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 600px;    
+    flex-direction: column;
+    position: absolute;
+    right: 5%;
+    top: 2rem;
+}
+
+.landing-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.05);
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: .9;
 }

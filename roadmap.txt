@@ -1,14 +1,17 @@
 next steps:
-do something with scores/streaks [track previous scores/high score?.... "hot streak" after ^ more questions]
-^ streak of 5+ for demo.... show the jungle fowl, animate.... 
+add instructions
+acknowledge item redemption
+some css animations for: when select quiz/start quiz.... for panic mode bobbing.... for landing page images
+scores/streaks - streak of 5+ for demo.... show the jungle fowl, animate.... 
 add local challenge questions
+update win/lose pages to reflect chosen challenge; link to locals challenge from tourist win page, update go home button
+display the challenge name on quiz
 some enter/keypress events to make my life easier
 bug: handle submit button with no answer selection
-improve panic mode: css transition/animation of question box so it starts bobbing; play panic mode heart beat sound 
-some animation/transition when you select a quiz before the quiz starts
-some instructions for how the quiz works
+panic mode heart beat sound 
 a progress arc animation for timer
 anti cheating event listeners
+figure out landing page ui
 
 next next steps:
 fun hantu mode

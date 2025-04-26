@@ -156,5 +156,19 @@ const touristQs = [
             "history",
             "people"
         ]
-    }                            
+    },   
+    {
+        id: 13,
+        text: "In Singlish, Singapore’s unique colloquial English, what is the primary function of the particle 'lah' when added to the end of a sentence?",
+        a: "It indicates a question",
+        d: "It softens the tone or adds emphasis",
+        c: "It marks formal speech",
+        b: "It signals disagreement",
+        answer: "d",
+        labels: [
+            "tourist",
+            "culture",
+            "language"
+        ]
+    }                             
 ]
