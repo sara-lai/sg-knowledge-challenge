@@ -55,7 +55,8 @@ const rightWrongMarkerEl = document.querySelector('#right-wrong-marker')
 const heartContainerEl = document.querySelector('.heart-container')
 const durianContainerEl = document.querySelector('.durian-container')
 const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
-const timerEl = document.querySelector('.timer')
+const timerTextEl = document.querySelector('.timer-text')
+const timerCircleEl = document.querySelector('.timer-circle')
 const bodyEl = document.querySelector('body') // for panic mode
 
 // end screens
@@ -288,32 +289,32 @@ chilliCrabContainerEl.addEventListener('click', (event) => {
 
 // *** timer related *** 
 
-function startTimer(){
+// function startTimer(){
 
-    timerEl.textContent = timerTime
-    intervalId = setInterval(() => {
-        timerTime -= 0.5
-        timerEl.textContent = Math.ceil(timerTime)
+//     timerEl.textContent = timerTime
+//     intervalId = setInterval(() => {
+//         timerTime -= 0.5
+//         timerEl.textContent = Math.ceil(timerTime)
 
-        if (timerTime <=5){
-            bodyEl.classList.toggle('panic-red')
-            questionBoxEl.classList.remove('return-from-fade')
-            questionBoxEl.classList.add('panic-fade')
-        }
+//         if (timerTime <=5){
+//             bodyEl.classList.toggle('panic-red')
+//             questionBoxEl.classList.remove('return-from-fade')
+//             questionBoxEl.classList.add('panic-fade')
+//         }
 
-        if (timerTime <= 0){
-            clearInterval(intervalId)
+//         if (timerTime <= 0){
+//             clearInterval(intervalId)
 
-            questionBoxEl.classList.remove('panic-fade')
-            questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
-            bodyEl.classList.remove('panic-red')
+//             questionBoxEl.classList.remove('panic-fade')
+//             questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
+//             bodyEl.classList.remove('panic-red')
             
-            // submit answer when time is out
-            handleAnswerSubmission()
-        }
+//             // submit answer when time is out
+//             handleAnswerSubmission()
+//         }
 
-    }, 500) // 2x for panic mode
-}
+//     }, 500) // 2x for panic mode
+// }
 
 function stopTimer(){
     clearInterval(intervalId)
@@ -322,6 +323,29 @@ function stopTimer(){
     questionBoxEl.classList.add('return-from-fade')
 }
 
+// variation https://codepen.io/simoae7/pen/GRBPJXN
+function startTimer() {
+    // overview: 
+    // use gap-dash patterns in svg to imitate a timer
+    // based on a changing percentage (depleting time / total time)
+
+    
+    timerTextEl.textContent = timerTime // use timerTime state for Durian purposes
+    let defaultTime = timerTime
+    let filledPercent = 100
+
+    timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
+    let interval = setInterval(function() {
+        timerTextEl.textContent = timerTime
+        if (timerTime <= 0) {
+            clearInterval(interval)
+            return
+        }
+        filledPercent = (timerTime / defaultTime) * 100
+        timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
+        timerTime--
+    }, 1000)
+}
 
 
 
@@ -402,7 +426,7 @@ function renderSurprises(){
     }
     if (gotChilliCrab){ 
         dismissableHeadline.textContent = "Congratulations! You unlocked a cooked Chilli Crab dish!"
-        dismissableBlurb.innerHTML = " Click on your Chilli Crab for <b>50-50 elimination</b>, 2 incorrect answers will disappear!"
+        dismissableBlurb.innerHTML = "Click on your Chilli Crab for <b>50-50 elimination</b>, 2 incorrect answers will disappear!"
         dismissableImg.classList.add('chillicrab-larger')       
     }
     if (gotHeart){ 
@@ -494,18 +518,6 @@ function initChallenge(){
     renderStatusBar()
 }
 
-// challenge selection to launch the inits()
-document.querySelector('#play').addEventListener('click', (event) => {
-    challengeName = document.querySelector('.quiz-option.selected').id
-
-    // todo - animation would be nice, launching the quiz
-    landingWrapperEl.style.display = 'none'
-    statusBarEl.style.display = 'flex'
-    questionWrapperEl.style.display = 'flex'
-
-    initChallenge()
-})
-
 function initQuestion(){
     // reset question state each new question
     answeredWrong = false
@@ -527,6 +539,17 @@ function initQuestion(){
     startTimer()
 }
 
+// challenge selection to launch the inits()
+document.querySelector('#play').addEventListener('click', (event) => {
+    challengeName = document.querySelector('.quiz-option.selected').id
+
+    // todo - animation would be nice, launching the quiz
+    landingWrapperEl.style.display = 'none'
+    statusBarEl.style.display = 'flex'
+    questionWrapperEl.style.display = 'flex'
+
+    initChallenge()
+})
 
 function chooseRandomQuestion(){
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
@@ -647,3 +670,4 @@ async function renderRightWrong(){
 }
 
  */
+

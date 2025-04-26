@@ -144,10 +144,28 @@ body {
 }
 
 /* timer */
-.timer {
+
+.timer-text {
     padding: 20px;
-    font-size: 3rem;
+    font-size: 1rem;
+}
+
+.timer-box {
     margin-right: 40px;
+    width: 160px; 
+    height: 160px;
+}
+
+circle {
+    transition: all 1s linear;
+}
+  
+.timer-circle {
+    transition: all 1s linear;
+    stroke: #FF9F39;
+    stroke-width: 6;
+    stroke-linecap: butt;
+    fill: transparent;
 }
 
 .panic-red {
