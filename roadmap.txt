@@ -14,6 +14,7 @@ abcd keypress events to make my life easier
 bug: handle submit button with no answer selection
 anti cheating event listeners
 make look OK on mobile
+maybe the empty heart container along with full ones
 
 next next steps:
 fun hantu mode

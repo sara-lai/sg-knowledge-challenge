@@ -400,7 +400,7 @@ function renderWonLost(){
     }
     if (userLost){
         endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
-        endScreenBlurb.innerHTML = "We encourage you to pay more attention next time on your trip to Singapore, \
+        endScreenBlurb.innerHTML = "We encourage you to pay more attention on your next trip to Singapore, \
             or perhaps study some basic  material about Singapore. Don’t be discouraged! Try again when you are \
             better prepared!"
         endScreenFlair.classList.add('lose-screen-img')  
@@ -411,6 +411,7 @@ function renderWonLost(){
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
 
     renderStatusBar() // mainly to remove final heart
+    renderHotStreak() // to remove animations if present
 }
 
 function renderSurprises(){
@@ -502,7 +503,7 @@ function renderHotStreak(){
         document.querySelector('.junglefowl-zone').append(jF2)
 
         document.querySelector('#hot-streak-notice').style.display = 'block'
-    } else if (streak === 0) { // i.e. they missed the last questions
+    } else if (streak === 0 || userWon) { // i.e. they missed the last questions ... or remove animations if win
         document.querySelector('.junglefowl-zone').innerHTML = ''
 
         document.querySelector('#hot-streak-notice').style.display = 'none'
@@ -762,8 +763,9 @@ function startTimer(){
 
     }, 500) // 2x for panic mode
 }
+    
 
-if decide to remove landing page "play" button (for more direct selection), then trigger initChallenge() from handleQuizSelection()
+if decide to remove landing page "play" button, then trigger initChallenge() from handleQuizSelection()
 function handleQuizSelection(event){
     clearSelected(quizOptionEls)
     event.target.classList.add('selected')

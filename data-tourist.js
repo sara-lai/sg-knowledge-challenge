@@ -362,8 +362,69 @@ const touristQs = [
             "tourist",
             "transport"
         ]
-    }                                         
+    },
+    {
+        id: 28,
+        text: "Singapore’s tropical climate features distinct monsoon and dry seasons, with the Northeast Monsoon bringing the heaviest rainfall. Which months are the rainiest months in Singapore?",
+        a: "May to July",
+        b: "August to October",
+        c: "December to February",
+        d: "March to April",
+        answer: "c",
+        labels: [
+            "tourist",
+            "climate"
+        ]
+    },   
+    {
+        id: 29,
+        text: "The Tuas Mega Port, under construction, is set to be world's largest container port with a capacity of 65 million TEU. But how does Singapore currently rank globally in container port size/handled volume?",
+        a: "10th largest",
+        b: "5th largest",
+        c: "2nd largest",
+        d: "the largest port in the world",
+        answer: "c",
+        labels: [
+            "tourist",
+            "economy",
+            "infrastructure"
+        ]
+    },
+    {
+        id: 30,
+        text: "The HSBC Rain Vortex at Jewel Changi Airport, the world’s tallest indoor waterfall, required clever engineering to keep visitors dry. What did they use to solve this problem?",
+        a: "A vast array of hidden air jets",
+        b: "A unique form of water-repellent glass panels",
+        c: "A laser-guided droplet deflection system",
+        d: "Cold air blasts to condense the mist within a given radius",
+        answer: "a",
+        labels: [
+            "tourist",
+            "changi",
+        ]
+    },  
+    {
+        id: 31,
+        text: "Singapore’s large and vibrant Tamil community has long shaped the city’s culture. Which iconic Tamil-founded landmark, built in 1827, is the oldest Hindu temple in Singapore and a must-visit during Deepavali?",
+        a: "Sri Veeramakaliamman Temple",
+        b: "Sri Mariamman Temple",
+        c: "Sri Senpaga Vinayagar Temple",
+        d: "Sri Thandayuthapani Temple  ",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culture",
+        ]
+    },      
+
+
+
+    
+    
+
 
 
 ]
+
+
 
