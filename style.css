@@ -104,6 +104,18 @@ body {
     gap: 10px
 }
 
+.challenge-name {
+    font-weight: 300;
+    font-size: 1.3rem;
+    letter-spacing: .8px;
+    margin-bottom: 6px;
+}
+
+.text-misc-box { /* need extra horizontal items within part of status bar */
+    display: flex;
+    gap: 20px;
+}
+
 .heart-container {
     display: flex;
     gap: 16px;
@@ -467,6 +479,17 @@ circle {
     position: absolute; /* because question wrapper dominates screen */
     bottom: 20%;
 }
+
+#hot-streak-notice {
+    display: none;
+    font-size: 20px;
+    color: red;
+    opacity: .5;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+
 
 /* left: -50px means the far LEFT, and left 100vm means the far RIGHT */
 /* must use same property (eg 'left') throughout animation */

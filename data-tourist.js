@@ -229,7 +229,7 @@ const touristQs = [
     },
     {
         id: 18,
-        text: "With large scale dredging, seawealls and sand, Singapore is known for reclaiming land from the sea, resting beneath iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
+        text: "With large scale dredging, seawalls and sand, Singapore is known for reclaiming land from the sea, which rests beneath iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
         a: "30 km<sup>2</sup>",
         b: "130 km<sup>2</sup>",
         c: "330 km<sup>2</sup>",
@@ -299,7 +299,7 @@ const touristQs = [
     },
     {
         id: 23,
-        text: "Lee Kuan Yew, Singapore’s founding father, was called which nickname by his family and close friends?",
+        text: "Lee Kuan Yew, Singapore’s founding father, was called what nickname by his family and close friends?",
         a: "Richard",
         b: "Harry",
         c: "Oliver",
@@ -310,7 +310,60 @@ const touristQs = [
             "history",
             "people"
         ]
-    }                           
+    },  
+    {
+        id: 24,
+        text: "The Woodlands and Tuas checkpoints, the so called first and second 'links', connect Malysia and Singapore. Approximately how many people make the land crossing each day?",
+        a: "60,000",
+        b: "100,000",
+        c: "270,000",
+        d: "450,000",
+        answer: "d",
+        labels: [
+            "tourist",
+            "malaysia"
+        ]
+    },
+    {
+        id: 25,
+        text: "Lee Kuan Yew is Singapore's founding Prime Minister who transformed the nation into a global powerhouse. In which year did this visionary leader pass away?",
+        a: "2015",
+        b: "2005",
+        c: "1995",
+        d: "1985",
+        answer: "a",
+        labels: [
+            "tourist",
+            "LKY"
+        ]
+    },
+    {
+        id: 26,
+        text: "A certificate of entitlement (COE) is required to own a vehicle in Singapore, valid for 10 years upon purchase. What is the approximate cost of a COE for a small car?",
+        a: "$2,500 SGD ($2,000 USD)",
+        b: "$5,000 SGD ($4,000 USD",
+        c: "$25,000 SGD ($19,000 USD)",
+        d: "$100,000 SGD ($75,000 USD)",
+        answer: "d",
+        labels: [
+            "tourist",
+            "transport"
+        ]
+    },
+    {
+        id: 27,
+        text: "In which year did Singapore became an independent nation?",
+        a: "1945",
+        b: "1955",
+        c: "1965",
+        d: "1975",
+        answer: "c",
+        labels: [
+            "tourist",
+            "transport"
+        ]
+    }                                         
+
 
 ]
 

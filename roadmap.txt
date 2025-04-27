@@ -1,13 +1,15 @@
 next steps:
+challengeName display stuff: update win/lose pages; link to locals challenge from tourist win page; update go home button to landing page
+win page: share how many got wrong
+lose page: share score 
+animate the landing sg-related circles… give them random sizes, randomly cycle new ones in out  -> put on page from JS instead of hardcode
 improve ‘Singapore’ scrolling name change: some flip/fade animation
-Scrolling clouds
+Scrolling clouds (or not?)
 improve junglefowl: stagger animations or change angles, not all coordinated
-animate the landing sg-related circles… give them random sizes, randomly cycle new ones in out 
 add instructions (landing page section?)
 acknowledge item redemption (some flash notice?)
 some css animations for: when select quiz/start quiz
 add a bunch of local challenge questions
-challengeName display stuff: display the challenge name on quiz; update win/lose pages; link to locals challenge from tourist win page; update go home button to landing page
 abcd keypress events to make my life easier
 bug: handle submit button with no answer selection
 anti cheating event listeners
@@ -15,10 +17,11 @@ make look OK on mobile
 
 next next steps:
 fun hantu mode
+somehow track high scores for when inevitbly lose locals challenge?
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
 demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
 panic mode heart beat sounds (maybe not)
-start out with "warm up" questions (ease into the harder challenge)
+start out with "warm up" questions (ease into the harder challenge); or restrict some questions from never appearing early?
 
 next next next steps:
 randomly order answer options

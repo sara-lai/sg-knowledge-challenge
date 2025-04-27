@@ -53,6 +53,7 @@ const answerSubmitEl = document.querySelector('#submit-q')
 const rightWrongMarkerEl = document.querySelector('#right-wrong-marker')
 
 // status bar related
+const quizNameEl = document.querySelector('.challenge-name')
 const heartContainerEl = document.querySelector('.heart-container')
 const durianContainerEl = document.querySelector('.durian-container')
 const chilliCrabContainerEl = document.querySelector('.chillicrab-container')
@@ -454,6 +455,12 @@ dismissableBtn.addEventListener('click', () => {
 
 function renderStatusBar(){
     // render style per tic-tac-toe lab -> only re-render based on state
+    if (challengeName === 'tourist'){
+        quizNameEl.textContent = 'The Tourist Challenge'
+    } else if (challengeName === 'locals'){
+        quizNameEl.textContent = 'The Locals Challenge'
+    }
+    
     heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
     for (let i = 0; i < hearts; i++){
         let heartEl = document.createElement('div')
@@ -493,9 +500,15 @@ function renderHotStreak(){
 
         document.querySelector('.junglefowl-zone').append(jF)
         document.querySelector('.junglefowl-zone').append(jF2)
+
+        document.querySelector('#hot-streak-notice').style.display = 'block'
     } else if (streak === 0) { // i.e. they missed the last questions
         document.querySelector('.junglefowl-zone').innerHTML = ''
+
+        document.querySelector('#hot-streak-notice').style.display = 'none'
     }
+
+    
 }
 
 function renderQuestion(){
@@ -607,7 +620,7 @@ endScreenBtn.addEventListener('click', () => {
 // *** landing related *** 
 
 // "Singapore" name scroll
-const names = ['Singapura', 'Temasek', 'Lion City', 'The Little Red Dot', 'Singapore'] 
+const names = ['Singapura', 'Temasek', 'Lion City', 'The Little Red Dot', 'Garden City', 'Fine City', 'Singapore'] 
 const spanName = document.getElementById('sg-name')
 const spanAdj = document.getElementById('sg-adj') // adjectives to go with some names (but no underline so different element)
 
