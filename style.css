@@ -424,18 +424,62 @@ circle {
     object-fit: contain;
 }
 
+#sg-name {
+    /* color: red; */
+}
+
 /* hot streak */
 
-.junglefowl1 {
-    background-image: url('images/junglefowl1.jpg');
+.jf {
     height: 160px;
     width: 160px;
     background-size: contain;
-    background-repeat: no-repeat;      
+    background-repeat: no-repeat;  
+    position: absolute; /* required for animations */
+    z-index: -1; /* go behind various UI elements for now */
+}
+.jf-right {
+    background-image: url('images/jf-right.png');
+    animation:
+        moveAcrossRight 10s linear infinite,
+        chickenBobble 0.5s ease-in-out infinite alternate;
+}
+.jf-left {
+    background-image: url('images/jf-left.png');
+    animation:
+        moveAcrossLeft 10s linear infinite,
+        chickenBobble 0.5s ease-in-out infinite alternate;
+}
+.junglefowl-zone {
+    position: absolute; /* because question wrapper dominates screen */
+    bottom: 20%;
 }
 
-.junglefowl-zone {
-    display: flex;
-    position: absolute;
-    bottom: 0;
+/* left: -50px means the far LEFT, and left 100vm means the far RIGHT */
+/* must use same property (eg 'left') throughout animation */
+
+@keyframes moveAcrossRight {
+    0% { 
+        left: -50px; 
+    } 
+    100% { 
+        left: 100vw;
+    } 
+  }
+@keyframes moveAcrossLeft {
+    0% { 
+        left: 100vw; 
+    } 
+    100% { 
+        left: -50px; 
+    }
 }
+@keyframes chickenBobble {
+    0% { 
+        transform: translateY(0) rotate(-5deg);
+    }
+    100% { 
+        transform: translateY(-5px) rotate(5deg); 
+    }
+}
+  

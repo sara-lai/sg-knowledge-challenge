@@ -482,9 +482,17 @@ function renderHotStreak(){
         // make them clickable and they move around like chickens?
         // flash a notice when starts... "well done! you're on a hot streak"
         let numFowl = streak - 4 // hot streak starts at 5
-        newEl = document.createElement('div')
-        newEl.classList.add('junglefowl1')
-        document.querySelector('.junglefowl-zone').append(newEl)
+        jF = document.createElement('div')
+        jF.classList.add('jf', 'jf-right')
+
+        jF2 = document.createElement('div')
+        jF2.classList.add('jf', 'jf-left')  
+
+        // todo - delay the animation so not all same -> .style.animationDelay        
+        // todo - more jf variety, and randomly choose for array to add one, randomy assign L or R
+
+        document.querySelector('.junglefowl-zone').append(jF)
+        document.querySelector('.junglefowl-zone').append(jF2)
     } else if (streak === 0) { // i.e. they missed the last questions
         document.querySelector('.junglefowl-zone').innerHTML = ''
     }
