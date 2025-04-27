@@ -1,5 +1,5 @@
 // *** sections overview *** 
-// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - tests - graveyard
+// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - landing - tests - graveyard
 
 // *** state ***
 
@@ -93,6 +93,7 @@ function handleAnswerSelection(event){
     clearSelected(answerBoxEls)
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
 }
+// note: if remove play button, move this to init()
 function handleQuizSelection(event){
     clearSelected(quizOptionEls)
     event.target.classList.add('selected') // different parent class setup than answer selection
@@ -558,7 +559,7 @@ function initQuestion(){
     startTimer()
 }
 
-// challenge selection to launch the inits()
+
 document.querySelector('#play').addEventListener('click', (event) => {
     challengeName = document.querySelector('.quiz-option.selected').id
 
@@ -569,6 +570,19 @@ document.querySelector('#play').addEventListener('click', (event) => {
 
     initChallenge()
 })
+// todo - if remove landing page "play" button, can trigger initChallenge() from handleQuizSelection()
+// function handleQuizSelection(event){
+//     clearSelected(quizOptionEls)
+//     event.target.classList.add('selected')
+
+//     challengeName = event.target.id 
+
+//     landingWrapperEl.style.display = 'none'
+//     statusBarEl.style.display = 'flex'
+//     questionWrapperEl.style.display = 'flex'
+
+//     initChallenge()    
+// }
 
 function chooseRandomQuestion(){
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
@@ -600,6 +614,30 @@ endScreenBtn.addEventListener('click', () => {
     initChallenge()
 })
 
+
+// *** landing related *** 
+
+const names = ['Singapura', 'Temasek', 'Lion City', 'The Little Red Dot', 'Singapore'] 
+const spanName = document.getElementById('sg-name')
+const spanAdj = document.getElementById('sg-adj')
+
+// overview
+// simple loop to update UI with each name, change i to 0 when at end to indefinitely cycle
+// adjectives to go with some names (but no underline)
+// todo transitions (.e.g. fade or flip the names)
+i = 0
+setInterval(() => {
+    spanName.textContent = names[i]
+    if (names[i] === 'Singapore'){
+        spanAdj.textContent = 'Great '
+    } else {
+        spanAdj.textContent = ''
+    }
+    i++
+    if (i === names.length){
+        i = 0
+    }
+}, 3000)
 
 
 // *** test functions for console ***
@@ -722,4 +760,3 @@ function startTimer(){
 
 
  */
-

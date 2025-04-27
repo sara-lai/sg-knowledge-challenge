@@ -424,10 +424,12 @@ circle {
     object-fit: contain;
 }
 
+/* todo some fade or flip effect for name change */ 
 #sg-name {
-    /* color: red; */
-}
-
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+  
 /* hot streak */
 
 .jf {

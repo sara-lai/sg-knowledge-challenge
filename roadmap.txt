@@ -1,25 +1,26 @@
 next steps:
-add instructions
-acknowledge item redemption
-some css animations for: when select quiz/start quiz.... for landing page images
-scores/streaks - streak of 5+ for demo.... show the jungle fowl, animate.... 
-add local challenge questions
-update win/lose pages to reflect chosen challenge; link to locals challenge from tourist win page, update go home button
-display the challenge name on quiz
-some keypress events to make my life easier
+‘Singapore’ scrolling name change/ animation/ red text? …. colour for buttons too?
+Scrolling clouds
+animate the landing sg-related circles… give them random sizes, randomly cycle new ones in out 
+add instructions (landing page section?)
+acknowledge item redemption (some flash notice?)
+some css animations for: when select quiz/start quiz
+add a bunch of local challenge questions
+challengeName display stuff: display the challenge name on quiz; update win/lose pages; link to locals challenge from tourist win page; update go home button to landing page
+abcd keypress events to make my life easier
 bug: handle submit button with no answer selection
-panic mode heart beat sound 
 anti cheating event listeners
-figure out landing page ui
+make look OK on mobile
 
 next next steps:
 fun hantu mode
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
 demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
+panic mode heart beat sounds (maybe not)
+start out with "warm up" questions (ease into the harder challenge)
 
 next next next steps:
 randomly order answer options
-start out with "warm up" questions (ease into the harder challenge)
 try again with JSON.... 
 use classes for quiz and question, construct Quiz/Question with JSON data
 recycle missed questions mode (maybe, eg cant finish quiz until all questions correct)

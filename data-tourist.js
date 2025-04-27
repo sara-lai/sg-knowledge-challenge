@@ -170,5 +170,76 @@ const touristQs = [
             "culture",
             "language"
         ]
-    }                             
+    },    
+    {
+        id: 14,
+        text: "In Singapore, the Malay word 'hantu' is commonly used in local folklore to refer to what supernatural entity?",
+        b: "A guardian spirit",
+        a: "A ghost or malevolent spirit",
+        c: "A haunted dwelling",
+        d: "A protective deity",
+        answer: "b",
+        labels: [
+            "tourist",
+            "folklore",
+            "culture"
+        ]
+    },
+    {
+        id: 15,
+        text: "What is the name of Singapore’s top-tier professional football league, known for featuring clubs like Lion City Sailors and Tampines Rovers?",
+        a: "Singapore Football League",
+        b: "Major League Football (MLF)",
+        c: "Singapore Premier League",
+        d: "FAS National League",
+        answer: "c",
+        labels: [
+            "tourist",
+            "sports",
+            "culture"
+        ]
+    },
+    {
+        id: 16,
+        text: "What does the Singlish term 'kiasu,' often heard in Singapore, mean in everyday conversations?",
+        a: "Being overly generous",
+        d: "Fear of missing out or overly competitive",
+        b: "Feeling relaxed and carefree",
+        c: "A feeling of good humour or self-amusement",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culture",
+            "language"
+        ]
+    },
+    {
+        id: 17,
+        text: "The Marina Bay Sands set a number of world records after its opening in 2010. Which of the following was not considered a world record at its time of opening?",
+        a: "The world’s longest elevated outdoor pool",
+        b: "The world’s longest public cantilever",
+        c: "The world’s largest open-cieling/atrium casino",
+        d: "The world's largest reclaimed land foundation",
+        answer: "d",
+        labels: [
+            "tourist",
+            "engineering",
+            "places"
+        ]
+    },
+    {
+        id: 18,
+        text: "With large scale dreding, seawealls and sand, Singapore is known for reclaiming land from the sea, atop which sit many iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
+        a: "30 km<sup>2</sup>",
+        b: "130 km<sup>2</sup>",
+        c: "230 km<sup>2</sup>",
+        d: "630 km<sup>2</sup>",
+        answer: "b",
+        labels: [
+            "tourist",
+            "history",
+            "engineering"
+        ]
+    }            
+
 ]
