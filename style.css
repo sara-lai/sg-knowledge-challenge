@@ -428,7 +428,18 @@ circle {
 #sg-name {
     text-decoration: underline;
     text-decoration-color: red;
-  }
+ }
+
+ .cloud1 {
+    height: 200px;
+    width: 100%;
+    background-image: url('images/cloud-1.svg'); /* let it repeat?? */
+    z-index: -1; 
+    position: absolute;
+    top: 0;
+ }
+
+
   
 /* hot streak */
 

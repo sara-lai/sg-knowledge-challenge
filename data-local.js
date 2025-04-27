@@ -46,6 +46,20 @@ const localQs = [
         labels: [
             'tourist', 'folklore', 'culinary'
         ]        
-    },            
+    },  
+    { // todo - testing a image based question.... 
+        id: 5,
+        text: "A public memorial was attended by over 4,000 Singaporeans in 2008 for this local legend. Who is this?",
+        a: "Ah Meng",
+        b: "Alma Alma",
+        c: "Annuar",
+        d: "Puan",
+        answer: 'a',
+        labels: [
+            'animals'
+        ],
+        type: 'image-based',
+        imageName: 'landing2.jpg',
+    },                
 ]
 

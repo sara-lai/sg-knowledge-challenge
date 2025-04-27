@@ -93,7 +93,6 @@ function handleAnswerSelection(event){
     clearSelected(answerBoxEls)
     event.target.closest('.answer-box').classList.add('selected') // add class on parent of the clicked target
 }
-// note: if remove play button, move this to init()
 function handleQuizSelection(event){
     clearSelected(quizOptionEls)
     event.target.classList.add('selected') // different parent class setup than answer selection
@@ -483,10 +482,10 @@ function renderHotStreak(){
         // make them clickable and they move around like chickens?
         // flash a notice when starts... "well done! you're on a hot streak"
         let numFowl = streak - 4 // hot streak starts at 5
-        jF = document.createElement('div')
+        let jF = document.createElement('div')
         jF.classList.add('jf', 'jf-right')
 
-        jF2 = document.createElement('div')
+        let jF2 = document.createElement('div')
         jF2.classList.add('jf', 'jf-left')  
 
         // todo - delay the animation so not all same -> .style.animationDelay        
@@ -500,6 +499,8 @@ function renderHotStreak(){
 }
 
 function renderQuestion(){
+    // todo - expand for handling more question 'types'
+
     questionTextEl.textContent = currQ.text
     answerAEl.innerHTML = currQ.a
     answerBEl.innerHTML = currQ.b
@@ -570,19 +571,6 @@ document.querySelector('#play').addEventListener('click', (event) => {
 
     initChallenge()
 })
-// todo - if remove landing page "play" button, can trigger initChallenge() from handleQuizSelection()
-// function handleQuizSelection(event){
-//     clearSelected(quizOptionEls)
-//     event.target.classList.add('selected')
-
-//     challengeName = event.target.id 
-
-//     landingWrapperEl.style.display = 'none'
-//     statusBarEl.style.display = 'flex'
-//     questionWrapperEl.style.display = 'flex'
-
-//     initChallenge()    
-// }
 
 function chooseRandomQuestion(){
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
@@ -615,16 +603,14 @@ endScreenBtn.addEventListener('click', () => {
 })
 
 
+
 // *** landing related *** 
 
+// "Singapore" name scroll
 const names = ['Singapura', 'Temasek', 'Lion City', 'The Little Red Dot', 'Singapore'] 
 const spanName = document.getElementById('sg-name')
-const spanAdj = document.getElementById('sg-adj')
+const spanAdj = document.getElementById('sg-adj') // adjectives to go with some names (but no underline so different element)
 
-// overview
-// simple loop to update UI with each name, change i to 0 when at end to indefinitely cycle
-// adjectives to go with some names (but no underline)
-// todo transitions (.e.g. fade or flip the names)
 i = 0
 setInterval(() => {
     spanName.textContent = names[i]
@@ -635,13 +621,19 @@ setInterval(() => {
     }
     i++
     if (i === names.length){
-        i = 0
+        i = 0 // indefinitely cycle!
     }
 }, 3000)
 
+// clouds animation
+let cloud1 = document.createElement('div')
+cloud1.classList.add('cloud1')
+landingWrapperEl.prepend(cloud1) // append to top of page
+
+
+
 
 // *** test functions for console ***
-
 
 function testAddDurian(){
     isSurprise = true
@@ -756,6 +748,20 @@ function startTimer(){
         }
 
     }, 500) // 2x for panic mode
+}
+
+if decide to remove landing page "play" button (for more direct selection), then trigger initChallenge() from handleQuizSelection()
+function handleQuizSelection(event){
+    clearSelected(quizOptionEls)
+    event.target.classList.add('selected')
+
+    challengeName = event.target.id 
+
+    landingWrapperEl.style.display = 'none'
+    statusBarEl.style.display = 'flex'
+    questionWrapperEl.style.display = 'flex'
+
+    initChallenge()    
 }
 
 

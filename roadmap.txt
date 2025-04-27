@@ -1,6 +1,7 @@
 next steps:
-‘Singapore’ scrolling name change/ animation/ red text? …. colour for buttons too?
+improve ‘Singapore’ scrolling name change: some flip/fade animation
 Scrolling clouds
+improve junglefowl: stagger animations or change angles, not all coordinated
 animate the landing sg-related circles… give them random sizes, randomly cycle new ones in out 
 add instructions (landing page section?)
 acknowledge item redemption (some flash notice?)

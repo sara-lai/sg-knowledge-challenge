@@ -51,7 +51,7 @@ const touristQs = [
         id: 5,
         text: "Approximately how many square kilometers/miles is Singapore?",
         a: "10,135 km<sup>2</sup> / 3,912 miles<sup>2</sup>",        
-        b: "2,009 km<sup>2</sup> / 775 miles<sup>2</sup>",
+        b: "2,035 km<sup>2</sup> / 775 miles<sup>2</sup>",
         c: "735 km<sup>2</sup> / 284 miles<sup>2</sup>",
         d: "155 km<sup>2</sup> / 60 miles<sup>2</sup>",
         answer: 'c',
@@ -148,7 +148,7 @@ const touristQs = [
         text: "What key role did Sir Stamford Raffles play in Singapore’s history, leading to its establishment as a British trading port in 1819?",
         a: "He was the first governor of Singapore",
         b: "He signed a treaty with the local rulers to establish a trading post",
-        c: "He designed the city’s first urban plan",
+        c: "He designed the city’s first urban plan, overseeing initial construction",
         d: "He discovered the island while sailing",
         answer: "b",
         labels: [
@@ -161,9 +161,9 @@ const touristQs = [
         id: 13,
         text: "In Singlish, Singapore’s unique colloquial English, what is the primary function of the particle 'lah' when added to the end of a sentence?",
         a: "It indicates a question",
-        d: "It softens the tone or adds emphasis",
-        c: "It marks formal speech",
         b: "It signals disagreement",
+        c: "It marks formal speech",
+        d: "It softens the tone or adds emphasis",        
         answer: "d",
         labels: [
             "tourist",
@@ -174,8 +174,8 @@ const touristQs = [
     {
         id: 14,
         text: "In Singapore, the Malay word 'hantu' is commonly used in local folklore to refer to what supernatural entity?",
-        b: "A guardian spirit",
-        a: "A ghost or malevolent spirit",
+        a: "A guardian spirit",
+        b: "A ghost or malevolent spirit",
         c: "A haunted dwelling",
         d: "A protective deity",
         answer: "b",
@@ -189,7 +189,7 @@ const touristQs = [
         id: 15,
         text: "What is the name of Singapore’s top-tier professional football league, known for featuring clubs like Lion City Sailors and Tampines Rovers?",
         a: "Singapore Football League",
-        b: "Major League Football (MLF)",
+        b: "League of Lions",
         c: "Singapore Premier League",
         d: "FAS National League",
         answer: "c",
@@ -201,11 +201,11 @@ const touristQs = [
     },
     {
         id: 16,
-        text: "What does the Singlish term 'kiasu,' often heard in Singapore, mean in everyday conversations?",
+        text: "What does the Singlish term 'kiasu' mean in everyday conversations?",
         a: "Being overly generous",
-        d: "Fear of missing out or overly competitive",
-        b: "Feeling relaxed and carefree",
-        c: "A feeling of good humour or self-amusement",
+        b: "Fear of missing out or overly competitive",
+        c: "Feeling relaxed and carefree",
+        d: "A feeling of self-amusement or whimsicalness",
         answer: "b",
         labels: [
             "tourist",
@@ -215,12 +215,12 @@ const touristQs = [
     },
     {
         id: 17,
-        text: "The Marina Bay Sands set a number of world records after its opening in 2010. Which of the following was not considered a world record at its time of opening?",
-        a: "The world’s longest elevated outdoor pool",
+        text: "Marina Bay Sands has set a number of world records after its opening in 2010. Which of the following is not considered a current or past world record?",
+        a: "The world's largest reclaimed land foundation",
         b: "The world’s longest public cantilever",
-        c: "The world’s largest open-cieling/atrium casino",
-        d: "The world's largest reclaimed land foundation",
-        answer: "d",
+        c: "The world’s largest gathering of people dressed as ghosts",
+        d: "The world’s longest elevated, outdoor pool",        
+        answer: "a",
         labels: [
             "tourist",
             "engineering",
@@ -229,17 +229,88 @@ const touristQs = [
     },
     {
         id: 18,
-        text: "With large scale dreding, seawealls and sand, Singapore is known for reclaiming land from the sea, atop which sit many iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
+        text: "With large scale dredging, seawealls and sand, Singapore is known for reclaiming land from the sea, resting beneath iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
         a: "30 km<sup>2</sup>",
         b: "130 km<sup>2</sup>",
-        c: "230 km<sup>2</sup>",
-        d: "630 km<sup>2</sup>",
+        c: "330 km<sup>2</sup>",
+        d: "730 km<sup>2</sup>",
         answer: "b",
         labels: [
             "tourist",
             "history",
             "engineering"
         ]
-    }            
+    },   
+    {
+        id: 19,
+        text: "What is the commonly heard Singlish term that is an approximate synonym for 'Yes'?",
+        a: "Ja",
+        b: "Done",
+        c: "Will",
+        d: "Can",        
+        answer: "d",
+        labels: [
+            "tourist",
+            "culture",
+            "language"
+        ]
+    },     
+    {
+        id: 20,
+        text: "While Singapore Airlines is well-known and often ranks as the world's best, they also launched a zippy budget airline soaring across Asia’s skies on the cheap! What's its name?",
+        a: "AirAsia",
+        b: "Lion Air",
+        c: "Scoot",
+        d: "Jetstar",
+        answer: "c",
+        labels: [
+            "tourist",
+            "travel",
+            "culture"
+        ]
+    },
+    {
+        id: 21,
+        text: "At 164 meters, what is the name of the tallest natural elevation point in Singapore?",
+        a: "Mount Faber",
+        b: "Mount Emily",
+        c: "Bukit Timah Hill",
+        d: "Joo Chiat Peak ('The Crag')",
+        answer: "c",
+        labels: [
+            "tourist",
+            "travel",
+            "culture"
+        ]
+    },
+    {
+        id: 22,
+        text: "When the Philippines’ Mount Pinatubo erupted in 1991, a layer of ash covered ground and cars across Singapore. Approximately how far away is the nearest known active volcano from Singapore?",
+        a: "30 km",
+        b: "130 km",
+        c: "430 km",
+        d: "1,300 km",
+        answer: "c",
+        labels: [
+            "tourist",
+            "travel",
+            "culture"
+        ]
+    },
+    {
+        id: 23,
+        text: "Lee Kuan Yew, Singapore’s founding father, was called which nickname by his family and close friends?",
+        a: "Richard",
+        b: "Harry",
+        c: "Oliver",
+        d: "Charlie",
+        answer: "b",
+        labels: [
+            "tourist",
+            "history",
+            "people"
+        ]
+    }                           
 
 ]
+
