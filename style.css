@@ -339,15 +339,26 @@ circle {
 }
 
 /* landing page related */
-.landing-wrapper {
+
+ /* trying a sort of sleek box shadow center ... note: probably more than a 'wrapper' at this point */
+.landing-wrapper { 
     flex-direction: column;
     gap: 30px;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     text-align: center;
-    padding-top: 40px;
+    padding-top: 140px;
     display: flex;
-
+    max-width: 620px;
+    margin: 0 auto;
+    background: white;
+    padding: 60px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 .landing-title {
     font-size: 5rem;
@@ -378,7 +389,8 @@ circle {
     gap: 20px;
 }
 .choose {
-    font-weight: 200;
+    font-weight: 300;
+    letter-spacing: .6px;
 }
 .quiz-option {
     border: 1px solid #d9d9d9;
@@ -399,31 +411,12 @@ circle {
     background-repeat: no-repeat;    
     width: 100%;
     min-height: 400px;
-    display: none;
+    display: none; /* maybe not using it */
 }
 
 .image-set {
     display: flex;
 }
-/* .image-set-left {
-    flex-wrap: wrap;
-    max-height: 600px;
-    flex-direction: column;
-    position: absolute;
-    left: 5%;
-    top: 2rem;
-    gap: 5px;
-}
-
-.image-set-right {
-    display: flex;
-    flex-wrap: wrap;
-    max-height: 600px;    
-    flex-direction: column;
-    position: absolute;
-    right: 5%;
-    top: 2rem;
-} */
 
 .landing-image {
     height: 100px;
@@ -434,7 +427,23 @@ circle {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 1;
     object-fit: contain;
+    z-index: -1;
+    background: white;
 }
+.landing-image-m {
+    height: 100px;
+    width: 100px;    
+}
+.landing-image-l {
+    height: 120px;
+    width: 120px;    
+}
+.landing-image-s {
+    height: 80px;
+    width: 80px;    
+}
+
+
 
 /* todo some fade or flip effect for name change */ 
 #sg-name {
@@ -449,6 +458,7 @@ circle {
     z-index: -1; 
     position: absolute;
     top: 0;
+    display: none; /* maybe wont use clouds */
  }
 
 

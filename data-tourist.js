@@ -313,7 +313,7 @@ const touristQs = [
     },  
     {
         id: 24,
-        text: "The Woodlands and Tuas checkpoints, the so called first and second 'links', connect Malysia and Singapore. Approximately how many people make the land crossing each day?",
+        text: "The Woodlands and Tuas checkpoints, the so called first and second 'links', connect Malysia and Singapore by land. Approximately how many people make the crossing every day?",
         a: "60,000",
         b: "100,000",
         c: "270,000",
@@ -378,7 +378,7 @@ const touristQs = [
     },   
     {
         id: 29,
-        text: "The Tuas Mega Port, under construction, is set to be world's largest container port with a capacity of 65 million TEU. But how does Singapore currently rank globally in container port size/handled volume?",
+        text: "The Tuas Mega Port, under construction, is set to be world's largest container port with a capacity of 65 million TEU. Until it opens, how does Singapore currently rank globally in container port size?",
         a: "10th largest",
         b: "5th largest",
         c: "2nd largest",

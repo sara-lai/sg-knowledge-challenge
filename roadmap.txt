@@ -1,8 +1,8 @@
 next steps:
+improve the landing image circles… make them bounce..... randomly cycle new ones in out? 
 challengeName display stuff: update win/lose pages; link to locals challenge from tourist win page; update go home button to landing page
 win page: share how many got wrong
 lose page: share score 
-animate the landing sg-related circles… give them random sizes, randomly cycle new ones in out  -> put on page from JS instead of hardcode
 improve ‘Singapore’ scrolling name change: some flip/fade animation
 Scrolling clouds (or not?)
 improve junglefowl: stagger animations or change angles, not all coordinated

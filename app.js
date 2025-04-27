@@ -639,11 +639,45 @@ setInterval(() => {
     }
 }, 3000)
 
-// clouds animation
+// clouds animation - maybe scrap
 let cloud1 = document.createElement('div')
 cloud1.classList.add('cloud1')
 landingWrapperEl.prepend(cloud1) // append to top of page
 
+
+// the img-circles 
+// brainstorm:
+// use JS to put on page, randomly adjust size, and randomly give special animation (bouncing around, bobbing etc)
+// use a loop to build list of file names.... randomly pick from.... create the element ... put on page (randomly/anywhere?)
+// note, may have 100+ of these, but only want to show 30ish at a time.... need them to cycle out....
+// next goal: have them bounce around
+
+let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49] // can be png or jpg so use this to switch extension
+let extension = null
+let imageNames = []
+for (let i = 1; i < 52; i++){
+    if (usePNG.includes(i)){
+        extension = 'png'
+    } else {
+        extension = 'jpg'
+    }
+    imageNames.push(`landing${i}.${extension}`)
+}
+
+let SML = ['s', 'm', 'l']
+
+for (let img of imageNames){
+    let imgEl = document.createElement('img')
+    imgEl.classList.add('landing-image')
+    imgEl.src = 'images/' + img
+
+    // randomly assign s - m - l class
+    let randomIdx = Math.floor(Math.random() * 3)
+    let letter = SML[randomIdx]
+    imgEl.classList.add(`landing-image-${letter}`)
+
+    bodyEl.append(imgEl)
+}
 
 
 
@@ -691,7 +725,7 @@ function testHotStreak(){
 // *** graveyard ***
 
 /*
-// array shuffle based approach; may use for random ordering of answer options
+// array shuffle based approach; may use for random ordering of answer options, or random img-circle array (landing paeg)
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 function shuffle(array){
@@ -763,7 +797,7 @@ function startTimer(){
 
     }, 500) // 2x for panic mode
 }
-    
+
 
 if decide to remove landing page "play" button, then trigger initChallenge() from handleQuizSelection()
 function handleQuizSelection(event){
