@@ -416,8 +416,8 @@ function renderWonLost(){
         endScreenFlair.classList.add('win-screen-img')
         endScreenBtn.textContent = 'again!'
 
-        stat1.innerHTML = `<span><b>Longest Streak: </b></span><span>${longestStreak}</span>`
-        stat2.innerHTML = `<span><b>Number of Incorrect Answers: </b></span><span>${wrongAnswers.length}</span>`
+        stat1.innerHTML = `<div><b>Longest Streak: </b>${longestStreak}</div>`
+        stat2.innerHTML = `<div><b>Number of Incorrect Answers: </b>${wrongAnswers.length}</div>`
 
         if (wrongAnswers.length > 0){
             extraCommentary.textContent = "Ah, yikes, we see you answered incorrectly. That's OK. You technically still won the challenge, but perhaps you should try again and see if you can do a bit better!"
@@ -448,6 +448,15 @@ function renderWonLost(){
         endScreenBtn.textContent = 'redeem yourself'
 
         endScreenFlair.style.display = 'block' // hidden by default
+
+        stat1.innerHTML = `<div><b>Your Score: </b>${score}</div>`  
+        stat2.innerHTML = `<div><b>Longest Streak: </b>${longestStreak}</div>`
+
+        if (score < 5){
+            extraCommentary.textContent = "Ah, wow. Actually I see that's not a very high score. Not sure what to say."
+        }        
+      
+
     }  
     
     endScreen.style.display = 'flex'
@@ -681,6 +690,8 @@ function removeStaleThings(){
     endScreenFlair.style.display = 'none'
     endScreenFlair2.style.display = 'none'
 
+    landingWrapperEl.style.display = 'none'
+
     questionWrapperEl.style.display = 'flex'
 }
 
@@ -772,6 +783,8 @@ function testGotScammed(){
     userAnswer = currQ.answer
     durians -= 1 // just take a durian for now
     gotScammed = 'durian'
+    // chilliCrabs -= 1
+    // gotScammed = 'chilliCrab'
     handleAnswerSubmission()
 }
 function testWin(){

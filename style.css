@@ -265,6 +265,7 @@ circle {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    margin-top: -40px;
   }  
 
   .end-screen p, .dismissable-notice p {
