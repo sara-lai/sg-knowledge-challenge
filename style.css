@@ -399,6 +399,10 @@ circle {
         cursor: pointer;
     }
 }
+.quiz-option#local {
+    background: red;
+    color: white;
+}
 .landing-wrapper .btn {
     font-family: 'Roboto';
     font-weight: 200;
@@ -443,25 +447,40 @@ circle {
     width: 80px;    
 }
 
+/* disclaimer for local challenge, using absolute so doesn't affect layout */
+.item-plus-disclaimer {
+    position: relative 
+}
+#local-warning {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -20px; /* sit below the button */
+    font-size: .9rem;
+    margin-left: 25px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: .5px;
+}
 
 
-/* todo some fade or flip effect for name change */ 
+/* name change/scroll -> todo some fade or flip effect */ 
 #sg-name {
     text-decoration: underline;
-    text-decoration-color: red;
+    /*text-decoration-color: red;*/
+    text-decoration-color: #65558F;
  }
 
- .cloud1 {
+ /* .cloud1 {
     height: 200px;
     width: 100%;
-    background-image: url('images/cloud-1.svg'); /* let it repeat?? */
+    background-image: url('images/cloud-1.svg');
     z-index: -1; 
     position: absolute;
     top: 0;
-    display: none; /* maybe wont use clouds */
- }
+ } */
 
 
+ 
   
 /* hot streak */
 

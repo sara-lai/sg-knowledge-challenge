@@ -49,7 +49,7 @@ const localQs = [
     },  
     { // todo - testing a image based question.... 
         id: 5,
-        text: "A public memorial was attended by over 4,000 Singaporeans in 2008 for this local legend. Who is this?",
+        text: "A public memorial was attended by over 4,000 Singaporeans in 2008 for this local legend displayed above. Who is this?",
         a: "Ah Meng",
         b: "Alma Alma",
         c: "Annuar",

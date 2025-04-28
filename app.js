@@ -393,10 +393,18 @@ function renderWonLost(){
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'
         endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
-            we salute you. Was that easy? Feel like you have local-level knowledge? Try <b>The True Locals Challenge</b>  \
+            we salute you. Was that easy? Feel like you have local-level knowledge? Try <b id='locals-challenge-go'>The True Locals Challenge</b>  \
             to further test your knowledge and for the chance to win prizes!"
         endScreenFlair.classList.add('win-screen-img')
         endScreenBtn.textContent = 'again!'
+
+        // if complete tourist, recommend local
+        if (challengeName === 'tourist'){
+            document.querySelector('#locals-challenge-go').addEventListener('click', () => {
+                challengeName = 'local'
+                initChallenge()
+            })
+        }        
     }
     if (userLost){
         endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
@@ -458,7 +466,7 @@ function renderStatusBar(){
     // render style per tic-tac-toe lab -> only re-render based on state
     if (challengeName === 'tourist'){
         quizNameEl.textContent = 'The Tourist Challenge'
-    } else if (challengeName === 'locals'){
+    } else if (challengeName === 'local'){
         quizNameEl.textContent = 'The Locals Challenge'
     }
     
@@ -529,7 +537,7 @@ function renderQuestion(){
 
 
 
-// *** init ***
+// *** init related ***
 
 function initChallenge(){
 
@@ -545,6 +553,8 @@ function initChallenge(){
     hearts = 3 
     durians = 0
     chilliCrabs = 0
+
+    removeStaleThings() // in case stale things from old challlenge
     
     produceQuestionSet()
 
@@ -573,7 +583,6 @@ function initQuestion(){
 
     startTimer()
 }
-
 
 document.querySelector('#play').addEventListener('click', (event) => {
     challengeName = document.querySelector('.quiz-option.selected').id
@@ -607,14 +616,20 @@ function produceQuestionSet(){
     console.log(unaskedQs)
 }
 
-endScreenBtn.addEventListener('click', () => {
-    // init related....
+endScreenBtn.addEventListener('click', reLaunchSameChallenge)
 
+function reLaunchSameChallenge(){
+    removeEndScreens()
+    initChallenge()
+}
+
+function removeStaleThings(){
+    //  e.g. end screens, landing image circles
     endScreen.style.display = 'none'
     questionWrapperEl.style.display = 'flex'
-
-    initChallenge()
-})
+    
+    document.querySelectorAll('.landing-image').forEach(el => el.remove())
+}
 
 
 
@@ -637,7 +652,7 @@ setInterval(() => {
     if (i === names.length){
         i = 0 // indefinitely cycle!
     }
-}, 3000)
+}, 3500)
 
 // clouds animation - maybe scrap
 let cloud1 = document.createElement('div')
@@ -651,6 +666,8 @@ landingWrapperEl.prepend(cloud1) // append to top of page
 // use a loop to build list of file names.... randomly pick from.... create the element ... put on page (randomly/anywhere?)
 // note, may have 100+ of these, but only want to show 30ish at a time.... need them to cycle out....
 // next goal: have them bounce around
+// todo - need to clear them all when quiz starts (a forEach with .remove() ?)
+// will this have terrible performance?
 
 let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49] // can be png or jpg so use this to switch extension
 let extension = null
