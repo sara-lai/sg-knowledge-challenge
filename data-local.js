@@ -1,54 +1,6 @@
 const localQs = [
     {
         id: 1,
-        text: "Locals! What is the name of the famous cocktail reputed to have originated at The Long Bar in Raffles Hotel?",
-        a: "The Singapore Sting",
-        b: "The Temasek Tequila Tsunami ",
-        c: "The Nanyang Negroni",
-        d: "The Singapore Sling",
-        answer: 'd',
-        labels: [
-            'tourist', 'culinary'
-        ]
-    },
-    {
-        id: 2,
-        text: "Locals! What is the name of Singapore's famous statue that is part-lion part-fish?",
-        a: "Lionfish",
-        b: "Gorgonu",
-        c: "Wuruk",
-        d: "Merlion",
-        answer: 'd',
-        labels: [
-            'tourist', 'folklore', 'culinary'
-        ]     
-    },
-    {
-        id: 3,
-        text: "Locals! Which hawker centre was famously featured in the movie Crazy Rich Asians?",
-        a: 'Newton',
-        b: 'Maxwell',
-        c: 'Golden Mile',
-        d: 'Lau Pa Sat',
-        answer: 'a',
-        labels: [
-            'tourist', 'folklore', 'culinary'
-        ]         
-    }, 
-    {
-        id: 4,
-        text: "Locals! Which resort island, accessible by cable car or monorail, is home to attractions like Universal Studios and a sprawling aquarium?",
-        a: "Jurong Island",
-        b: "Coney Island",
-        c: "Sentosa Island",
-        d: "Singapore Island",
-        answer: 'c',
-        labels: [
-            'tourist', 'folklore', 'culinary'
-        ]        
-    },  
-    { // todo - testing a image based question.... 
-        id: 5,
         text: "A public memorial was attended by over 4,000 Singaporeans in 2008 for this local legend displayed above. Who is this?",
         a: "Ah Meng",
         b: "Alma Alma",
@@ -56,10 +8,34 @@ const localQs = [
         d: "Puan",
         answer: 'a',
         labels: [
-            'animals'
+            'animals', 'locals'
         ],
         type: 'image-based',
         imageName: 'landing2.jpg',
-    },                
+    },    
+    {
+        id: 2,
+        text: "Singaporeans are internationally recognised for their math skill. A dataset has a mean of 20 and a standard deviation of 5. What is the z-score for a value of 25?",
+        a: "0",
+        b: "1",
+        c: "1.5",
+        d: "2",
+        answer: 'b',
+        labels: [
+            'math', 'locals'
+        ],
+    }, 
+    {
+        id: 3,
+        text: "Which of the following is not considered a variety of Durian?",
+        a: "Red Prawn",
+        b: "D24",
+        c: "Black Thorn",
+        d: "Kah Kin",
+        answer: 'd',
+        labels: [
+            'durian', 'locals'
+        ],
+    },                        
 ]
 

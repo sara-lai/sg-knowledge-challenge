@@ -52,6 +52,8 @@ const answerCEl = document.querySelector('#c .answer-text')
 const answerDEl = document.querySelector('#d .answer-text')
 const answerSubmitEl = document.querySelector('#submit-q')
 const rightWrongMarkerEl = document.querySelector('#right-wrong-marker')
+const otherQuestionTypesEl = document.querySelector('.other-question-types')
+const imageQuestionEl = document.querySelector('.other-question-types img')
 
 // status bar related
 const quizNameEl = document.querySelector('.challenge-name')
@@ -390,6 +392,8 @@ function renderNoticeRightWrong(){
     }
     rightWrongMarkerEl.style.display = 'block' // any display option, just make appear       
 
+    otherQuestionTypesEl.style.display = 'none' // not ideal here? icon issue with new image-question types
+
 }
 
 function hideNoticeRightWrong(){
@@ -579,6 +583,14 @@ function renderQuestion(){
     answerBEl.innerHTML = currQ.b
     answerCEl.innerHTML = currQ.c
     answerDEl.innerHTML = currQ.d
+
+    // test new quesiton type! 
+    if (currQ.type === 'image-based'){
+        imageQuestionEl.src = 'images/' + currQ.imageName
+        otherQuestionTypesEl.style.display = 'block'
+    } else {
+        otherQuestionTypesEl.style.display = 'none'
+    }
 
     clearSelected(answerBoxEls) // clear prev answer selection
 
