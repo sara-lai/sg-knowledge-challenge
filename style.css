@@ -290,25 +290,42 @@ circle {
     font-weight: 400;
   }
 
-  .end-screen-flair {
+/* todos - must improve this end screen design */
+#end-screen-flair, #end-screen-flair2 {
     height: 400px;
     width: 400px;     
     background-size: contain;
     background-repeat: no-repeat;     
     margin-top: 3rem;
-  }
+    display: none;  /* hide or layuot problems */
+}
 
-  .win-screen-img {
-    background-image: url('images/win-screen-img.png');  
-  }
+.win-screen-img {
+    background-image: url('images/win-screen-img-no-bg.png');  
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;    
+    z-index: 10; /* go in front since no bg */
+ }
+ .win-screen-img2 {
+    background-image: url('images/win-screen-img-no-bg.png');  
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    right: 0; /* todo - I shouldnt repeat all this, use a like .absolute-right class */
+    top: 0;    
+    z-index: 10;
+ } 
 
-  .lose-screen-img {
+ #end-screen-flair.lose-screen-img { /* specificty required since changed to id */
     background-image: url('images/lose-screen-img.png');
     height: 150px;
     width: 150px;
-  }
+ }
 
-  .heart-larger {
+.heart-larger {
     background-image: url('images/heart2-icon.png');
     background-size: contain;
     width: 5rem;
@@ -338,6 +355,21 @@ circle {
     height: 10rem;
 }
 
+.stats-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.stat {
+    font-size: 1.1rem;
+}
+#locals-challenge-go:hover {
+    cursor: pointer;
+}
+.extra-commentary {
+    max-width: 700px;
+    font-style: italic;
+}
 /* landing page related */
 
  /* trying a sort of sleek box shadow center ... note: probably more than a 'wrapper' at this point */
@@ -480,7 +512,7 @@ circle {
  } */
 
 
- 
+
   
 /* hot streak */
 

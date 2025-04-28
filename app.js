@@ -12,6 +12,7 @@ let prevQs = []
 let wrongAnswers = [] // maybe review at end
 let score = 0 
 let streak = 0
+let longestStreak = 0
 let userWon = false
 let userLost = false
 
@@ -65,8 +66,14 @@ const bodyEl = document.querySelector('body') // for panic mode
 const endScreen = document.querySelector('#end-screen')
 const endScreenHeadline = document.querySelector('.end-screen h2')
 const endScreenBlurb = document.querySelector('.end-screen p')
-const endScreenFlair = document.querySelector('.end-screen-flair')
+const endScreenFlair = document.querySelector('#end-screen-flair')
+const endScreenFlair2 = document.querySelector('#end-screen-flair2')
 const endScreenBtn = document.querySelector('.end-screen .btn')
+const statsBox = document.querySelector('.stats-box')
+const extraCommentary = document.querySelector('.extra-commentary')
+const stat1 = document.querySelector('#stat1')
+const stat2 = document.querySelector('#stat2')
+
 
 // notice screens
 const dismissableNotice = document.querySelector('#the-notice')
@@ -163,6 +170,9 @@ function handleRightAnswer(){
         answeredRight = true
         score += 1
         streak += 1
+        if (streak > longestStreak){ // check in both right and wrong conditions
+            longestStreak = streak
+        }
         return true 
     }        
     return false
@@ -171,6 +181,11 @@ function handleRightAnswer(){
 function handleWrongAnswer(){
     answeredWrong = true
     hearts -= 1
+    
+    if (streak > longestStreak){ // capture before reset streak
+        longestStreak = streak
+    }
+
     streak = 0  
 }
 
@@ -386,9 +401,12 @@ function hideNoticeRightWrong(){
 
 function renderWonLost(){
     // using win/lose screen from html
-
-    // if repeating the quiz, need to clear
-    endScreenFlair.classList = ['end-screen-flair']
+    // ok new things: 
+    // on win screen -> display "your longest streak longestStreak", "number wrong: wrongAnswers.length"
+    // on lose screen -> also longest streak, and high score (score) 
+    // maybe some subtle editorial eg "Congrats you won.... but you still missed 6 questions.... that's OK, at least you completed it."
+    // Or subtle scolding on lost page: "hmm you only got 5 questions right, that's really not so good. It's OK.... ."
+    // use .stats-box to optionally append 1) longestStreak 2) wrongAnswers.length 3) score.... add #stat1 and stat2# to page to update
 
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'
@@ -398,13 +416,28 @@ function renderWonLost(){
         endScreenFlair.classList.add('win-screen-img')
         endScreenBtn.textContent = 'again!'
 
+        stat1.innerHTML = `<span><b>Longest Streak: </b></span><span>${longestStreak}</span>`
+        stat2.innerHTML = `<span><b>Number of Incorrect Answers: </b></span><span>${wrongAnswers.length}</span>`
+
+        if (wrongAnswers.length > 0){
+            extraCommentary.textContent = "Ah, yikes, we see you answered incorrectly. That's OK. You technically still won the challenge, but perhaps you should try again and see if you can do a bit better!"
+        }
+        
         // if complete tourist, recommend local
         if (challengeName === 'tourist'){
             document.querySelector('#locals-challenge-go').addEventListener('click', () => {
                 challengeName = 'local'
                 initChallenge()
             })
-        }        
+        }   
+        
+        // i want to duplicate the fireworks img, put in upper right - add endScreenFlair2 to page
+        // todo - make fireworks bobble! or rotate
+        endScreenFlair2.classList.add('win-screen-img2')
+
+        endScreenFlair.style.display = 'block'
+        endScreenFlair2.style.display = 'block'
+
     }
     if (userLost){
         endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
@@ -413,10 +446,17 @@ function renderWonLost(){
             better prepared!"
         endScreenFlair.classList.add('lose-screen-img')  
         endScreenBtn.textContent = 'redeem yourself'
+
+        endScreenFlair.style.display = 'block' // hidden by default
     }  
     
     endScreen.style.display = 'flex'
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
+
+    // todo improve the UI: 
+    // clear status bar, put the end screen flair in the 4 corners, 
+    statusBarEl.style.display = 'none'
+
 
     renderStatusBar() // mainly to remove final heart
     renderHotStreak() // to remove animations if present
@@ -487,7 +527,8 @@ function renderStatusBar(){
         let chilliCrabEl = document.createElement('div')
         chilliCrabEl.classList.add('chillicrab')
         chilliCrabContainerEl.append(chilliCrabEl)
-    }        
+    }   
+        
 }
 
 function renderHotStreak(){
@@ -506,6 +547,7 @@ function renderHotStreak(){
 
         // todo - delay the animation so not all same -> .style.animationDelay        
         // todo - more jf variety, and randomly choose for array to add one, randomy assign L or R
+        // todo - one crazy one that rotates
 
         document.querySelector('.junglefowl-zone').append(jF)
         document.querySelector('.junglefowl-zone').append(jF2)
@@ -560,6 +602,8 @@ function initChallenge(){
 
     initQuestion()
 
+    statusBarEl.style.display = 'flex' // fix for relaunching challenge issue
+
     renderStatusBar()
 }
 
@@ -584,12 +628,12 @@ function initQuestion(){
     startTimer()
 }
 
+// todo - named function
 document.querySelector('#play').addEventListener('click', (event) => {
     challengeName = document.querySelector('.quiz-option.selected').id
 
     // todo - animation would be nice, launching the quiz
     landingWrapperEl.style.display = 'none'
-    statusBarEl.style.display = 'flex'
     questionWrapperEl.style.display = 'flex'
 
     initChallenge()
@@ -619,16 +663,25 @@ function produceQuestionSet(){
 endScreenBtn.addEventListener('click', reLaunchSameChallenge)
 
 function reLaunchSameChallenge(){
-    removeEndScreens()
+    removeStaleThings()    
+
     initChallenge()
 }
 
 function removeStaleThings(){
-    //  e.g. end screens, landing image circles
+    // mostly for end screens and landing page features
+
     endScreen.style.display = 'none'
-    questionWrapperEl.style.display = 'flex'
     
-    document.querySelectorAll('.landing-image').forEach(el => el.remove())
+    document.querySelectorAll('.landing-image').forEach(el => el.remove()) // all the landing image circles, appended to body
+
+    endScreenFlair.classList = [] // reset big endscreen images
+    endScreenFlair2.classList = []
+
+    endScreenFlair.style.display = 'none'
+    endScreenFlair2.style.display = 'none'
+
+    questionWrapperEl.style.display = 'flex'
 }
 
 
@@ -739,7 +792,7 @@ function testHotStreak(){
 }
 
 
-// *** graveyard ***
+// *** graveyard: may revise from dead ***
 
 /*
 // array shuffle based approach; may use for random ordering of answer options, or random img-circle array (landing paeg)
