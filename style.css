@@ -466,6 +466,11 @@ circle {
     object-fit: contain;
     z-index: -1;
     background: white;
+    animation: chickenBobble 2.5s ease-in-out infinite alternate;
+}
+.landing-image-s {
+    height: 80px;
+    width: 80px;    
 }
 .landing-image-m {
     height: 100px;
@@ -475,10 +480,18 @@ circle {
     height: 120px;
     width: 120px;    
 }
-.landing-image-s {
-    height: 80px;
-    width: 80px;    
+
+/* image bobbing! reuise chickenBobble? */
+
+@keyframes chickenBobble {
+    0% { 
+        transform: translateY(0) rotate(-5deg);
+    }
+    100% { 
+        transform: translateY(-5px) rotate(5deg); 
+    }
 }
+
 
 /* disclaimer for local challenge, using absolute so doesn't affect layout */
 .item-plus-disclaimer {

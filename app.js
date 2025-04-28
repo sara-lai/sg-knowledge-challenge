@@ -745,12 +745,14 @@ for (let i = 1; i < 52; i++){
     imageNames.push(`landing${i}.${extension}`)
 }
 
+console.log(imageNames)
+
 let SML = ['s', 'm', 'l']
 
-for (let img of imageNames){
+for (let imgName of imageNames){
     let imgEl = document.createElement('img')
     imgEl.classList.add('landing-image')
-    imgEl.src = 'images/' + img
+    imgEl.src = 'images/' + imgName
 
     // randomly assign s - m - l class
     let randomIdx = Math.floor(Math.random() * 3)
