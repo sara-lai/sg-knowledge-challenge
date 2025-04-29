@@ -394,13 +394,12 @@ circle {
     max-width: 620px;
     margin: 0 auto;
     background: white;
-    padding: 60px;
+    padding: 30px;
+    padding-bottom: 60px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.05);
     margin-top: 100px;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 .landing-title {
     font-size: 5rem;
@@ -475,6 +474,7 @@ circle {
     object-fit: contain;
     z-index: -1;
     background: white;
+    position: absolute; /* required for animation */
     animation: 
         imageBobble 2.5s ease-in-out infinite alternate,
         imageDrift 5s ease-in-out infinite;

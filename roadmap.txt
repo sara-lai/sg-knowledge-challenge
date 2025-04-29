@@ -1,11 +1,9 @@
 next steps:
-bug: durian not clicakble in panic mode?? b/c frantic-bounce.... other issue: redeem during panic mode, should restore opacity
-test out anti cheating event listeners
+bug: if redeem multiple chillicrabs if just gives you the answer
+improve anti cheating event listeners (remove JS question data?)
 landing image circles: improve drift animation.... make them bounced around.... will have to use JS and css variables.... have to absolute position?
-add instructions (landing page section?)
 add 10 more local challenge questions
 landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
-bug check mark can go off screen or has unexpected gaps from top of question text.... character limits partially solves, investigate.....
 
 
 next next steps:
@@ -27,6 +25,7 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 maybe fix or add later?
 
 make look OK on mobile
+add instructions (landing page section?)
 bug: handle submit button with no answer selection (or punish for not bothering to select anything?)
 abcd keypress events to make my life easier [doesnt impact mobile....]
 improve ‘Singapore’ scrolling name change: some flip/fade animation

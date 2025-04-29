@@ -533,6 +533,19 @@ const touristQs = [
             "fruit",
         ]
     },                     
+    {  
+        id: 41,
+        text: "Which theme park in Singapore was built by the Tiger Balm tycoon whose main attraction is the 10 Courts of Hell of Chinese Buddhism.",
+        a: "Haw Par Villa",
+        b: "Resorts World Sentosa",
+        c: "Tiger Balm Village",
+        d: "Ne Zha Villa",
+        answer: "a",
+        labels: [
+            "tourist",
+            "fruit",
+        ]
+    },        
 
 
 ]

@@ -680,7 +680,7 @@ function reLaunchSameChallenge(){
 }
 
 function removeStaleThings(){
-    // mostly for end screens and landing page features
+    // mostly for end screens and landing page features, hot streaks too
 
     endScreen.style.display = 'none'
     
@@ -695,6 +695,9 @@ function removeStaleThings(){
     landingWrapperEl.style.display = 'none'
 
     questionWrapperEl.style.display = 'flex'
+
+    document.querySelector('.junglefowl-zone').innerHTML = ''
+    document.querySelector('#hot-streak-notice').style.display = 'none'    
 }
 
 
@@ -752,9 +755,19 @@ console.log(imageNames)
 let SML = ['s', 'm', 'l']
 
 for (let imgName of imageNames){
+    // overview:
+    // create the image and set src based on imgName
+    // randomly assign a start position on screen
+    // randomly assign a s-m-l class for size variety
     let imgEl = document.createElement('img')
     imgEl.classList.add('landing-image')
     imgEl.src = 'images/' + imgName
+
+    // first attempt at random start positions + abs positioned top/left/right etc
+    let imgStartLeft = Math.random() * window.innerWidth
+    let imgStartTop = Math.random() * window.innerHeight
+    imgEl.style.left = imgStartLeft + 'px'
+    imgEl.style.top = imgStartTop + 'px'
 
     // randomly assign s - m - l class
     let randomIdx = Math.floor(Math.random() * 3)
@@ -809,12 +822,46 @@ function testHotStreak(){
 }
 
 
-// *** todo - anti cheating ***
+// *** anti cheating ***
 
 // https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
 // should only run after a quiz has started....  if (unaskedQs.length)..... or if (challengeName !== null)
 // severely interrupts development lol.... add flag... relaxRules
+// ok cheating notice gets cleared out with bodyEl.innerHTML = '', need to make the notice with then JS
+// todo - should somehow delete the JS too so cant scrape questions???
 
+
+cheatingNoticeEl = document.querySelector('#cheating-notice')
+let enforceCheatingRules = true
+
+let caughtCheatingMessage = "We beleive you have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
+We hope you were not trying to cheat, but if you were, please know that this is not a good habit and it will catch up to you later \
+in life, perhaps sooner than later. We believe in the importance of second chances, but in this case your IP address has been forwarded to the \
+International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and further action."
+
+// https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      if (unaskedQs.length && enforceCheatingRules){
+        bodyEl.innerHTML = '' /* lol why no .*/
+        let h1El = document.createElement('h1')
+        h1El.textContent = caughtCheatingMessage
+        bodyEl.append(h1El)
+
+        stopTimer() // or panic mode comes along
+      }
+    }
+  })
+  window.addEventListener("blur", () => {
+    if (unaskedQs.length && enforceCheatingRules){
+       bodyEl.innerHTML = ''
+       let h1El = document.createElement('h1')
+       h1El.textContent = caughtCheatingMessage
+       bodyEl.append(h1El)
+
+       stopTimer()
+      }
+  })
 
 
 // *** graveyard: may revise from dead ***

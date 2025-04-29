@@ -111,6 +111,20 @@ const localQs = [
             "people"
         ]
     },     
+    {
+        id: 10,
+        text: "This esteemed resident of Singapore was born in Singapore in 1990 where he lived his life out to old age, the first of his type to be born in the tropics. What is his name?",
+        a: "Knut",
+        b: "Flocke",
+        c: "Inuka",
+        d: "Tan",
+        answer: 'c',
+        labels: [
+            'animals', 'locals'
+        ],
+        type: 'image-based',
+        imageName: 'landing5.jpg',
+    },       
 ]
 
 
