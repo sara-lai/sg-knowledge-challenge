@@ -230,7 +230,7 @@ circle {
 #right-wrong-marker {
     display: none;
     position: absolute; /* dont want it to move other element around */
-    top: -33%; /* always appear above the question text */
+    top: -120px; /* note: dont use percentage or will go off screen with 'tall' question texts */
     right: 45%;
 }
 
@@ -477,7 +477,7 @@ circle {
     background: white;
     animation: 
         imageBobble 2.5s ease-in-out infinite alternate,
-        imageDrift 2.5s ease-in-out infinite;
+        imageDrift 5s ease-in-out infinite;
 
 }
 .landing-image-s {
@@ -507,8 +507,11 @@ circle {
     0% { 
         transform: translate(0, 0);
     }
+    50% {
+        transform: translate(200px,-100px)
+    }
     100% { 
-        transform: translate(-100px,-100px); /* make this random! */
+        transform: translate(-200px,-100px); /* make this random! */
     }
 }
 

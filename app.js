@@ -1,5 +1,5 @@
 // *** sections overview *** 
-// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - landing - tests - graveyard
+// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - landing - tests - anti cheating - graveyard
 
 // *** state ***
 
@@ -212,7 +212,7 @@ function handleSurprises(){
         // // pick randomly from array of surprises - control by number of items
         let surprises = [ 
             'durian', 'durian', 'durian', 'durian', 'durian', 'durian', 'durian',
-            'chillicrab', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'scam'
+            'chillicrab', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'heart', 'scam', 'scam'
         ] 
         //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
@@ -255,8 +255,8 @@ function handleSurprises(){
 // *** item redeeming ***
 
 function redeemDurian(){
-    // will need to register events when durianEl created... or not??
     timerTime += 20 
+    endPanic() // otherwise stuck in panic mode despite more time
     durians -= 1
     renderStatusBar()
     console.log('redeemed durian')
@@ -349,7 +349,7 @@ function beginPanic(){
     questionBoxEl.classList.remove('return-from-fade')
     questionBoxEl.classList.add('panic-fade')
     timerCircleEl.classList.toggle('panic-red-svg')
-    questionWrapperEl.classList.add('frantic-bounce')
+    questionBoxEl.classList.add('frantic-bounce') // note: if on questionWrapper get unexpected problems (stops events in status bar)
 }
 
 function endPanic(){
@@ -357,7 +357,7 @@ function endPanic(){
     questionBoxEl.classList.add('return-from-fade') // for css transition reasons (opacity:1 immediate)
     bodyEl.classList.remove('panic-red')
     timerCircleEl.classList.remove('panic-red-svg')
-    questionWrapperEl.classList.remove('frantic-bounce')
+    questionBoxEl.classList.remove('frantic-bounce')
 }
 
 
@@ -807,6 +807,14 @@ function testHotStreak(){
     userAnswer = currQ.answer
     handleAnswerSubmission()
 }
+
+
+// *** todo - anti cheating ***
+
+// https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
+// should only run after a quiz has started....  if (unaskedQs.length)..... or if (challengeName !== null)
+// severely interrupts development lol.... add flag... relaxRules
+
 
 
 // *** graveyard: may revise from dead ***

@@ -276,7 +276,7 @@ const touristQs = [
         b: "Mount Emily",
         c: "Bukit Timah Hill",
         d: "Joo Chiat Peak ('The Crag')",
-        answer: "c",
+        answer: "c",    
         labels: [
             "tourist",
             "travel",
@@ -303,7 +303,7 @@ const touristQs = [
         a: "A frothy black tea poured between containers at height",
         b: "A spiced tea with cardamom, shaken vigorously with milk, imitating Indian chai",
         c: "A sweet green tea with tapioca pearls that are lightly seared with a torch by the vendor",
-        d: "Anoter name for cheese tea",
+        d: "Another name for cheese tea",
         answer: "a",
         labels: [
             "tourist",
