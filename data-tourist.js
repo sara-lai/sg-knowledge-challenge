@@ -117,7 +117,7 @@ const touristQs = [
     },    
     {
         id: 10,
-        text: "What is the name of the vibrant street in Kampong Glam, famous for its Middle Eastern cafes and textile shops?",
+        text: "What is the name of the vibrant street in Kampong Glam, famous for its Middle Eastern cafes and textile boutiques?",
         a: "Haji Lane",
         b: "Bugis Street",
         c: "Orchard Road",
@@ -134,7 +134,7 @@ const touristQs = [
         text: "Which annual event transforms Singapore’s skyline with a dazzling display of fireworks and performances over Marina Bay?",
         a: "Singapore Grand Prix",
         b: "National Day Parade",
-        c: "4th of July",
+        c: "The 4th of July",
         d: "Deepavali Festival",
         answer: "b",
         labels: [
@@ -147,9 +147,9 @@ const touristQs = [
         id: 12,
         text: "What key role did Sir Stamford Raffles play in Singapore’s history, leading to its establishment as a British trading port in 1819?",
         a: "He was the first governor of Singapore",
-        b: "He signed a treaty with the local rulers to establish a trading post",
-        c: "He designed the city’s first urban plan, overseeing initial construction",
-        d: "He discovered the island while sailing",
+        b: "He signed a treaty with local rulers to establish a trading post",
+        c: "He designed the city’s first urban plan, personally desinging Raffles Hotel",
+        d: "He encountered the island while sailing, initially believing it to be Sri Lanka",
         answer: "b",
         labels: [
             "tourist",
@@ -160,9 +160,9 @@ const touristQs = [
     {
         id: 13,
         text: "In Singlish, Singapore’s unique colloquial English, what is the primary function of the particle 'lah' when added to the end of a sentence?",
-        a: "It indicates a question",
-        b: "It signals disagreement",
-        c: "It marks formal speech",
+        a: "It signals the subjunctive mood",
+        b: "It is used for disagreement",
+        c: "It marks formal speech, such as speaking to an elder",
         d: "It softens the tone or adds emphasis",        
         answer: "d",
         labels: [
@@ -173,11 +173,11 @@ const touristQs = [
     },    
     {
         id: 14,
-        text: "In Singapore, the Malay word 'hantu' is commonly used in local folklore to refer to what supernatural entity?",
-        a: "A guardian spirit",
+        text: "In Singapore, the Malay word 'hantu' is commonly used in local folklore to refer to what?",
+        a: "A guardian spirit or protective deity",
         b: "A ghost or malevolent spirit",
-        c: "A haunted dwelling",
-        d: "A protective deity",
+        c: "A haunted dwelling or space",
+        d: "A relic, sometimes cursed, that can affects the bearer's fortune",
         answer: "b",
         labels: [
             "tourist",
@@ -219,7 +219,7 @@ const touristQs = [
         a: "The world's largest reclaimed land foundation",
         b: "The world’s longest public cantilever",
         c: "The world’s largest gathering of people dressed as ghosts",
-        d: "The world’s longest elevated, outdoor pool",        
+        d: "The world’s longest elevated swimming pool",        
         answer: "a",
         labels: [
             "tourist",
@@ -229,7 +229,7 @@ const touristQs = [
     },
     {
         id: 18,
-        text: "With large scale dredging, seawalls and sand, Singapore is known for reclaiming land from the sea, which rests beneath iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
+        text: "With large scale dredging, seawalls and sand, Singapore is known for reclaiming land from the sea, forming foundations for iconic landmarks like Marina Bay Sands. Approximately how much land has Singapore reclaimed in total?",
         a: "30 km<sup>2</sup>",
         b: "130 km<sup>2</sup>",
         c: "330 km<sup>2</sup>",
@@ -285,7 +285,7 @@ const touristQs = [
     },
     {
         id: 22,
-        text: "When the Philippines’ Mount Pinatubo erupted in 1991, a layer of ash covered ground and cars across Singapore. Approximately how far away is the nearest known active volcano from Singapore?",
+        text: "When Mount Pinatubo erupted in 1991, a layer of ash covered ground and cars across Singapore. Approximately how far away is the nearest known active volcano from Singapore?",
         a: "30 km",
         b: "130 km",
         c: "430 km",
@@ -340,10 +340,10 @@ const touristQs = [
     {
         id: 26,
         text: "A certificate of entitlement (COE) is required to own a vehicle in Singapore, valid for 10 years upon purchase. What is the approximate cost of a COE for a small car?",
-        a: "$2,500 SGD ($2,000 USD)",
-        b: "$5,000 SGD ($4,000 USD",
-        c: "$25,000 SGD ($19,000 USD)",
-        d: "$100,000 SGD ($75,000 USD)",
+        a: "S$2,500 ($2,000 USD)",
+        b: "S$5,000 ($4,000 USD",
+        c: "S$25,000 ($19,000 USD)",
+        d: "S$100,000 ($75,000 USD)",
         answer: "d",
         labels: [
             "tourist",
@@ -378,11 +378,11 @@ const touristQs = [
     },   
     {
         id: 29,
-        text: "The Tuas Mega Port, under construction, is set to be world's largest container port with a capacity of 65 million TEU. Until it opens, how does Singapore currently rank globally in container port size?",
+        text: "The Tuas Mega Port, under construction, is set to be world's largest container port with a capacity of 65 million TEU. But until it opens, how does Singapore currently rank globally in container port size?",
         a: "10th largest",
         b: "5th largest",
         c: "2nd largest",
-        d: "the largest port in the world",
+        d: "the largest container port in the world",
         answer: "c",
         labels: [
             "tourist",
@@ -401,6 +401,7 @@ const touristQs = [
         labels: [
             "tourist",
             "changi",
+            "engineering"
         ]
     },  
     {
@@ -415,13 +416,137 @@ const touristQs = [
             "tourist",
             "culture",
         ]
-    },      
-
-
-
-    
-    
-
+    },   
+    {
+        id: 32,
+        text: "HDB flats are at the heart of Singapore's vibrant neighborhoods. What is an HDB void deck?",
+        a: "A mid-building garden that embodies 'The Garden City'",
+        b: "An engineered section, as used on many of Singapore's buildings, that relfects solar radiation to keep residents cooler",
+        c: "A groundfloor communal area, ocassionally used for weddings and funerals",
+        d: "A free parking zone for residents, typically an underground parking garage",
+        answer: "c",
+        labels: [
+            "tourist",
+            "community",
+        ]
+    }, 
+    {  
+        id: 33,
+        text: "Singapore's approach to water security and environmental management has served as a model for other nations. Which of the following is not part of Singapore's water management ecosystem?",
+        a: "5 state-of-the-art water desalination plants",
+        b: "5 state-of-the-art wastewater recycling plants",
+        c: "5 state-of-the-art humidity-condensation plants",
+        d: "Channeling rainnwater from around 500 km<sup>2</sup> of land",
+        answer: "c",
+        labels: [
+            "tourist",
+            "community",
+        ]
+    },
+    {  
+        id: 34,
+        text: "Singapore's approach to water management ensures a resilient supply and has served as a model for other nations. Which of the following is not part of its strategy?",
+        a: "5 state-of-the-art water desalination plants",
+        b: "5 state-of-the-art wastewater recycling plants",
+        c: "5 state-of-the-art humidity-condensation plants",
+        d: "500 km<sup>2</sup> approximately of rainwater catchment",
+        answer: "c",
+        labels: [
+            "tourist",
+            "environment",
+        ]
+    },                    
+    {  
+        id: 35,
+        text: "Interestingly, Singapore has a number of unique and extreme slides. Which of the following slides does not actually exist?",
+        a: "A slide that takes passengers from the transit area down to their gate at Changi Airport",
+        b: "East Coast Park's 16 meter tall slide that overlooks mega vessels in the Singapore strait",
+        c: "Famed nightclub Marquee's 3 story slide down to the dance floor",
+        d: "Universal Studio's multi-part Sesame Street-themed slide that combines spaghetti with space travel",
+        answer: "d",
+        labels: [
+            "tourist",
+            "quirky",
+        ]
+    }, 
+    {  
+        id: 36,
+        text: "Which serene neighborhood known for its eateries was originally a nutmeg plantation until it was destroyed by a beetle blight in 1857?",
+        a: "Dempsey Hill",
+        b: "Tiong Bahru",
+        c: "Sentosa Cove",
+        d: "Marine Parade",
+        answer: "a",
+        labels: [
+            "tourist",
+            "neighborhoods",
+        ]
+    },   
+    {  
+        id: 37,
+        text: "Also called Straits Chinese or Baba Nyonya, these settlers came 300-500 years ago to Singapore, creating a unique hybrid culture blending Chinese, Malay, and Western influence, with cultural hubs today in East Coast. What are they called?",
+        a: "Hokkiens",
+        b: "Peranakans",
+        c: "Nanyangs",
+        d: "Laksans",
+        answer: "b",
+        labels: [
+            "tourist",
+            "culture",
+        ]
+    },  
+    {  
+        id: 38,
+        text: "Singapore's national flower, Vanda 'Miss Joaquim', was bred by decorated horticulturist and Singaporean-Armenian Agnes Joaquim in the 19th century. What type of flower is it?",
+        a: "Orchid",
+        b: "Lily",
+        c: "Chrysanthemum",
+        d: "Brassica",
+        answer: "a",
+        labels: [
+            "tourist",
+            "botany",
+        ]
+    }, 
+    {  
+        id: 39,
+        text: "Singpore's official relationship wtih chewing gum began in 1992 after acts of gum-based vandalism caused train delays with jammed door sensors. What is NOT true about Singapore's chewing gum regulations?",
+        a: "Some categories of gum can be bought and sold in Singapore (e.g. nicotine gum)",
+        b: "Gum brought into the country for personal use is perfectly OK",
+        c: "Lobbying by Wringley led to a partial lifting of the original gum ban (via the 2004 U.S.-Singapore Free Trade Agreement)",
+        d: "Gums are saleable in Singapore if they can be broken down and swallowed within 20 chews (the '20 Chew Rule')",
+        answer: "d",
+        labels: [
+            "tourist",
+            "legal",
+        ]
+    },  
+    {  
+        id: 40,
+        text: "While not as recognized as durian, the national fruit, rambuten is a widely popular fruit in Singapore as well. 'Rambut' is a Malay word that means what?",
+        a: "sweet",
+        b: "sour",
+        c: "citrusy",
+        d: "hair",
+        answer: "d",
+        labels: [
+            "tourist",
+            "fruit",
+        ]
+    },   
+    {  
+        id: 41,
+        text: "Tea has a rich history in Singapore, from Sir Raffles under the East India Company, to both Indian and Chinese settlers bringing their own tea cultures, to modern Taiwanese boba and cheese teas. What is 'teh tarik'?",
+        a: "A frothy black tea poured between containers at height",
+        b: "A spiced tea with cardamom, shaken vigorously with milk, imitating Indian chai",
+        c: "A sweet green tea with tapioca pearls that are lightly seared with a torch by the vendor",
+        d: "Anoter name for cheese tea",
+        answer: "a",
+        labels: [
+            "tourist",
+            "tea",
+        ]
+    },                    
 
 
 ]

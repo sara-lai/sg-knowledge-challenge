@@ -1,11 +1,7 @@
 next steps:
+bug where check mark goes partially off screen if text box is too big.... hmm
 improve the landing image circles… make them bounce..... randomly cycle new ones in out? 
-challengeName display stuff: update win/lose pages; link to locals challenge from tourist win page; update go home button to landing page
-win page: share how many got wrong
-lose page: share score 
 improve ‘Singapore’ scrolling name change: some flip/fade animation
-Scrolling clouds (or not?)
-improve junglefowl: stagger animations or change angles, not all coordinated
 add instructions (landing page section?)
 acknowledge item redemption (some flash notice?)
 some css animations for: when select quiz/start quiz
@@ -15,10 +11,12 @@ bug: handle submit button with no answer selection
 anti cheating event listeners
 make look OK on mobile
 maybe the empty heart container along with full ones
+landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
+improve junglefowl animations if time
 
 next next steps:
 fun hantu mode
-somehow track high scores for when inevitbly lose locals challenge?
+somehow track/save high scores for when inevitbly lose locals challenge, so can keep trying to beat high scores.... 
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
 demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
 panic mode heart beat sounds (maybe not)

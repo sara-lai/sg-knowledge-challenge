@@ -404,20 +404,21 @@ function hideNoticeRightWrong(){
 }
 
 function renderWonLost(){
-    // using win/lose screen from html
-    // ok new things: 
-    // on win screen -> display "your longest streak longestStreak", "number wrong: wrongAnswers.length"
-    // on lose screen -> also longest streak, and high score (score) 
-    // maybe some subtle editorial eg "Congrats you won.... but you still missed 6 questions.... that's OK, at least you completed it."
-    // Or subtle scolding on lost page: "hmm you only got 5 questions right, that's really not so good. It's OK.... ."
-    // use .stats-box to optionally append 1) longestStreak 2) wrongAnswers.length 3) score.... add #stat1 and stat2# to page to update
-
+    // todo - the version for locals challenge.... if (challengeName====....) branches
+    
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'
-        endScreenBlurb.innerHTML = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
+        let wonBlurbTxt = ''
+        if (challengeName === 'tourist'){
+            wonBlurbTxt = "Excellent! You are a perceptive and knowledgeable tourist of Singapore, \
             we salute you. Was that easy? Feel like you have local-level knowledge? Try <b id='locals-challenge-go'>The True Locals Challenge</b>  \
             to further test your knowledge and for the chance to win prizes!"
+        } else {
+            wonBlurbTxt = "This is actually incredible that you've won! We will give you a prize! Email us! blah@blahblha.com"
+        }
+        endScreenBlurb.innerHTML = wonBlurbTxt
         endScreenFlair.classList.add('win-screen-img')
+        endScreenFlair2.classList.add('win-screen-img2') // two fireworks on win page
         endScreenBtn.textContent = 'again!'
 
         stat1.innerHTML = `<div><b>Longest Streak: </b>${longestStreak}</div>`
@@ -430,26 +431,31 @@ function renderWonLost(){
         // if complete tourist, recommend local
         if (challengeName === 'tourist'){
             document.querySelector('#locals-challenge-go').addEventListener('click', () => {
-                challengeName = 'local'
+                challengeName = 'locals'
                 initChallenge()
             })
         }   
         
-        // i want to duplicate the fireworks img, put in upper right - add endScreenFlair2 to page
-        // todo - make fireworks bobble! or rotate
-        endScreenFlair2.classList.add('win-screen-img2')
-
         endScreenFlair.style.display = 'block'
         endScreenFlair2.style.display = 'block'
-
     }
     if (userLost){
-        endScreenHeadline.innerHTML = 'You failed <b>The Tourist Challenge</b>'
-        endScreenBlurb.innerHTML = "We encourage you to pay more attention on your next trip to Singapore, \
+        endScreenHeadline.innerHTML = `You failed <b>The ${challengeName} Challenge</b>`
+        let endScreenBlurbTxt = ''
+        let endScreenBtnTxt = ''
+        if (challengeName === 'tourist'){
+            endScreenBlurbTxt =  "We encourage you to pay more attention on your next trip to Singapore, \
             or perhaps study some basic  material about Singapore. Don’t be discouraged! Try again when you are \
             better prepared!"
-        endScreenFlair.classList.add('lose-screen-img')  
-        endScreenBtn.textContent = 'redeem yourself'
+            endScreenBtnTxt = 'redeem yourself'
+        } else {
+            endScreenBlurbTxt = "This is a hard challenge! Don't be discouraged! Try again?"
+            endScreenBtnTxt = 'again!'
+        }
+        endScreenBlurb.innerHTML = endScreenBlurbTxt
+        endScreenFlair.classList.add('lose-screen-img')
+        
+        endScreenBtn.textContent = endScreenBtnTxt
 
         endScreenFlair.style.display = 'block' // hidden by default
 
@@ -458,26 +464,19 @@ function renderWonLost(){
 
         if (score < 5){
             extraCommentary.textContent = "Ah, wow. Actually I see that's not a very high score. Not sure what to say."
-        }        
-      
-
+        }
     }  
     
     endScreen.style.display = 'flex'
     questionWrapperEl.style.display = 'none' // can show again if re-launch challenge
-
-    // todo improve the UI: 
-    // clear status bar, put the end screen flair in the 4 corners, 
     statusBarEl.style.display = 'none'
 
-
-    renderStatusBar() // mainly to remove final heart
     renderHotStreak() // to remove animations if present
 }
 
 function renderSurprises(){
 
-    dismissableImg.classList = [] // or item classes will accumulate
+    dismissableImg.classList = [] // or item classes will accumulate & conflict
 
     if (gotDurian){
         dismissableHeadline.textContent = "Congratulations! You unlocked a Durian!"
@@ -502,8 +501,6 @@ function renderSurprises(){
 
     dismissableNotice.style.display = 'flex'
     questionWrapperEl.style.display = 'none'
-
-    // move dismmissal outside render() or else will re-register/execute many times!
 }
 
 dismissableBtn.addEventListener('click', () => {
@@ -519,7 +516,7 @@ function renderStatusBar(){
     // render style per tic-tac-toe lab -> only re-render based on state
     if (challengeName === 'tourist'){
         quizNameEl.textContent = 'The Tourist Challenge'
-    } else if (challengeName === 'local'){
+    } else if (challengeName === 'locals'){
         quizNameEl.textContent = 'The Locals Challenge'
     }
     
@@ -546,24 +543,19 @@ function renderStatusBar(){
 
 function renderHotStreak(){
     if (streak >= 5){
-        // plan, have junglefowl enter the screen
-        // perhaps multiply the junglefowl as streak continues
-        // scam steals junglefowl too?
-        // make them clickable and they move around like chickens?
-        // flash a notice when starts... "well done! you're on a hot streak"
-        let numFowl = streak - 4 // hot streak starts at 5
-        let jF = document.createElement('div')
-        jF.classList.add('jf', 'jf-right')
+        // adds 1 random junglefowl each correct answer while on streak
+        // todo - delay the animation so not all same? -> .style.animationDelay       
+        // todo - one crazy one that rotates (unlocked with 20 in a row?)      
+        // todo - increase to stread > 10 for live game
+        let jungleFowl = document.createElement('div')
+        jungleFowl.classList.add('jf')
 
-        let jF2 = document.createElement('div')
-        jF2.classList.add('jf', 'jf-left')  
+        let jFTypes = ['jf2-right', 'jf2-left', 'jf1-right', 'jf1-left']
+        let randomIdx = Math.floor(Math.random() * 4)
+        let randomjF = jFTypes[randomIdx]
+        jungleFowl.classList.add(randomjF)
 
-        // todo - delay the animation so not all same -> .style.animationDelay        
-        // todo - more jf variety, and randomly choose for array to add one, randomy assign L or R
-        // todo - one crazy one that rotates
-
-        document.querySelector('.junglefowl-zone').append(jF)
-        document.querySelector('.junglefowl-zone').append(jF2)
+        document.querySelector('.junglefowl-zone').append(jungleFowl)
 
         document.querySelector('#hot-streak-notice').style.display = 'block'
     } else if (streak === 0 || userWon) { // i.e. they missed the last questions ... or remove animations if win
@@ -571,8 +563,6 @@ function renderHotStreak(){
 
         document.querySelector('#hot-streak-notice').style.display = 'none'
     }
-
-    
 }
 
 function renderQuestion(){
@@ -584,7 +574,7 @@ function renderQuestion(){
     answerCEl.innerHTML = currQ.c
     answerDEl.innerHTML = currQ.d
 
-    // test new quesiton type! 
+    // test image-quesiton type! 
     if (currQ.type === 'image-based'){
         imageQuestionEl.src = 'images/' + currQ.imageName
         otherQuestionTypesEl.style.display = 'block'
@@ -672,7 +662,7 @@ function produceQuestionSet(){
     if (challengeName === 'tourist'){
         mainQs = touristQs
         console.log('set mainQs as tourist set')
-    } else if (challengeName === 'local'){
+    } else if (challengeName === 'locals'){
         mainQs = localQs
         console.log('set mainQs as locals set')        
     }
