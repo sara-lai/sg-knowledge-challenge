@@ -475,7 +475,10 @@ circle {
     object-fit: contain;
     z-index: -1;
     background: white;
-    animation: chickenBobble 2.5s ease-in-out infinite alternate;
+    animation: 
+        imageBobble 2.5s ease-in-out infinite alternate,
+        imageDrift 2.5s ease-in-out infinite;
+
 }
 .landing-image-s {
     height: 80px;
@@ -492,12 +495,20 @@ circle {
 
 /* image bobbing! reuise chickenBobble? */
 
-@keyframes chickenBobble {
+@keyframes imageBobble {
     0% { 
         transform: translateY(0) rotate(-5deg);
     }
     100% { 
         transform: translateY(-5px) rotate(5deg); 
+    }
+}
+@keyframes imageDrift {
+    0% { 
+        transform: translate(0, 0);
+    }
+    100% { 
+        transform: translate(-100px,-100px); /* make this random! */
     }
 }
 
@@ -550,7 +561,7 @@ circle {
 .jf1-right {
     background-image: url('images/jf1-right.png');
     animation:
-        moveAcrossRight 10s linear infinite,
+        moveAcrossRight 20s linear infinite,
         chickenBobble 0.5s ease-in-out infinite alternate;
 }
 .jf2-right {
@@ -558,13 +569,13 @@ circle {
     width: 120px;
     background-image: url('images/jf2-right.png');
     animation:
-        moveAcrossRight 10s linear infinite,
+        moveAcrossRight 20s linear infinite,
         chickenBobble 0.5s ease-in-out infinite alternate;
 }
 .jf1-left {
     background-image: url('images/jf1-left.png');
     animation:
-        moveAcrossLeft 10s linear infinite,
+        moveAcrossLeft 20s linear infinite,
         chickenBobble 0.5s ease-in-out infinite alternate;    
 }
 .jf2-left {
@@ -572,7 +583,7 @@ circle {
     width: 120px;    
     background-image: url('images/jf2-left.png');
     animation:
-        moveAcrossLeft 10s linear infinite,
+        moveAcrossLeft 20s linear infinite,
         chickenBobble 0.5s ease-in-out infinite alternate;      
 }
   
@@ -588,6 +599,7 @@ circle {
     color: red;
     opacity: .5;
     letter-spacing: 1px;
+    margin-left: 20px;
     /* font-style: italic; */
 }
 

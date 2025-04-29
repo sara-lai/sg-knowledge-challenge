@@ -296,21 +296,20 @@ const touristQs = [
             "travel",
             "culture"
         ]
-    },
-    {
+    }, 
+    {  
         id: 23,
-        text: "Lee Kuan Yew, Singapore’s founding father, was called what nickname by his family and close friends?",
-        a: "Richard",
-        b: "Harry",
-        c: "Oliver",
-        d: "Charlie",
-        answer: "b",
+        text: "Tea has a rich history in Singapore, from Sir Raffles working under EIC tea traders, to Indian and Chinese settlers bringing their respective tea cultures, to later Taiwanese boba and cheese teas. What is Teh Tarik?",
+        a: "A frothy black tea poured between containers at height",
+        b: "A spiced tea with cardamom, shaken vigorously with milk, imitating Indian chai",
+        c: "A sweet green tea with tapioca pearls that are lightly seared with a torch by the vendor",
+        d: "Anoter name for cheese tea",
+        answer: "a",
         labels: [
             "tourist",
-            "history",
-            "people"
+            "tea",
         ]
-    },  
+    },      
     {
         id: 24,
         text: "The Woodlands and Tuas checkpoints, the so called first and second 'links', connect Malysia and Singapore by land. Approximately how many people make the crossing every day?",
@@ -533,20 +532,7 @@ const touristQs = [
             "tourist",
             "fruit",
         ]
-    },   
-    {  
-        id: 41,
-        text: "Tea has a rich history in Singapore, from Sir Raffles under the East India Company, to both Indian and Chinese settlers bringing their own tea cultures, to modern Taiwanese boba and cheese teas. What is 'teh tarik'?",
-        a: "A frothy black tea poured between containers at height",
-        b: "A spiced tea with cardamom, shaken vigorously with milk, imitating Indian chai",
-        c: "A sweet green tea with tapioca pearls that are lightly seared with a torch by the vendor",
-        d: "Anoter name for cheese tea",
-        answer: "a",
-        labels: [
-            "tourist",
-            "tea",
-        ]
-    },                    
+    },                     
 
 
 ]

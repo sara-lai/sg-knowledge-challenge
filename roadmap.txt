@@ -1,18 +1,11 @@
 next steps:
-bug where check mark goes partially off screen if text box is too big.... hmm
-improve the landing image circles… make them bounce..... randomly cycle new ones in out? 
-improve ‘Singapore’ scrolling name change: some flip/fade animation
+bug: durian not clicakble in panic mode??
+test out anti cheating event listeners
+landing image circles: improve drift animation.... make them bounced around.... will have to use JS and css variables.... 
 add instructions (landing page section?)
-acknowledge item redemption (some flash notice?)
-some css animations for: when select quiz/start quiz
-add a bunch of local challenge questions
-abcd keypress events to make my life easier
-bug: handle submit button with no answer selection
-anti cheating event listeners
-make look OK on mobile
-maybe the empty heart container along with full ones
+add 10 more local challenge questions
 landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
-improve junglefowl animations if time
+
 
 next next steps:
 fun hantu mode
@@ -28,3 +21,14 @@ try again with JSON....
 use classes for quiz and question, construct Quiz/Question with JSON data
 recycle missed questions mode (maybe, eg cant finish quiz until all questions correct)
 turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with generic constants
+
+
+maybe fix or add later?
+bug where check mark goes partially off screen if question text is too tall.... hmm --> just have character limits on question text
+make look OK on mobile
+bug: handle submit button with no answer selection (or punish for not bothering to select anything?)
+abcd keypress events to make my life easier [doesnt impact mobile....]
+improve ‘Singapore’ scrolling name change: some flip/fade animation
+maybe use empty heart container along with full ones
+acknowledge item redemption (some flash notice?)
+some css animation/transition for select quiz/start quiz

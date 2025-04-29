@@ -97,7 +97,22 @@ const localQs = [
             'heat', 'locals'
         ],
     },                                            
+    {
+        id: 9,
+        text: "Lee Kuan Yew was called what nickname by his family and close friends?",
+        a: "Richard",
+        b: "Harry",
+        c: "Oliver",
+        d: "Charlie",
+        answer: "b",
+        labels: [
+            "tourist",
+            "history",
+            "people"
+        ]
+    },     
 ]
+
 
 
 
