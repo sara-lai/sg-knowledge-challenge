@@ -103,7 +103,7 @@ const touristQs = [
     },
     {
         id: 9,
-        text: "Which historic fort, built in the 19th century, now hosts concerts and events on its scenic hilltop?",
+        text: "Which 19th century fort now hosts concerts and events on its scenic hilltop, including Shakespeare in the Park?",
         a: "Fort Siloso",
         d: "Fort Canning",
         c: "Fort Pasir Panjang",
@@ -483,10 +483,10 @@ const touristQs = [
     }, 
     {  
         id: 37,
-        text: "Singpore's official relationship wtih chewing gum began in 1992 after acts of gum-based vandalism caused train delays with jammed door sensors. What is NOT true about Singapore's chewing gum regulations?",
+        text: "Singpore's stance on chewing gum began in 1992 after train delays were caused when door sensors were jammed with gum. What is NOT true about Singapore's chewing gum regulations?",
         a: "Some categories of gum can be bought and sold in Singapore (e.g. nicotine gum)",
         b: "Gum brought into the country for personal use is perfectly OK",
-        c: "Lobbying by Wringley led to a partial lifting of the original gum ban (via the 2004 U.S.-Singapore Free Trade Agreement)",
+        c: "Lobbying by Wringley led to a partial lifting of the ban via the 2004 U.S.-Singapore Free Trade Agreement",
         d: "Gums are saleable in Singapore if they can be broken down and swallowed within 20 chews (the '20 Chew Rule')",
         answer: "d",
         labels: [
@@ -496,7 +496,7 @@ const touristQs = [
     },  
     {  
         id: 38,
-        text: "While not as celebrated as durian, the national fruit and 'King of Fruits', rambuten is a widely popular fruit in Singapore as well. 'Rambut' is a Malay word that means what?",
+        text: "While not as celebrated as Durian, the national fruit and 'King of Fruits', rambuten is a widely popular fruit in Singapore as well. 'Rambut' is a Malay word that means what?",
         a: "sweet",
         b: "sour",
         c: "citrusy",
@@ -517,9 +517,22 @@ const touristQs = [
         answer: "c",
         labels: [
             "tourist",
-            "fruit",
+            "attractions",
         ]
-    },           
+    },  
+    {  
+        id: 40,
+        text: "The iconic Supertrees found at Gardens by the Bay, between 25 and 50 metres in height, were largely inspired by what, according to the creators?",
+        a: "Avenue of the Baobabs in Madagascar",
+        b: "Valley of the Cypress in South Tibet",
+        c: "The Redwood trees of California",        
+        d: "The Karri trees of southwestern Australia",
+        answer: "d",
+        labels: [
+            "tourist",
+            "attractions",
+        ]
+    },               
 
 
 ]

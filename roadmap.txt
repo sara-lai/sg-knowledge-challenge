@@ -1,4 +1,5 @@
 next steps:
+probably need lower resolution/smaller versions of landing page imgs for better performane 
 landing page improve: cerulean/sky blue backdrop/gradient too (remove quiz start).... scroll down to green land/singapore with info box above it (instructions, about this app, etc.)
 bug: if redeem multiple chillicrabs if just gives you the answer
 landing image circles: possible improve?

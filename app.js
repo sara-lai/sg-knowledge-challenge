@@ -201,6 +201,7 @@ function handleWonLost(){
         userLost = true
         return true
     }
+    return false
 }
 
 function handleSurprises(){
@@ -731,7 +732,7 @@ setInterval(() => {
 
 // will this have terrible performance?
 
-let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90] // can be png or jpg so use this to switch extension
+let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90, 101] // can be png or jpg so use this to switch extension
 let extension = null
 const SML = ['s', 'm', 'l']
 
@@ -741,7 +742,7 @@ const SML = ['s', 'm', 'l']
 // randomly assign a s-m-l class for size variety
 // randomly assign a start position on screen
 // randomly assign a trajectory to the css variables, and a random duration
-for (let i = 1; i <= 100; i++){
+for (let i = 1; i <= 101; i++){
     if (usePNG.includes(i)){
         extension = 'png'
     } else {
