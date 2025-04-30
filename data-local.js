@@ -255,7 +255,7 @@ const localQs = [
     },    
     {  
         id: 21,
-        text: "Annually Singapore sees over 2,400 mm of precipitation. Thus, Singaporeans know a lot about rain. Why does it rain (pick the most correct option)?",
+        text: "Annually Singapore sees over 2,400mm of precipitation... Singaporeans are highly knowledgeable about rain. Why does it rain (pick the most correct option)?",
         a: "High pressure systems, common in the tropics, pull out droplets from the ocean to form storm clouds",
         b: "Tiny particles like dust and pollen are sites for droplet formation, until they cause cloud breakup",
         c: "Warm air rises and condenses into clouds until the clouds get too heavy and it rains",
@@ -296,11 +296,11 @@ const localQs = [
     },  
     {  
         id: 24,
-        text: "Nick Leeson is a familiar name in Singapore, having been portrayed by Ewan McGregor in a popular film and having a swanky bar named for him (now closed). What is he known for?",
-        a: "He's a yatch racing world champion known for his legendary drinking ability",
-        b: "He heroicly flew a Singapore Airlines 747 to safety after total engine loss from a nearby volcanic eruption",
-        c: "He's the story of a struggling artist who rose to fame, eventually designing Marina Bay Sands",        
-        d: "He made a bunch of speculative trades that brought down the oldest bank in England",  
+        text: "Nick Leeson is a familiar name in Singapore, once portrayed by Ewan McGregor in a popular film, with a swanky bar in town named for him. Who is he?",
+        a: "He's a yatch racing world champion known for his legendary antics",
+        b: "He flew a Singapore Airlines 747 to safety after total engine failure due to a nearby volcanic eruption",
+        c: "He was a struggling artist who rose to fame, eventually designing Marina Bay Sands",        
+        d: "His speculative trades brought down the oldest bank in England",  
         answer: "d",
         labels: [
             "locals",
@@ -334,7 +334,20 @@ const localQs = [
         ],    
         type: 'image-based',
         imageName: 'landing21.jpg',            
-    },                                                                 
+    },   
+    {  
+        id: 27,
+        text: "Some Singaporeans hit the Johor e-gates to live at upscale, sprawling property developments that are sometimes 10x cheaper per square foot than Singapore. One such development cost $100 billion USD to develop but only houses 1% of the intended 700,000. What is it called?",
+        a: "Iskandar Puteri",
+        b: "Horizon Hills",
+        c: "Forest City",        
+        d: "Sunway",  
+        answer: "b",
+        labels: [
+            "locals",
+            "malaysia",
+        ],           
+    },                                                                     
 ]    
 
 

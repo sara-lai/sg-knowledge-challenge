@@ -1,4 +1,7 @@
 next steps:
+negative durians bug....
+add instructions to landing page
+audio: added heartbeak for panic mode, could add nosie for answers right, add noise for gaining items / sounds effects
 probably need lower resolution/smaller versions of landing page imgs for better performane 
 landing page improve: cerulean/sky blue backdrop/gradient too (remove quiz start).... scroll down to green land/singapore with info box above it (instructions, about this app, etc.)
 bug: if redeem multiple chillicrabs if just gives you the answer
@@ -20,6 +23,8 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 
 
 maybe fix or add later?
+only do scam event for locals quiz, not tourist....
+rare bug where panic mode doesnt get reset (when submit answer exact second panic mode begins?)
 some css animation/transition for select quiz/start quiz
 improve anti cheating event listeners (remove JS question data?)
 make look OK on mobile -  img circles perofrmance?

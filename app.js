@@ -29,6 +29,7 @@ let gotDurian = false
 let gotChilliCrab = false
 let gotScammed = false // can contain name of taken item
 let disableEnter = false
+let heartbeatAudio = new Audio('heartbeat.mp3') // per GA "Playing Audio in the Browser"
 
 // timer related
 let timerTime = 20
@@ -236,10 +237,13 @@ function handleSurprises(){
             hearts += 1
         }   
         if (theSurprise === 'scam'){
-            if (durians + chilliCrabs >= 2){ // only scam if durians + chilliCrabs >= 2
+            // overview: 
+            // take durians more frequently than chillicrabs (but take a chillicrab if no durians yet)
+            // dont take anything if not more than 2 items already
+            if (durians + chilliCrabs >= 2){ 
                 gotScammed = true 
-                randomInt = Math.floor(Math.random() * 3)  // take durians 3x more frequently than chillicrabs               
-                if (randomInt === 0 && chilliCrabs){
+                randomInt = Math.floor(Math.random() * 3)  // so can take durians twice as frequently
+                if (randomInt === 0 && chilliCrabs || !durians){ 
                     chilliCrabs -= 1  
                     gotScammed = 'chilliCrab'                  
                 } else {
@@ -353,6 +357,8 @@ function beginPanic(){
     questionBoxEl.classList.add('panic-fade')
     timerCircleEl.classList.toggle('panic-red-svg')
     questionBoxEl.classList.add('frantic-bounce') // note: if on questionWrapper get unexpected problems (stops events in status bar)
+
+    heartbeatAudio.play()
 }
 
 function endPanic(){
@@ -361,6 +367,9 @@ function endPanic(){
     bodyEl.classList.remove('panic-red')
     timerCircleEl.classList.remove('panic-red-svg')
     questionBoxEl.classList.remove('frantic-bounce')
+
+    heartbeatAudio.pause()
+    heartbeatAudio.currentTime = 0
 }
 
 
@@ -748,6 +757,7 @@ for (let i = 1; i <= 101; i++){
     } else {
         extension = 'jpg'
     }
+
     let imgName = `landing${i}.${extension}`
     let imgEl = document.createElement('img')
     imgEl.classList.add('landing-image')
@@ -832,7 +842,7 @@ function testHotStreak(){
 
 
 cheatingNoticeEl = document.querySelector('#cheating-notice')
-let enforceCheatingRules = true
+let enforceCheatingRules = false
 
 let caughtCheatingMessage = "We beleive you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
 We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \

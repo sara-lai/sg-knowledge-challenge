@@ -299,7 +299,7 @@ const touristQs = [
     }, 
     {  
         id: 23,
-        text: "Tea has a rich history in Singapore, from Sir Raffles working under EIC tea traders, to Indian and Chinese settlers bringing their respective tea cultures, to later Taiwanese boba and cheese teas. What is Teh Tarik?",
+        text: "Tea has a rich history in Singapore, from Sir Raffles under the EIC, to Indian and Chinese settlers bringing their respective tea cultures, to later Taiwanese boba and cheese teas. What is Teh Tarik?",
         a: "A frothy black tea poured between containers at height",
         b: "A spiced tea with cardamom, shaken vigorously with milk, imitating Indian chai",
         c: "A sweet green tea with tapioca pearls that are lightly seared with a torch by the vendor",
@@ -484,7 +484,7 @@ const touristQs = [
     {  
         id: 37,
         text: "Singpore's stance on chewing gum began in 1992 after train delays were caused when door sensors were jammed with gum. What is NOT true about Singapore's chewing gum regulations?",
-        a: "Some categories of gum can be bought and sold in Singapore (e.g. nicotine gum)",
+        a: "Some categories of gum can be bought and sold (e.g. nicotine gum)",
         b: "Gum brought into the country for personal use is perfectly OK",
         c: "Lobbying by Wringley led to a partial lifting of the ban via the 2004 U.S.-Singapore Free Trade Agreement",
         d: "Gums are saleable in Singapore if they can be broken down and swallowed within 20 chews (the '20 Chew Rule')",
