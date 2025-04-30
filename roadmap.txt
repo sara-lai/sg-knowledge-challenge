@@ -1,10 +1,10 @@
 next steps:
+add 10 more local challenge questions
 bug: if redeem multiple chillicrabs if just gives you the answer
 improve anti cheating event listeners (remove JS question data?)
-landing image circles: improve drift animation.... make them bounced around.... will have to use JS and css variables.... have to absolute position?
-add 10 more local challenge questions
+landing image circles: possible improve?
 landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
-
+^ color gradient?... #e2f4ff cerulean esque... [but hvae to remove when start quiz]
 
 next next steps:
 fun hantu mode
@@ -23,8 +23,9 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 
 
 maybe fix or add later?
-
-make look OK on mobile
+bad code: the "wrapper" eg landing-wrapper isn't a wrapper anymore.... causing layout issue like below bug
+bug: when refresh after starting a quiz, the landing info box jumps to top of screen... confusing
+make look OK on mobile - will img circles destroy perofrmance on mobile?
 add instructions (landing page section?)
 bug: handle submit button with no answer selection (or punish for not bothering to select anything?)
 abcd keypress events to make my life easier [doesnt impact mobile....]
@@ -33,3 +34,4 @@ maybe use empty heart container along with full ones
 acknowledge item redemption (some flash notice?)
 some css animation/transition for select quiz/start quiz
 double the panic mode refresh rate like the old timer
+maybe dont use ids in data, error prone.... create ids by looping instead?

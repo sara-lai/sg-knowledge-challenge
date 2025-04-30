@@ -723,56 +723,53 @@ setInterval(() => {
     }
 }, 3500)
 
-// clouds animation - maybe scrap
-let cloud1 = document.createElement('div')
-cloud1.classList.add('cloud1')
-landingWrapperEl.prepend(cloud1) // append to top of page
 
 
 // the img-circles 
-// brainstorm:
-// use JS to put on page, randomly adjust size, and randomly give special animation (bouncing around, bobbing etc)
-// use a loop to build list of file names.... randomly pick from.... create the element ... put on page (randomly/anywhere?)
-// note, may have 100+ of these, but only want to show 30ish at a time.... need them to cycle out....
-// next goal: have them bounce around
-// todo - need to clear them all when quiz starts (a forEach with .remove() ?)
+
 // will this have terrible performance?
 
-let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49] // can be png or jpg so use this to switch extension
+let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90] // can be png or jpg so use this to switch extension
 let extension = null
-let imageNames = []
-for (let i = 1; i < 52; i++){
+const SML = ['s', 'm', 'l']
+
+// overview:
+// create the filename with i/png/jpg
+// create the imgEl and set src
+// randomly assign a s-m-l class for size variety
+// randomly assign a start position on screen
+// randomly assign a trajectory to the css variables, and a random duration
+for (let i = 1; i <= 100; i++){
     if (usePNG.includes(i)){
         extension = 'png'
     } else {
         extension = 'jpg'
     }
-    imageNames.push(`landing${i}.${extension}`)
-}
-
-console.log(imageNames)
-
-let SML = ['s', 'm', 'l']
-
-for (let imgName of imageNames){
-    // overview:
-    // create the image and set src based on imgName
-    // randomly assign a start position on screen
-    // randomly assign a s-m-l class for size variety
+    let imgName = `landing${i}.${extension}`
     let imgEl = document.createElement('img')
     imgEl.classList.add('landing-image')
     imgEl.src = 'images/' + imgName
 
-    // first attempt at random start positions + abs positioned top/left/right etc
+    // randomly assign s - m - l class.... note: can do this with setting transform instead?
+    let randomIdx = Math.floor(Math.random() * 3)
+    let letter = SML[randomIdx]
+    imgEl.classList.add(`landing-image-${letter}`)    
+
+    // random start positions + abs positioned top/left/right etc
     let imgStartLeft = Math.random() * window.innerWidth
     let imgStartTop = Math.random() * window.innerHeight
     imgEl.style.left = imgStartLeft + 'px'
-    imgEl.style.top = imgStartTop + 'px'
+    imgEl.style.top = imgStartTop + 'px'    
 
-    // randomly assign s - m - l class
-    let randomIdx = Math.floor(Math.random() * 3)
-    let letter = SML[randomIdx]
-    imgEl.classList.add(`landing-image-${letter}`)
+    // random direction on X & Y axes
+    let imgDirectionX = (Math.random() - 0.5) * 1000 /* the -0.5 is a technique to randomly make negative */
+    let imgDirectionY = (Math.random() - 0.5) * 1400 /* width is greater than height... */
+    imgEl.style.setProperty('--directionX', imgDirectionX + 'px') /* must use setProperty for a css variable */
+    imgEl.style.setProperty('--directionY', imgDirectionY + 'px')
+
+    // random duration .... could weight it by the distance/directoin above
+    let duration = (Math.random() * 10) + 4 /* the +4 guarantees that the minimum duration is 4, otherwise wild speeds! */ 
+    imgEl.style.animationDuration = duration + 's'    
 
     bodyEl.append(imgEl)
 }
@@ -832,12 +829,12 @@ function testHotStreak(){
 
 
 cheatingNoticeEl = document.querySelector('#cheating-notice')
-let enforceCheatingRules = true
+let enforceCheatingRules = false
 
 let caughtCheatingMessage = "We beleive you have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
 We hope you were not trying to cheat, but if you were, please know that this is not a good habit and it will catch up to you later \
 in life, perhaps sooner than later. We believe in the importance of second chances, but in this case your IP address has been forwarded to the \
-International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and further action."
+International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action."
 
 // https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
 document.addEventListener("visibilitychange", () => {
@@ -954,6 +951,11 @@ function handleQuizSelection(event){
 
     initChallenge()    
 }
+
+clouds animation - maybe try again
+let cloud1 = document.createElement('div')
+cloud1.classList.add('cloud1')
+landingWrapperEl.prepend(cloud1) // append to top of page
 
 
  */

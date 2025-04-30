@@ -431,19 +431,6 @@ const touristQs = [
     }, 
     {  
         id: 33,
-        text: "Singapore's approach to water security and environmental management has served as a model for other nations. Which of the following is not part of Singapore's water management ecosystem?",
-        a: "5 state-of-the-art water desalination plants",
-        b: "5 state-of-the-art wastewater recycling plants",
-        c: "5 state-of-the-art humidity-condensation plants",
-        d: "Channeling rainnwater from around 500 km<sup>2</sup> of land",
-        answer: "c",
-        labels: [
-            "tourist",
-            "community",
-        ]
-    },
-    {  
-        id: 34,
         text: "Singapore's approach to water management ensures a resilient supply and has served as a model for other nations. Which of the following is not part of its strategy?",
         a: "5 state-of-the-art water desalination plants",
         b: "5 state-of-the-art wastewater recycling plants",
@@ -456,20 +443,7 @@ const touristQs = [
         ]
     },                    
     {  
-        id: 35,
-        text: "Interestingly, Singapore has a number of unique and extreme slides. Which of the following slides does not actually exist?",
-        a: "A slide that takes passengers from the transit area down to their gate at Changi Airport",
-        b: "East Coast Park's 16 meter tall slide that overlooks mega vessels in the Singapore strait",
-        c: "Famed nightclub Marquee's 3 story slide down to the dance floor",
-        d: "Universal Studio's multi-part Sesame Street-themed slide that combines spaghetti with space travel",
-        answer: "d",
-        labels: [
-            "tourist",
-            "quirky",
-        ]
-    }, 
-    {  
-        id: 36,
+        id: 34,
         text: "Which serene neighborhood known for its eateries was originally a nutmeg plantation until it was destroyed by a beetle blight in 1857?",
         a: "Dempsey Hill",
         b: "Tiong Bahru",
@@ -482,7 +456,7 @@ const touristQs = [
         ]
     },   
     {  
-        id: 37,
+        id: 35,
         text: "Also called Straits Chinese or Baba Nyonya, these settlers came 300-500 years ago to Singapore, creating a unique hybrid culture blending Chinese, Malay, and Western influence, with cultural hubs today in East Coast. What are they called?",
         a: "Hokkiens",
         b: "Peranakans",
@@ -495,7 +469,7 @@ const touristQs = [
         ]
     },  
     {  
-        id: 38,
+        id: 36,
         text: "Singapore's national flower, Vanda 'Miss Joaquim', was bred by decorated horticulturist and Singaporean-Armenian Agnes Joaquim in the 19th century. What type of flower is it?",
         a: "Orchid",
         b: "Lily",
@@ -508,7 +482,7 @@ const touristQs = [
         ]
     }, 
     {  
-        id: 39,
+        id: 37,
         text: "Singpore's official relationship wtih chewing gum began in 1992 after acts of gum-based vandalism caused train delays with jammed door sensors. What is NOT true about Singapore's chewing gum regulations?",
         a: "Some categories of gum can be bought and sold in Singapore (e.g. nicotine gum)",
         b: "Gum brought into the country for personal use is perfectly OK",
@@ -521,8 +495,8 @@ const touristQs = [
         ]
     },  
     {  
-        id: 40,
-        text: "While not as recognized as durian, the national fruit, rambuten is a widely popular fruit in Singapore as well. 'Rambut' is a Malay word that means what?",
+        id: 38,
+        text: "While not as celebrated as durian, the national fruit and 'King of Fruits', rambuten is a widely popular fruit in Singapore as well. 'Rambut' is a Malay word that means what?",
         a: "sweet",
         b: "sour",
         c: "citrusy",
@@ -534,18 +508,18 @@ const touristQs = [
         ]
     },                     
     {  
-        id: 41,
-        text: "Which theme park in Singapore was built by the Tiger Balm tycoon whose main attraction is the 10 Courts of Hell of Chinese Buddhism.",
-        a: "Haw Par Villa",
+        id: 39,
+        text: "Which theme park in Singapore was built by the Tiger Balm tycoon whose main attraction is the 10 Courts of Hell of Chinese Buddhism?",
+        a: "Ne Zha Village",
         b: "Resorts World Sentosa",
-        c: "Tiger Balm Village",
-        d: "Ne Zha Villa",
-        answer: "a",
+        c: "Haw Par Villa",        
+        d: "Tiger Balm Village",
+        answer: "c",
         labels: [
             "tourist",
             "fruit",
         ]
-    },        
+    },           
 
 
 ]

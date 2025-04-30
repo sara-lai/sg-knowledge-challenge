@@ -6,6 +6,7 @@ question - status bar - timer - panic mode - right/wrong markers - end screens -
 body {
     height: 100vh;
     font-family: "Roboto";
+    overflow: hidden; /* so moving img circles dont create scroll zones */
 }
 
 /* question related */
@@ -391,7 +392,7 @@ circle {
     text-align: center;
     padding-top: 140px;
     display: flex;
-    max-width: 620px;
+    max-width: 540px;
     margin: 0 auto;
     background: white;
     padding: 30px;
@@ -402,8 +403,8 @@ circle {
     margin-top: 100px;
 }
 .landing-title {
-    font-size: 5rem;
-    line-height: 6.4rem;
+    font-size: 4rem;
+    line-height: 5.8rem;
     letter-spacing: 3.1px;  
     font-family: "Playfair", serif;
     max-width: 580px;
@@ -415,7 +416,7 @@ circle {
     font-family: 'Roboto';
     letter-spacing: .7px;
     font-weight: 300;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .action-box {
     display: flex;
@@ -477,7 +478,9 @@ circle {
     position: absolute; /* required for animation */
     animation: 
         imageBobble 2.5s ease-in-out infinite alternate,
-        imageDrift 5s ease-in-out infinite;
+        drift 5s linear infinite alternate; /* note: the 5s duration is overwritten by js */
+    --directionX: 0; /* to be set by JS for random motions */
+    --directionY: 0;
 
 }
 .landing-image-s {
@@ -493,6 +496,7 @@ circle {
     width: 120px;    
 }
 
+
 /* image bobbing! reuise chickenBobble? */
 
 @keyframes imageBobble {
@@ -503,17 +507,16 @@ circle {
         transform: translateY(-5px) rotate(5deg); 
     }
 }
-@keyframes imageDrift {
+
+@keyframes drift {
     0% { 
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(200px,-100px)
+        transform: translate(0, 0); 
     }
     100% { 
-        transform: translate(-200px,-100px); /* make this random! */
+        transform: translate(var(--directionX), var(--directionY)); 
     }
 }
+
 
 
 /* disclaimer for local challenge, using absolute so doesn't affect layout */
