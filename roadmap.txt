@@ -2,8 +2,6 @@ next steps:
 probably need lower resolution/smaller versions of landing page imgs for better performane 
 landing page improve: cerulean/sky blue backdrop/gradient too (remove quiz start).... scroll down to green land/singapore with info box above it (instructions, about this app, etc.)
 bug: if redeem multiple chillicrabs if just gives you the answer
-landing image circles: possible improve?
-landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
 
 next next steps:
 fun hantu mode
@@ -22,14 +20,14 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 
 
 maybe fix or add later?
+some css animation/transition for select quiz/start quiz
 improve anti cheating event listeners (remove JS question data?)
-make look OK on mobile - will img circles destroy perofrmance on mobile?
+make look OK on mobile -  img circles perofrmance?
 add instructions (landing page section?)
-bug: handle submit button with no answer selection (or punish for not bothering to select anything?)
+bug: handle submit button with no answer selection (or not - punish for not bothering to select anything?)
 abcd keypress events to make my life easier [doesnt impact mobile....]
 improve ‘Singapore’ scrolling name change: some flip/fade animation
 maybe use empty heart container along with full ones
 acknowledge item redemption (some flash notice?)
-some css animation/transition for select quiz/start quiz
 double the panic mode refresh rate like the old timer
 maybe dont use ids in data, error prone.... create ids by looping instead?

@@ -227,7 +227,7 @@ const localQs = [
     },  
     {  
         id: 19,
-        text: "With a Malay film star mother, she started out as a child actress, later released best-selling albums in the 1980s, and later appeared on Singapore Idol and in a Dick Lee musical. Who is this Singaporean?",
+        text: "With a Malay film star mother, she started out as a child actress, later released best-selling albums in the 1980s, and later appeared on Singapore Idol and in a Dick Lee musical. Who is this famous Singaporean singer?",
         a: "Anita Sarawak",
         b: "Amy Mastura",
         c: "Rahimah Rahim",
