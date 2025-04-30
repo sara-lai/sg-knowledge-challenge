@@ -383,25 +383,31 @@ circle {
 }
 /* landing page related */
 
- /* trying a sort of sleek box shadow center ... note: probably more than a 'wrapper' at this point */
+/* mirroring wrapper - box layout with question css */
 .landing-wrapper { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.landing-box {
+    display: flex;
     flex-direction: column;
     gap: 30px;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding-top: 140px;
-    display: flex;
     max-width: 540px;
-    margin: 0 auto;
     background: white;
     padding: 30px;
     padding-bottom: 60px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    margin-top: 100px;
+    margin-top: -100px; 
 }
+
 .landing-title {
     font-size: 4rem;
     line-height: 5.8rem;
@@ -409,7 +415,8 @@ circle {
     font-family: "Playfair", serif;
     max-width: 580px;
     margin: 0 auto;
-    font-weight: 500
+    font-weight: 500;
+    text-align: center;
 }
 .landing-subtitle {
     font-size: 1.5rem;

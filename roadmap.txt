@@ -1,10 +1,8 @@
 next steps:
-add 10 more local challenge questions
+landing page improve: cerulean/sky blue backdrop/gradient too (remove quiz start).... scroll down to green land/singapore with info box above it (instructions, about this app, etc.)
 bug: if redeem multiple chillicrabs if just gives you the answer
-improve anti cheating event listeners (remove JS question data?)
 landing image circles: possible improve?
 landing page design: Scrolling clouds (or not?), some landscape/map as background iamge? something not too distracting given all the img circles
-^ color gradient?... #e2f4ff cerulean esque... [but hvae to remove when start quiz]
 
 next next steps:
 fun hantu mode
@@ -23,8 +21,7 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 
 
 maybe fix or add later?
-bad code: the "wrapper" eg landing-wrapper isn't a wrapper anymore.... causing layout issue like below bug
-bug: when refresh after starting a quiz, the landing info box jumps to top of screen... confusing
+improve anti cheating event listeners (remove JS question data?)
 make look OK on mobile - will img circles destroy perofrmance on mobile?
 add instructions (landing page section?)
 bug: handle submit button with no answer selection (or punish for not bothering to select anything?)

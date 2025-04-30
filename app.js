@@ -20,7 +20,7 @@ let userLost = false
 let answeredWrong = false
 let answeredRight = false
 let userAnswer = null // e.g. logic if no user answer & time runs out
-let hearts = 3 
+let hearts = 4
 let durians = 0
 let chilliCrabs = 0
 let isSurprise = false
@@ -212,7 +212,9 @@ function handleSurprises(){
         // // pick randomly from array of surprises - control by number of items
         let surprises = [ 
             'durian', 'durian', 'durian', 'durian', 'durian', 'durian', 'durian',
-            'chillicrab', 'chillicrab', 'chillicrab', 'chillicrab', 'heart', 'heart', 'scam', 'scam'
+            'chillicrab', 'chillicrab', 'chillicrab', 'chillicrab', 
+            'heart', 'heart', 
+            'scam', 'scam'
         ] 
         //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
@@ -568,7 +570,7 @@ function renderHotStreak(){
 function renderQuestion(){
     // todo - expand for handling more question 'types'
 
-    questionTextEl.textContent = currQ.text
+    questionTextEl.innerHTML = currQ.text
     answerAEl.innerHTML = currQ.a
     answerBEl.innerHTML = currQ.b
     answerCEl.innerHTML = currQ.c
@@ -603,7 +605,7 @@ function initChallenge(){
     streak = 0
     userWon = false
     userLost = false    
-    hearts = 3 
+    hearts = 4 
     durians = 0
     chilliCrabs = 0
 
@@ -768,7 +770,7 @@ for (let i = 1; i <= 100; i++){
     imgEl.style.setProperty('--directionY', imgDirectionY + 'px')
 
     // random duration .... could weight it by the distance/directoin above
-    let duration = (Math.random() * 10) + 4 /* the +4 guarantees that the minimum duration is 4, otherwise wild speeds! */ 
+    let duration = (Math.random() * 10) + 3 /* the +3 guarantees that the minimum duration is 3, otherwise wild speeds! */ 
     imgEl.style.animationDuration = duration + 's'    
 
     bodyEl.append(imgEl)
@@ -829,12 +831,12 @@ function testHotStreak(){
 
 
 cheatingNoticeEl = document.querySelector('#cheating-notice')
-let enforceCheatingRules = false
+let enforceCheatingRules = true
 
-let caughtCheatingMessage = "We beleive you have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
-We hope you were not trying to cheat, but if you were, please know that this is not a good habit and it will catch up to you later \
-in life, perhaps sooner than later. We believe in the importance of second chances, but in this case your IP address has been forwarded to the \
-International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action."
+let caughtCheatingMessage = "We beleive you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
+We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \
+in life, perhaps sooner than you think. We believe in the importance of second chances, please try the quiz again, but we have also referred your IP address to the \
+International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action. Please be prepared to travel to Geneva if you are summoned."
 
 // https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
 document.addEventListener("visibilitychange", () => {

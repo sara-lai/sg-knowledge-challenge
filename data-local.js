@@ -187,7 +187,7 @@ const localQs = [
     },    
     {
         id: 16,
-        text: "Which durian variety, coveted by Singapore’s enthusiasts, is celebrated for its pale, almost white flesh, bitter flavor with a watery texture, and an aroma that novices may mistaken for spoilage?",
+        text: "Which durian variety, coveted by Singapore’s enthusiasts, is celebrated for its pale, almost white flesh, bitter flavor with a watery texture, and an aroma that novices may mistake for spoilage?",
         a: "Red Prawn",
         b: "Capri",
         c: "XO",
@@ -199,17 +199,60 @@ const localQs = [
     },  
     {  
         id: 17,
-        text: "Interestingly, Singapore has a number of unique and extreme slides. Which of the following slides does not actually exist?",
+        text: "Singapore has a number of unique and extreme slides. Which of the following slides does not actually exist?",
         a: "A slide that takes passengers from the transit area down to their gate at Changi Airport",
-        b: "East Coast Park's 16 meter tall slide that overlooks mega vessels in the Singapore strait",
-        c: "Famed nightclub Marquee's 3 story slide down to the dance floor",
-        d: "Universal Studio's multi-part Sesame Street-themed slide that combines spaghetti with space travel",
+        b: "A 16 meter tall slide that overlooks mega vessels in the Singapore strait, found in East Coast park",
+        c: "The slide at Marquee at Marina Bay Sands, which takes you 3 stories down to the dance floor",
+        d: "The Universal Studios multi-part Sesame Street-themed slide that combines spaghetti with space travel",
         answer: "d",
         labels: [
-            "tourist",
+            "locals",
             "quirky",
         ]
-    },                              
+    },   
+    {  
+        id: 18,
+        text: "With a doctorate from Julliard, this Singaporean classical music artist shown above is known for her work with unconventional instruments. Who is she?",
+        a: "Margaret Leng Tan",
+        b: "Lynnette Seah",
+        c: "Vanessa-Mae",
+        d: "Stefanie Sun",
+        answer: "a",
+        labels: [
+            "locals",
+            "music",
+        ],
+        type: 'image-based',
+        imageName: 'landing34.png',        
+    },  
+    {  
+        id: 19,
+        text: "With a Malay film star mother, this Singaporean started out as a child actress, later released best-selling albums in the 1980s, and has more recently appeared on Singapore Idol and in a Dick Lee musical. Who is she?",
+        a: "Anita Sarawak",
+        b: "Amy Mastura",
+        c: "Rahimah Rahim",
+        d: "Siti",
+        answer: "c",
+        labels: [
+            "locals",
+            "pop",
+        ],
+        type: 'image-based',
+        imageName: 'landing81.jpg',        
+    },   
+    {  
+        id: 20,
+        text: "What is 'Fried Rice Paradise'?",
+        a: "A nickname for the Newton Food Centre",
+        b: "A common hawker centre promotional stunt in the 1990s, where patrons received free sides of rice",
+        c: "A chant by fans commonly heard at Singapore Premier League matches",
+        d: "A musical and TV series by Dick Lee",
+        answer: "d",
+        labels: [
+            "locals",
+            "pop",
+        ],    
+    },                                          
 ]    
 
 
