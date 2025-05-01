@@ -334,7 +334,7 @@ function startTimer() {
     let filledPercent = 100 
 
     timerTime-- // decrement or will get 1 second delay
-    timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent]
+    timerCircleEl.style.strokeDasharray = [filledPercent, 100 - filledPercent] // [a, b] here a = dash percentage b = gap percentage
     intervalId = setInterval(function() {
         timerTextEl.textContent = timerTime
 
@@ -652,18 +652,13 @@ function initQuestion(){
     startTimer()
 }
 
-// todo - named function
-// more todo -> the 'none'/ 'flex' are already handled in removeStaleThings().... 
-// and you coudl move challengeName to initChallenge()??
-document.querySelector('#play').addEventListener('click', (event) => {
+
+document.querySelector('#play').addEventListener('click', () => { // launch from landing page
     challengeName = document.querySelector('.quiz-option.selected').id
-
-    // todo - animation would be nice, launching the quiz
-    landingWrapperEl.style.display = 'none'
-    questionWrapperEl.style.display = 'flex'
-
     initChallenge()
-})
+}) 
+
+endScreenBtn.addEventListener('click', initChallenge) // relaunch from endscreen (keep challengeName the same)
 
 function chooseRandomQuestion(){
     // randomly pick from unaskedQs - set currQ - then slice from unaskedQs (or quiz will never end!)
@@ -684,14 +679,6 @@ function produceQuestionSet(){
 
     unaskedQs = mainQs.map(question => question.id) // use ids not objs for questions array (more readable in console too!)
     console.log(unaskedQs)
-}
-
-endScreenBtn.addEventListener('click', reLaunchSameChallenge)
-
-function reLaunchSameChallenge(){
-    // removeStaleThings()  this is now called in initChallenge().... is this whole function useless?
-
-    initChallenge()
 }
 
 function removeStaleThings(){
@@ -719,8 +706,6 @@ function removeStaleThings(){
     // show question because new challenge
     questionWrapperEl.style.display = 'flex' 
 }
-
-
 
 
 
