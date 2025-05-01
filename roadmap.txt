@@ -1,12 +1,9 @@
 next steps:
-remove instructions toggle stuff when init challenge
-add instructions to landing page
-audio: added heartbeak for panic mode, could add nosie for answers right, add noise for gaining items / sounds effects
 probably need lower resolution/smaller versions of landing page imgs for better performane 
 landing page improve: cerulean/sky blue backdrop/gradient too (remove quiz start).... scroll down to green land/singapore with info box above it (instructions, about this app, etc.)
-bug: if redeem multiple chillicrabs if just gives you the answer
 
 next next steps:
+audio: could add nosie for answers right, add noise for gaining items / sounds effects
 fun hantu mode
 somehow track/save high scores for when inevitbly lose locals challenge, so can keep trying to beat high scores.... 
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
@@ -23,6 +20,7 @@ turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chi
 
 
 maybe fix or add later?
+bug: if redeem multiple chillicrabs if just gives you the answer (maybe desirable)
 only do scam event for locals quiz, not tourist....
 rare bug where panic mode doesnt get reset (when submit answer exact second panic mode begins?)
 some css animation/transition for select quiz/start quiz
