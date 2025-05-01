@@ -709,7 +709,9 @@ function removeStaleThings(){
     questionWrapperEl.style.display = 'flex'
 
     document.querySelector('.junglefowl-zone').innerHTML = ''
-    document.querySelector('#hot-streak-notice').style.display = 'none'    
+    document.querySelector('#hot-streak-notice').style.display = 'none'
+    
+    
 }
 
 
@@ -739,48 +741,45 @@ setInterval(() => {
 
 // the img-circles 
 
-// will this have terrible performance?
+// note: I think this has terrible performance? (use smaller/low res images?)
 
-let usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90, 101] // can be png or jpg so use this to switch extension
 let extension = null
+const usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90, 101] // can be png or jpg so use this to switch extension
 const SML = ['s', 'm', 'l']
 
-// overview:
-// create the filename with i/png/jpg
-// create the imgEl and set src
-// randomly assign a s-m-l class for size variety
-// randomly assign a start position on screen
-// randomly assign a trajectory to the css variables, and a random duration
-for (let i = 1; i <= 101; i++){
+for (let i = 1; i <= 101; i++){ // maybe cap around 100 for now
+
+    // construct the filename string
     if (usePNG.includes(i)){
         extension = 'png'
     } else {
         extension = 'jpg'
     }
-
     let imgName = `landing${i}.${extension}`
+
+    // set the img src
     let imgEl = document.createElement('img')
     imgEl.classList.add('landing-image')
     imgEl.src = 'images/' + imgName
 
-    // randomly assign s - m - l class.... note: can do this with setting transform instead?
+    // randomly assign s - m - l class
     let randomIdx = Math.floor(Math.random() * 3)
     let letter = SML[randomIdx]
     imgEl.classList.add(`landing-image-${letter}`)    
 
-    // random start positions + abs positioned top/left/right etc
+    // random start positions on screen (css = abs positioned)
     let imgStartLeft = Math.random() * window.innerWidth
     let imgStartTop = Math.random() * window.innerHeight
     imgEl.style.left = imgStartLeft + 'px'
     imgEl.style.top = imgStartTop + 'px'    
 
-    // random direction on X & Y axes
-    let imgDirectionX = (Math.random() - 0.5) * 1000 /* the -0.5 is a technique to randomly make negative */
-    let imgDirectionY = (Math.random() - 0.5) * 1400 /* width is greater than height... */
-    imgEl.style.setProperty('--directionX', imgDirectionX + 'px') /* must use setProperty for a css variable */
-    imgEl.style.setProperty('--directionY', imgDirectionY + 'px')
+    // random distances on X & Y
+    let distanceX = (Math.random() - 0.5) * 1000 /* the -0.5 is a technique to randomly make negative */
+    let distanceY = (Math.random() - 0.5) * 1400 /* screen width is greater than height... */
+    imgEl.style.setProperty('--distanceX', distanceX + 'px') /* must use setProperty for a css variable */
+    imgEl.style.setProperty('--distanceY', distanceY + 'px')
 
-    // random duration .... could weight it by the distance/directoin above
+    // random duration .... could weigh it by the distance ^ to prevent crazy outliers
     let duration = (Math.random() * 10) + 3 /* the +3 guarantees that the minimum duration is 3, otherwise wild speeds! */ 
     imgEl.style.animationDuration = duration + 's'    
 
@@ -788,8 +787,22 @@ for (let i = 1; i <= 101; i++){
 }
 
 
+// instructions related
+// todo better remove when game starts
+const instructionToggle = document.querySelector('#instructions-toggle')
+const instructions = document.querySelector('.instructions-section')
+
+instructionToggle.addEventListener('click', () => {
+    instructions.classList.toggle('instructions-visible')
+    instructionToggle.classList.toggle('shadow-border')
+})
+
+
+
+
 
 // *** test functions for console ***
+
 
 function testAddDurian(){
     isSurprise = true
@@ -832,46 +845,36 @@ function testHotStreak(){
 }
 
 
+
 // *** anti cheating ***
 
-// https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
-// should only run after a quiz has started....  if (unaskedQs.length)..... or if (challengeName !== null)
-// severely interrupts development lol.... add flag... relaxRules
-// ok cheating notice gets cleared out with bodyEl.innerHTML = '', need to make the notice with then JS
-// todo - should somehow delete the JS too so cant scrape questions???
 
+let enforceCheatingRules = false // set false when test/dev
 
-cheatingNoticeEl = document.querySelector('#cheating-notice')
-let enforceCheatingRules = false
-
-let caughtCheatingMessage = "We beleive you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
-We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \
-in life, perhaps sooner than you think. We believe in the importance of second chances, please try the quiz again, but we have also referred your IP address to the \
-International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action. Please be prepared to travel to Geneva if you are summoned."
+// todo - should somehow delete some of the JS too so cant scrape questions???
+// todo - obfuscation like airbnb
 
 // https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
-document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden") {
-      if (unaskedQs.length && enforceCheatingRules){
-        bodyEl.innerHTML = '' /* lol why no .*/
+document.addEventListener("visibilitychange", serveCheatNotice)
+window.addEventListener('blur', serveCheatNotice)
+
+  function serveCheatNotice(){
+    let caughtCheatingMessage = "We beleive you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
+    We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \
+    in life, perhaps sooner than you think. We believe in the importance of second chances, please try the quiz again, but we have also referred your IP address to the \
+    International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action. Please be prepared to travel to Geneva if you are summoned."
+
+    if (enforceCheatingRules){
+        bodyEl.innerHTML = ''
         let h1El = document.createElement('h1')
         h1El.textContent = caughtCheatingMessage
         bodyEl.append(h1El)
+ 
+        stopTimer() /* or get panic mode still */
+       }
+  }
 
-        stopTimer() // or panic mode comes along
-      }
-    }
-  })
-  window.addEventListener("blur", () => {
-    if (unaskedQs.length && enforceCheatingRules){
-       bodyEl.innerHTML = ''
-       let h1El = document.createElement('h1')
-       h1El.textContent = caughtCheatingMessage
-       bodyEl.append(h1El)
 
-       stopTimer()
-      }
-  })
 
 
 // *** graveyard: may revise from dead ***

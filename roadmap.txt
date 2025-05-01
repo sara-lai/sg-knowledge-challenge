@@ -1,5 +1,5 @@
 next steps:
-negative durians bug....
+remove instructions toggle stuff when init challenge
 add instructions to landing page
 audio: added heartbeak for panic mode, could add nosie for answers right, add noise for gaining items / sounds effects
 probably need lower resolution/smaller versions of landing page imgs for better performane 

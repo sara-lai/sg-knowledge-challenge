@@ -227,7 +227,7 @@ const localQs = [
     },  
     {  
         id: 19,
-        text: "With a Malay film star mother, she started out as a child actress, later released best-selling albums in the 1980s, and later appeared on Singapore Idol and in a Dick Lee musical. Who is this famous Singaporean singer?",
+        text: "With a Malay film star mother, this famous singer started out as a child actress and went on to release best-selling albums in the 1980s, later coming out of retirement to appear on Singapore Idol. Who is this famous Singaporean singer?",
         a: "Anita Sarawak",
         b: "Amy Mastura",
         c: "Rahimah Rahim",
@@ -255,7 +255,7 @@ const localQs = [
     },    
     {  
         id: 21,
-        text: "Annually Singapore sees over 2,400mm of precipitation... Singaporeans are highly knowledgeable about rain. Why does it rain (pick the most correct option)?",
+        text: "Singapore sees over 2,400mm of precipitation each year, so Singaporeans are quite knowledgeable about rain.... or are they? Why does it rain (pick the most correct option)?",
         a: "High pressure systems, common in the tropics, pull out droplets from the ocean to form storm clouds",
         b: "Tiny particles like dust and pollen are sites for droplet formation, until they cause cloud breakup",
         c: "Warm air rises and condenses into clouds until the clouds get too heavy and it rains",
@@ -342,7 +342,7 @@ const localQs = [
         b: "Horizon Hills",
         c: "Forest City",        
         d: "Sunway",  
-        answer: "b",
+        answer: "c",
         labels: [
             "locals",
             "malaysia",
