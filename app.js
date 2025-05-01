@@ -89,7 +89,12 @@ const dismissableBtn = document.querySelector('.dismissable-notice .btn')
 const landingWrapperEl = document.querySelector('.landing-wrapper')
 const statusBarEl = document.querySelector('.status-bar')
 const quizOptionEls = document.querySelectorAll('.quiz-option')
+const instructionToggle = document.querySelector('#instructions-toggle')
+const instructions = document.querySelector('.instructions-section')
 
+// hot streak
+const jungleFowlZone = document.querySelector('.junglefowl-zone')
+const hotStreakNotice = document.querySelector('#hot-streak-notice')
 
 
 // *** answer selection - quiz selection *** //
@@ -126,7 +131,7 @@ document.addEventListener('keydown', (event) => { // attach listener globally/to
 })
 
 function handleAnswerSubmission(){
-    // todo - disable submit button if havent selected (& time is left)
+    // todo - disable submit button if havent selected (& time is left) - or just punish for selecting without answering?
 
     stopTimer()
 
@@ -160,7 +165,7 @@ function handleAnswerSubmission(){
 
     renderNoticeRightWrong()
 
-    setTimeout(() => {
+    setTimeout(() => { // showing right/wrong marker for a second before moving on
         hideNoticeRightWrong()
 
         render()
@@ -209,7 +214,7 @@ function handleSurprises(){
 
     if (Math.floor(Math.random() * 3) === 0){  // 33% chance getting item each question for demo (15% for live?)
 
-        isSurprise = true // test rendering
+        isSurprise = true
         
         // // pick randomly from array of surprises - control by number of items
         let surprises = [ 
@@ -218,7 +223,6 @@ function handleSurprises(){
             'heart', 'heart', 
             'scam', 'scam'
         ] 
-        //let surprises = ['scam', 'scam']
         let randomIdx = Math.floor(Math.random() * surprises.length)        
         let theSurprise = surprises[randomIdx]
 
@@ -304,6 +308,7 @@ function redeemChilliCrab(){
     remove1El.style.opacity = 0
     remove2El.style.opacity = 0
 
+    // bug (or is it?): can redeem multiple same question & get right answer
 }
 chilliCrabContainerEl.addEventListener('click', (event) => {
     if (event.target.className === 'chillicrab'){
@@ -416,8 +421,6 @@ function hideNoticeRightWrong(){
 }
 
 function renderWonLost(){
-    // todo - the version for locals challenge.... if (challengeName====....) branches
-    
     if (userWon){
         endScreenHeadline.textContent = 'You did it! You won!'
         let wonBlurbTxt = ''
@@ -526,12 +529,7 @@ dismissableBtn.addEventListener('click', () => {
 
 function renderStatusBar(){
     // render style per tic-tac-toe lab -> only re-render based on state
-    if (challengeName === 'tourist'){
-        quizNameEl.textContent = 'The Tourist Challenge'
-    } else if (challengeName === 'locals'){
-        quizNameEl.textContent = 'The Locals Challenge'
-    }
-    
+   
     heartContainerEl.innerHTML = '' // clear or will keep multiplying hearts
     for (let i = 0; i < hearts; i++){
         let heartEl = document.createElement('div')
@@ -550,15 +548,19 @@ function renderStatusBar(){
         chilliCrabEl.classList.add('chillicrab')
         chilliCrabContainerEl.append(chilliCrabEl)
     }   
-        
+
+    if (challengeName === 'tourist'){
+        quizNameEl.textContent = 'The Tourist Challenge'
+    } else if (challengeName === 'locals'){
+        quizNameEl.textContent = 'The Locals Challenge'
+    }        
 }
 
 function renderHotStreak(){
     if (streak >= 5){
-        // adds 1 random junglefowl each correct answer while on streak
-        // todo - delay the animation so not all same? -> .style.animationDelay       
-        // todo - one crazy one that rotates (unlocked with 20 in a row?)      
-        // todo - increase to stread > 10 for live game
+        // adds 1 random junglefowl each correct answer while on streak    
+        // todo - unique ones unlocked e.g. 20 in a row or some milestone)      
+        // todo - increase to streak > 10 for live game
         let jungleFowl = document.createElement('div')
         jungleFowl.classList.add('jf')
 
@@ -567,18 +569,17 @@ function renderHotStreak(){
         let randomjF = jFTypes[randomIdx]
         jungleFowl.classList.add(randomjF)
 
-        document.querySelector('.junglefowl-zone').append(jungleFowl)
+        jungleFowlZone.append(jungleFowl)
+        hotStreakNotice.style.display = 'block'
 
-        document.querySelector('#hot-streak-notice').style.display = 'block'
-    } else if (streak === 0 || userWon) { // i.e. they missed the last questions ... or remove animations if win
-        document.querySelector('.junglefowl-zone').innerHTML = ''
-
-        document.querySelector('#hot-streak-notice').style.display = 'none'
+    } else if (streak === 0 || userWon) { // i.e. they missed the last questions ... or game is over
+        jungleFowlZone.innerHTML = ''
+        hotStreakNotice.style.display = 'none'
     }
+    // bug? junglefowl sometimes hang around between quizes
 }
 
 function renderQuestion(){
-    // todo - expand for handling more question 'types'
 
     questionTextEl.innerHTML = currQ.text
     answerAEl.innerHTML = currQ.a
@@ -586,7 +587,7 @@ function renderQuestion(){
     answerCEl.innerHTML = currQ.c
     answerDEl.innerHTML = currQ.d
 
-    // test image-quesiton type! 
+    // the image-quesiton type! 
     if (currQ.type === 'image-based'){
         imageQuestionEl.src = 'images/' + currQ.imageName
         otherQuestionTypesEl.style.display = 'block'
@@ -596,7 +597,7 @@ function renderQuestion(){
 
     clearSelected(answerBoxEls) // clear prev answer selection
 
-    answerBoxEls.forEach(el => el.style.opacity = 1) // for 50-50 purposes (it uses opacity to hide)
+    answerBoxEls.forEach(el => el.style.opacity = 1) // revive 2 boxes if 50-50 used
 }
 
 
@@ -652,6 +653,8 @@ function initQuestion(){
 }
 
 // todo - named function
+// more todo -> the 'none'/ 'flex' are already handled in removeStaleThings().... 
+// and you coudl move challengeName to initChallenge()??
 document.querySelector('#play').addEventListener('click', (event) => {
     challengeName = document.querySelector('.quiz-option.selected').id
 
@@ -679,46 +682,62 @@ function produceQuestionSet(){
         console.log('set mainQs as locals set')        
     }
 
-    unaskedQs = mainQs.map(question => question.id) // use ids not objs for questions array
+    unaskedQs = mainQs.map(question => question.id) // use ids not objs for questions array (more readable in console too!)
     console.log(unaskedQs)
 }
 
 endScreenBtn.addEventListener('click', reLaunchSameChallenge)
 
 function reLaunchSameChallenge(){
-    removeStaleThings()    
+    // removeStaleThings()  this is now called in initChallenge().... is this whole function useless?
 
     initChallenge()
 }
 
 function removeStaleThings(){
-    // mostly for end screens and landing page features, hot streaks too
+    // overview: 
+    // too much stuff left around when launch / relaunch a challenge
+    // maybe crude? just put here and remove it
 
+    // landing
+    landingWrapperEl.style.display = 'none'
+    document.querySelectorAll('.landing-image').forEach(el => el.remove()) // all the landing image circles, appended to body/document
+    instructionToggle.style.display = 'none'
+    instructions.style.display = 'none'    
+
+    // end screen
     endScreen.style.display = 'none'
-    
-    document.querySelectorAll('.landing-image').forEach(el => el.remove()) // all the landing image circles, appended to body
-
     endScreenFlair.classList = [] // reset big endscreen images
     endScreenFlair2.classList = []
-
     endScreenFlair.style.display = 'none'
     endScreenFlair2.style.display = 'none'
 
-    landingWrapperEl.style.display = 'none'
+    // hot streak
+    jungleFowlZone.innerHTML = ''
+    hotStreakNotice.style.display = 'none'
 
-    questionWrapperEl.style.display = 'flex'
-
-    document.querySelector('.junglefowl-zone').innerHTML = ''
-    document.querySelector('#hot-streak-notice').style.display = 'none'
-    
-    
+    // show question because new challenge
+    questionWrapperEl.style.display = 'flex' 
 }
+
+
 
 
 
 // *** landing related *** 
 
-// "Singapore" name scroll
+// 3 components -> instructions, name scrolls, wild img circles
+// should do some sort of initLanding() setup ? do you really need init() for everything?
+
+
+// instructions
+instructionToggle.addEventListener('click', () => {
+    instructions.classList.toggle('instructions-visible')
+    instructionToggle.classList.toggle('shadow-border') // because looks bad with the instructions panel
+})
+
+
+// name scroll
 const names = ['Singapura', 'Temasek', 'Lion City', 'The Little Red Dot', 'Garden City', 'Fine City', 'Singapore'] 
 const spanName = document.getElementById('sg-name')
 const spanAdj = document.getElementById('sg-adj') // adjectives to go with some names (but no underline so different element)
@@ -738,11 +757,9 @@ setInterval(() => {
 }, 3500)
 
 
-
-// the img-circles 
-
+// img-circles 
 // note: I think this has terrible performance? (use smaller/low res images?)
-
+// maybe: scrap usePNG and do like a try-catch thing instead
 let extension = null
 const usePNG = [8, 10, 11, 13, 23, 24, 26, 34, 39, 40, 41, 42, 43, 49, 55, 57, 60, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 80, 90, 101] // can be png or jpg so use this to switch extension
 const SML = ['s', 'm', 'l']
@@ -774,12 +791,12 @@ for (let i = 1; i <= 101; i++){ // maybe cap around 100 for now
     imgEl.style.top = imgStartTop + 'px'    
 
     // random distances on X & Y
-    let distanceX = (Math.random() - 0.5) * 1000 /* the -0.5 is a technique to randomly make negative */
-    let distanceY = (Math.random() - 0.5) * 1400 /* screen width is greater than height... */
+    let distanceX = (Math.random() - 0.5) * 1400 /* the -0.5 is a technique to randomly make negative */
+    let distanceY = (Math.random() - 0.5) * 1000 /* screen width is less than height... */
     imgEl.style.setProperty('--distanceX', distanceX + 'px') /* must use setProperty for a css variable */
     imgEl.style.setProperty('--distanceY', distanceY + 'px')
 
-    // random duration .... could weigh it by the distance ^ to prevent crazy outliers
+    // random duration .... could weigh it by the distance above to prevent crazy outliers
     let duration = (Math.random() * 10) + 3 /* the +3 guarantees that the minimum duration is 3, otherwise wild speeds! */ 
     imgEl.style.animationDuration = duration + 's'    
 
@@ -787,22 +804,10 @@ for (let i = 1; i <= 101; i++){ // maybe cap around 100 for now
 }
 
 
-// instructions related
-// todo better remove when game starts
-const instructionToggle = document.querySelector('#instructions-toggle')
-const instructions = document.querySelector('.instructions-section')
-
-instructionToggle.addEventListener('click', () => {
-    instructions.classList.toggle('instructions-visible')
-    instructionToggle.classList.toggle('shadow-border')
-})
-
-
 
 
 
 // *** test functions for console ***
-
 
 function testAddDurian(){
     isSurprise = true
@@ -846,8 +851,9 @@ function testHotStreak(){
 
 
 
-// *** anti cheating ***
 
+
+// *** anti cheating ***
 
 let enforceCheatingRules = false // set false when test/dev
 
@@ -863,6 +869,7 @@ window.addEventListener('blur', serveCheatNotice)
     We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \
     in life, perhaps sooner than you think. We believe in the importance of second chances, please try the quiz again, but we have also referred your IP address to the \
     International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action. Please be prepared to travel to Geneva if you are summoned."
+    // ^ hope users understand this is a joke! 
 
     if (enforceCheatingRules){
         bodyEl.innerHTML = ''
@@ -870,9 +877,10 @@ window.addEventListener('blur', serveCheatNotice)
         h1El.textContent = caughtCheatingMessage
         bodyEl.append(h1El)
  
-        stopTimer() /* or get panic mode still */
-       }
+        stopTimer() // or get panic mode still 
+    }
   }
+
 
 
 
@@ -880,7 +888,7 @@ window.addEventListener('blur', serveCheatNotice)
 // *** graveyard: may revise from dead ***
 
 /*
-// array shuffle based approach; may use for random ordering of answer options, or random img-circle array (landing paeg)
+// array shuffle based approach; may eventually replace current random choice appraoch, or use for random ordering of answer options
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 function shuffle(array){
@@ -903,7 +911,7 @@ function shuffle(array){
     return array
 }
 
-previous async-await-promise approach, switched to broken up render paths
+previous async-await-promise approach. why: needed pauses for right/wrong & item screens inside old, big single render; instead: switched to broken up render paths
 async function renderRightWrong(){
     if (answeredRight || answeredWrong){ // only fire if a question has been answered
     
@@ -925,7 +933,7 @@ async function renderRightWrong(){
     }
 }
 
-simpler timer before SVG approcah
+simpler timer before SVG approcah.... here because illustrates 2x panic mode at 500 ms
 function startTimer(){
 
     timerEl.textContent = timerTime
@@ -968,7 +976,7 @@ function handleQuizSelection(event){
     initChallenge()    
 }
 
-clouds animation - maybe try again
+clouds animation - maybe try again: nice clouds scrolling in background at top
 let cloud1 = document.createElement('div')
 cloud1.classList.add('cloud1')
 landingWrapperEl.prepend(cloud1) // append to top of page
