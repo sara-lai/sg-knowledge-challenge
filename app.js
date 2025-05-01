@@ -1,7 +1,9 @@
-// *** sections overview *** 
-// state - cached els - answer selection / quiz selection - answer submission - item redeeming - timer - render - init - landing - tests - anti cheating - graveyard
+// ********* sections overview ************ 
 
-// *** state ***
+// state - cached els - answer selection/quiz selection - answer submission - item redeeming - timer - render - init - landing - tests - anti cheating - graveyard
+
+
+// ************************ state *********************
 
 // quiz level state
 let challengeName = null
@@ -37,10 +39,11 @@ let panicMode = false
 let intervalId = null
 
 // constants
-// todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY
+// todo - generalize 'durian' 'chillicrab' etc. -> TIME_EXTENDER, FIFTY_FITY (for quiz builder future)
 
 
-// *** cached el references ***
+
+// ********************* cached el references *********************
 
 // question - answer related
 const questionWrapperEl = document.querySelector('.question-wrapper') // container for various screens/pages
@@ -77,7 +80,6 @@ const extraCommentary = document.querySelector('.extra-commentary')
 const stat1 = document.querySelector('#stat1')
 const stat2 = document.querySelector('#stat2')
 
-
 // notice screens
 const dismissableNotice = document.querySelector('#the-notice')
 const dismissableHeadline = document.querySelector('.dismissable-notice h2')
@@ -97,7 +99,8 @@ const jungleFowlZone = document.querySelector('.junglefowl-zone')
 const hotStreakNotice = document.querySelector('#hot-streak-notice')
 
 
-// *** answer selection - quiz selection *** //
+
+// ****************** answer selection - quiz selection ******************
 
 answerBoxEls.forEach( el => {
     el.addEventListener('click', handleAnswerSelection) // todo - A B C D or 1 2 3 4 keys
@@ -119,7 +122,7 @@ function clearSelected(els){ // takes an argument since used for answer & quiz o
 
 
 
-// *** answer submission *** //
+// ********************* answer submission (main state updating) *********************
 
 answerSubmitEl.addEventListener('click', handleAnswerSubmission)
 
@@ -263,7 +266,8 @@ function handleSurprises(){
 
 
 
-// *** item redeeming ***
+
+// ********************* item redeeming *********************
 
 function redeemDurian(){
     timerTime += 20 
@@ -301,14 +305,12 @@ function redeemChilliCrab(){
     let remove1El = document.querySelector(`.answer-box#${remove1}`)
     let remove2El = document.querySelector(`.answer-box#${remove2}`)
 
-    // trouble removing without affecting layout... using opacity
+    // had trouble removing without affecting layout... using opacity for now
     // set opacity to 1 again at renderQuestion()!
-    // remove1El.innerHTML = ''
-    // remove2El.innerHTML = ''
     remove1El.style.opacity = 0
     remove2El.style.opacity = 0
 
-    // bug (or is it?): can redeem multiple same question & get right answer
+    // bug (or allowable?): can redeem multiple same question & gives you the right answer
 }
 chilliCrabContainerEl.addEventListener('click', (event) => {
     if (event.target.className === 'chillicrab'){
@@ -318,14 +320,14 @@ chilliCrabContainerEl.addEventListener('click', (event) => {
 
 
 
-// *** timer related *** 
+// ************************ timer related ************************
 
 function stopTimer(){
     clearInterval(intervalId)
     endPanic()
 }
 
-// variation https://codepen.io/simoae7/pen/GRBPJXN
+// variation https://codepen.io/simoae7/pen/GRBPJXN / SVG approach per Waihon
 function startTimer() {
     // use gap-dash pattern in svg to imitate a timer, use changing percentage of depleted time / total time
 
@@ -379,7 +381,9 @@ function endPanic(){
 
 
 
-// *** render section *** //
+
+
+// *************************** render section ***************************
 
 function render(){
 
@@ -518,13 +522,12 @@ function renderSurprises(){
     questionWrapperEl.style.display = 'none'
 }
 
-dismissableBtn.addEventListener('click', () => {
+dismissableBtn.addEventListener('click', () => { // this is only for item notice dismissal ; putting inside renderSurprise() re-adds events
     dismissableNotice.style.display = 'none'
     questionWrapperEl.style.display = 'flex'
 
     isSurprise = false
     render() // repeating main render() to take other branch
-    
 })
 
 function renderStatusBar(){
@@ -603,7 +606,7 @@ function renderQuestion(){
 
 
 
-// *** init related ***
+// ************************ init related ************************
 
 function initChallenge(){
 
@@ -709,9 +712,10 @@ function removeStaleThings(){
 
 
 
-// *** landing related *** 
 
-// 3 components -> instructions, name scrolls, wild img circles
+// ************************ landing related *************************** 
+
+// 3 components -> instructions, name scroll, wild img circles
 // should do some sort of initLanding() setup ? do you really need init() for everything?
 
 
@@ -790,9 +794,7 @@ for (let i = 1; i <= 101; i++){ // maybe cap around 100 for now
 
 
 
-
-
-// *** test functions for console ***
+// ************************ test functions for console ************************
 
 function testAddDurian(){
     isSurprise = true
@@ -816,6 +818,7 @@ function testGotScammed(){
     // chilliCrabs -= 1
     // gotScammed = 'chilliCrab'
     handleAnswerSubmission()
+    // todo - testGotScammed('itemname') better
 }
 function testWin(){
     unaskedQs = []
@@ -836,14 +839,10 @@ function testHotStreak(){
 
 
 
+// *************************** anti cheating ***************************
 
-
-// *** anti cheating ***
-
-let enforceCheatingRules = false // set false when test/dev
-
-// todo - should somehow delete some of the JS too so cant scrape questions???
 // todo - obfuscation like airbnb
+let enforceCheatingRules = true // set false when test/dev
 
 // https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab
 document.addEventListener("visibilitychange", serveCheatNotice)
@@ -870,7 +869,7 @@ window.addEventListener('blur', serveCheatNotice)
 
 
 
-// *** graveyard: may revise from dead ***
+// ************************ graveyard: may revise from dead ******************************
 
 /*
 // array shuffle based approach; may eventually replace current random choice appraoch, or use for random ordering of answer options
