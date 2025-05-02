@@ -167,13 +167,13 @@ function handleAnswerSubmission(){
     prevQs.push(currQ.id)
 
     renderNoticeRightWrong()
-
+ 
     setTimeout(() => { // showing right/wrong marker for a second before moving on
         hideNoticeRightWrong()
 
         render()
 
-     }, 1000)    
+     }, 1000)   
 }
 
 function handleRightAnswer(){
@@ -655,7 +655,6 @@ function initQuestion(){
     startTimer()
 }
 
-
 document.querySelector('#play').addEventListener('click', () => { // launch from landing page
     challengeName = document.querySelector('.quiz-option.selected').id
     initChallenge()
@@ -849,13 +848,13 @@ document.addEventListener("visibilitychange", serveCheatNotice)
 window.addEventListener('blur', serveCheatNotice)
 
   function serveCheatNotice(){
-    let caughtCheatingMessage = "We beleive you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
+    let caughtCheatingMessage = "We believe you may have attempted to cheat. This includes opening new windows or taking focus off of the game. Out of an abudance of caution, we have decided to end your challenge. \
     We hope you were not trying to cheat, perhaps you were just checking your mail or Instagram, but please know that cheating is not a good habit and it will catch up to you later \
     in life, perhaps sooner than you think. We believe in the importance of second chances, please try the quiz again, but we have also referred your IP address to the \
     International Online Quiz Governance Body in Geneva, Switzerland (IOQGB) for investigation and possible further action. Please be prepared to travel to Geneva if you are summoned."
     // ^ hope users understand this is a joke! 
 
-    if (enforceCheatingRules){
+    if (enforceCheatingRules && unaskedQs.length){ // for now, dont enforce from homepage
         bodyEl.innerHTML = ''
         let h1El = document.createElement('h1')
         h1El.textContent = caughtCheatingMessage
