@@ -617,6 +617,7 @@ function initChallenge(){
     wrongAnswers = []
     score = 0
     streak = 0
+    longestStreak = 0
     userWon = false
     userLost = false    
     hearts = 4 
@@ -780,7 +781,7 @@ for (let i = 1; i <= 101; i++){ // maybe cap around 100 for now
 
     // random distances on X & Y
     let distanceX = (Math.random() - 0.5) * 1400 /* the -0.5 is a technique to randomly make negative */
-    let distanceY = (Math.random() - 0.5) * 1000 /* screen width is less than height... */
+    let distanceY = (Math.random() - 0.5) * 1000 /* screen height is less than width... */
     imgEl.style.setProperty('--distanceX', distanceX + 'px') /* must use setProperty for a css variable */
     imgEl.style.setProperty('--distanceY', distanceY + 'px')
 
