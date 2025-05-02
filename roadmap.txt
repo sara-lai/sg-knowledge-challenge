@@ -8,7 +8,6 @@ fun hantu mode
 somehow track/save high scores for when inevitbly lose locals challenge, so can keep trying to beat high scores.... 
 easter eggs for certain wrong answers (like 'gorgonu' cuts your time in half for rest of quiz, 'gorgonu mode')
 demo of another question type (fill in blank or.... drag and drop, etc., or play a song to identify it?)
-panic mode heart beat sounds (maybe not)
 start out with "warm up" questions (ease into the harder challenge); or restrict some questions from never appearing early?
 
 next next next steps:
@@ -18,7 +17,6 @@ use classes for quiz and question, construct Quiz/Question with JSON data
 recycle missed questions mode (maybe, eg cant finish quiz until all questions correct)
 turn into generic quiz builder... for any type of quiz.... replace 'durian' 'chillicrab' with generic constants
 
-
 maybe fix or add later?
 bug: if redeem multiple chillicrabs if just gives you the answer (maybe desirable)
 only do scam event for locals quiz, not tourist....
@@ -26,7 +24,6 @@ rare bug where panic mode doesnt get reset (when submit answer exact second pani
 some css animation/transition for select quiz/start quiz
 improve anti cheating event listeners (remove JS question data?)
 make look OK on mobile -  img circles perofrmance?
-add instructions (landing page section?)
 bug: handle submit button with no answer selection (or not - punish for not bothering to select anything?)
 abcd keypress events to make my life easier [doesnt impact mobile....]
 improve ‘Singapore’ scrolling name change: some flip/fade animation
