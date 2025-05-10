@@ -34,7 +34,7 @@ Strict and straightforward state-update-render cycle
 - Anti Cheating: [Stack Overflow](https://stackoverflow.com/questions/10338704/javascript-to-detect-if-the-user-changes-tab)
 - Using variables in CSS animation w/ JS-set values: [Val Head's Blog](https://valhead.com/2017/07/21/animating-with-css-variables/)
 
-## The Approach
+## The Approach / Planning
 
 - Figma mockups
 - State-Update-Render cycle
