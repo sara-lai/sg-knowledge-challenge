@@ -11,3 +11,7 @@ This is simplified quiz generation software prepared for a demo. Be sure to try 
   - Multiple question types (.e.g image-based questions)- 
   - Item awards for 50-50 & Time Extension
   - Fun & surprising CSS Animations
+ 
+  - <img width="1680" alt="Screenshot 2025-05-10 at 1 32 41 PM" src="https://github.com/user-attachments/assets/9ed67d1a-62a1-4f9d-9874-be9a61e1d34b" />
+
+
