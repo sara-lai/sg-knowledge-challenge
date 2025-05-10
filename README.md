@@ -5,7 +5,7 @@
 <br>
 <br>
 
-This is simplified quiz generation software prepared for a demo. Be sure to try out the next generation version of The Great Singapore Knowledge Challenge launching in June 2025 at [thegameofknowledge.com](https://thegameofknowledge.com).
+This is simplified quiz generation software prepared for a presentation. Be sure to try out the next generation version of The Great Singapore Knowledge Challenge launching in June 2025 at [thegameofknowledge.com](https://thegameofknowledge.com)!
 
 [play demo version](https://sara-lai.github.io/sg-knowledge-challenge/)
 
@@ -25,6 +25,7 @@ Strict and straightforward state-update-render cycle
   - Multiple question types (.e.g image-based questions)- 
   - Item awards for 50-50 & Time Extension
   - Fun & surprising CSS Animations
+  - Cheating detection
 
 ## Some citations of helpful resources:
 
@@ -44,7 +45,7 @@ Strict and straightforward state-update-render cycle
   - My game needs pauses (show right-wrong icons) and dismissable notices for items
   - Very hard to “stop” or “slow down” the big `render()` (see my code Graveyard for attempts)
   - Solution: breakup render into various paths (notices/pauses are at end of path/nothing after!)
-- Avoid exhaustion: heavy use of named functions & sections (see Learnt slide)
+- Avoid exhaustion: heavy use of named functions & separation into sections
 - Develop own test method: special functions to update state from console to quickly test app features & UI
 - New features naturally fell into one of the State-Update-Render slots
   - Some complication: needed a `removeStaleThings()` sort of catch all for new quizzes
